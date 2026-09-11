@@ -11,8 +11,8 @@ body { background:#eef1f5; padding:20px; color:#222; }
 .app-ui { max-width:1100px; margin:0 auto; background:#fff; border-radius:12px; box-shadow:0 10px 30px rgba(0,0,0,.12); overflow:hidden; }
 .app-header { background:linear-gradient(135deg,#1a1a2e,#16213e); color:#fff; padding:20px 25px; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; }
 .app-title { font-size:22px; font-weight:800; }
-.mode-switcher { display:flex; background:rgba(255,255,255,.12); border-radius:30px; padding:4px; }
-.mode-btn { padding:9px 24px; border:none; background:transparent; color:rgba(255,255,255,.7); font-weight:700; font-size:14px; border-radius:25px; cursor:pointer; }
+.mode-switcher { display:flex; background:rgba(255,255,255,.12); border-radius:30px; padding:4px; flex-wrap:wrap; }
+.mode-btn { padding:9px 20px; border:none; background:transparent; color:rgba(255,255,255,.7); font-weight:700; font-size:14px; border-radius:25px; cursor:pointer; }
 .mode-btn.active { background:#f39c12; color:#fff; }
 .content-area { padding:25px; }
 .section { border:1px solid #dde2e8; border-radius:8px; padding:18px; margin-bottom:20px; }
@@ -42,14 +42,15 @@ table.ed-table { width:100%; border-collapse:collapse; font-size:13px; }
 .t-line { display:flex; justify-content:space-between; padding:6px 0; font-size:15px; }
 .t-line.grand { border-top:3px solid #1a1a2e; margin-top:8px; padding-top:12px; font-size:19px; font-weight:800; color:#1a1a2e; }
 .words-box { margin-top:12px; background:#fff3cd; border-left:4px solid #f39c12; padding:10px 14px; font-size:13px; font-style:italic; color:#7a5c00; border-radius:4px; }
-.action-bar { display:flex; gap:12px; flex-wrap:wrap; margin-top:22px; }
-.action-bar .btn { flex:1; min-width:140px; padding:12px 10px; font-size:14px; border-radius:8px; }
+.action-bar { display:flex; gap:10px; flex-wrap:wrap; margin-top:22px; }
+.action-bar .btn { flex:1; min-width:120px; padding:12px 8px; font-size:13px; border-radius:8px; }
 .tr-toolbar .btn { font-size:13px; padding:9px 14px; }
 .hist-table .btn, #trHistoryWrap table .btn { font-size:12px; padding:4px 8px; }
 .btn-blue { background:#3498db; color:#fff; }
 .btn-purple { background:#8e44ad; color:#fff; }
 .btn-lock { background:#34495e; color:#fff; }
 .btn-teal { background:#16a085; color:#fff; }
+.btn-orange { background:#e67e22; color:#fff; }
 #statusMsg { position:fixed; top:18px; right:18px; z-index:9999; padding:14px 22px; border-radius:8px; color:#fff; font-weight:700; display:none; box-shadow:0 6px 18px rgba(0,0,0,.25); max-width:360px; }
 #statusMsg.ok{background:#27ae60} #statusMsg.err{background:#e74c3c} #statusMsg.inf{background:#3498db}
 .hist-table { width:100%; border-collapse:collapse; font-size:12.5px; }
@@ -103,7 +104,7 @@ table.inv-table { width:100%; border-collapse:collapse; font-size:13px; }
 .inv-foot .name { font-weight:800; font-size:14px; margin-bottom:3px; }
 .inv-foot.no-logo { margin-bottom:37px; }
 
-#tradingDoc { display:none; width:794px; min-height:1122px; margin:0 auto; background:#fff; color:#111; padding:42px 48px; font-family:'Segoe UI',Tahoma,sans-serif; }
+#tradingDoc { display:none; width:794px; min-height:1122px; margin:0 auto; background:#fff; color:#111; padding:42px 48px; }
 #tradingDoc[dir=rtl] { text-align:right; }
 .tr-head { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #111; padding-bottom:14px; margin-bottom:20px; }
 .tr-logo img { max-height:64px; max-width:250px; display:block; }
@@ -142,6 +143,30 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
 #trHistoryWrap th,#trHistoryWrap td { border:1px solid #cfd6dd; padding:7px 8px; text-align:left; }
 #trHistoryWrap th { background:#f0f2f5; }
 
+/* ============ DELIVERY NOTE MASTER ============ */
+#doDoc { display:none; flex-direction:column; width:794px; min-height:1122px; margin:0 auto; background:#fff; color:#111; padding:36px 40px; }
+.do-head { display:flex; justify-content:space-between; align-items:flex-start; }
+.do-head .lh img { max-height:70px; max-width:220px; display:block; }
+.do-head .lh .cname { font-size:15px; font-weight:800; margin-top:10px; }
+.do-head .rh { text-align:right; font-size:12.5px; font-weight:700; line-height:1.7; }
+.do-title { text-align:center; font-size:17px; font-weight:800; letter-spacing:1px; text-decoration:underline; margin:26px 0 22px; }
+.do-meta { display:flex; justify-content:space-between; font-size:13px; margin-bottom:14px; }
+.do-meta .to .lbl { font-weight:700; }
+.do-meta .to .nm { font-weight:800; margin-top:4px; }
+.do-meta .rf { text-align:right; line-height:1.9; font-weight:700; }
+.do-meta .rf span.v { font-weight:800; }
+table.do-table { width:100%; border-collapse:collapse; font-size:13px; border:1px solid #111; }
+.do-table th { border:1px solid #111; padding:8px; font-size:13px; font-weight:800; text-align:left; }
+.do-table td { border:1px solid #111; padding:8px; vertical-align:top; }
+.do-table td.q { text-align:center; font-weight:700; }
+/* FIX: real reserved blank/plain row (height works on table cells, min-height alone was ignored) */
+.do-space { position:relative; height:330px; min-height:330px; border:none !important; }
+.do-space .stamp { position:absolute; right:30px; bottom:8px; max-width:150px; max-height:150px; }
+.do-total td { font-weight:800; }
+.do-terms { margin-top:14px; font-size:11.5px; line-height:1.7; }
+.do-terms .t { font-weight:800; text-decoration:underline; margin-bottom:6px; }
+.do-sig { display:flex; justify-content:space-between; margin-top:34px; font-size:13px; font-weight:700; }
+
 @media print {
     body { background:#fff !important; padding:0 !important; }
     .app-ui, #statusMsg, [data-pdfwrap] { display:none !important; }
@@ -152,7 +177,9 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
     .inv-foot.no-logo { margin-bottom:37px !important; }
     #tradingDoc { display:none !important; }
     body.print-trading #tradingDoc { display:block !important; width:100% !important; min-height:1122px; }
-    body.print-trading #invoiceDoc { display:none !important; }
+    #doDoc { display:none !important; }
+    body.print-do #doDoc { display:flex !important; width:100% !important; min-height:1122px; }
+    body.print-trading #invoiceDoc, body.print-do #invoiceDoc { display:none !important; }
 }
 @media (max-width:768px){ .form-grid{grid-template-columns:1fr} .action-bar{flex-direction:column} .action-bar .btn{min-width:100%} }
 </style>
@@ -168,6 +195,7 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
             <button class="mode-btn active" id="btnInvoice" onclick="setMode('invoice')">INVOICE</button>
             <button class="mode-btn" id="btnQuotation" onclick="setMode('quotation')">QUOTATION</button>
             <button class="mode-btn" id="btnTrading" onclick="setMode('trading')">TRADING</button>
+            <button class="mode-btn" id="btnDo" onclick="setMode('do')">DO</button>
         </div>
     </div>
 
@@ -180,12 +208,11 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
                 <div class="logo-preview" id="logoPreview"><div class="logo-placeholder">No Logo<br>Uploaded</div></div>
                 <div>
                     <input type="file" id="logoInput" accept="image/*" style="display:none" onchange="handleLogo(event)">
-                    <button class="btn btn-dark" onclick="document.getElementById('logoInput').click()">📁 Upload Logo (shows in header)</button>
+                    <button class="btn btn-dark" onclick="document.getElementById('logoInput').click()">📁 Upload Logo</button>
                     <label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px;font-weight:700;text-transform:none">
                         <input type="checkbox" id="logoOn" onchange="saveLogoState();refreshLogo();" style="width:18px;height:18px" checked>
-                        Logo ON / OFF (header logo + black strips)
+                        Logo ON / OFF
                     </label>
-                    <div style="font-size:11px;color:#778;margin-top:6px">When logo is ON, header and footer black strips are shown. When OFF, footer address moves up 1cm. This logo is also used by the Trading module.</div>
                 </div>
             </div>
             <div class="logo-section">
@@ -194,13 +221,13 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
                     <input type="file" id="stampInput" accept="image/*" style="display:none" onchange="handleStamp(event)">
                     <button class="btn btn-dark" onclick="document.getElementById('stampInput').click()">🔵 Upload Company Stamp</button>
                     <label style="display:flex;gap:8px;align-items:center;margin-top:8px;font-size:13px;font-weight:700;text-transform:none">
-                        <input type="checkbox" id="stampOn" onchange="saveStampState();buildDocument();" style="width:18px;height:18px">
-                        Stamp ON / OFF (show stamp on document)
+                        <input type="checkbox" id="stampOn" onchange="saveStampState();buildDocument();buildDoDoc();" style="width:18px;height:18px">
+                        Stamp ON / OFF
                     </label>
                 </div>
             </div>
             <div class="form-grid">
-                <div class="form-group"><label>Company Name (footer)</label><input class="form-control" id="compName" value="E Smart Electronics L.L.C"></div>
+                <div class="form-group"><label>Company Name</label><input class="form-control" id="compName" value="E Smart Electronics L.L.C"></div>
                 <div class="form-group"><label>TRN Number</label><input class="form-control" id="compTRN" value="100429672700003"></div>
                 <div class="form-group"><label>Address</label><textarea class="form-control" id="compAddress">Mushrif Mall, Shop #217, Level 2, Airport Road, Abu Dhabi, PO Box 95174</textarea></div>
                 <div class="form-group"><label>Email</label><input class="form-control" id="compEmail" value="info@esmartme.com"></div>
@@ -222,7 +249,7 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
                     </div>
                 </div>
                 <div class="form-group"><label id="docNumLabel">Invoice Number (auto / manual)</label><input class="form-control" id="docNumber" value=""></div>
-                <div class="form-group"><label>Date (auto today / changeable)</label><input type="date" class="form-control" id="docDate" value=""></div>
+                <div class="form-group"><label>Date</label><input type="date" class="form-control" id="docDate" value=""></div>
                 <div class="form-group"><label>Staff / Sales Person</label><input class="form-control" id="staffName" value="SHAKEER"></div>
                 <div class="form-group"><label>L.PO Reference</label><input class="form-control" id="poRef"></div>
             </div>
@@ -239,8 +266,7 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
         </div>
 
         <div class="section" style="border-color:#f39c12">
-            <div class="section-header">📝 Quotation Only: Terms & Conditions + Bank Details</div>
-            <div style="font-size:12px;color:#778;margin-bottom:10px">These appear ONLY when mode = QUOTATION. Never on invoices.</div>
+            <div class="section-header">📝 Quotation Only: Terms & Bank</div>
             <div class="form-group" style="margin-bottom:12px">
                 <label>Terms & Conditions (one per line)</label>
                 <textarea class="form-control" id="termsText" rows="6">1. The price quoted is valid only for 7 days.
@@ -270,26 +296,28 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
                 <tbody id="itemsBody"></tbody>
             </table>
             <button class="btn btn-green" style="margin-top:12px" onclick="addRow()">+ Add Item Row</button>
-
             <div class="totals-box">
-                <div class="t-line"><span>Gross Amount Before VAT 5%:</span><strong id="grossAmt">0.00 AED</strong></div>
+                <div class="t-line"><span>Gross Before VAT 5%:</span><strong id="grossAmt">0.00 AED</strong></div>
                 <div class="t-line"><span>Discount:</span><strong><input type="number" id="discount" value="0" min="0" step="0.01" style="width:110px;padding:5px;border:1px solid #cfd6dd;border-radius:4px;text-align:right" oninput="calcTotals()"> AED</strong></div>
-                <div class="t-line"><span>Total VAT Amount 5%:</span><strong id="vatAmt">0.00 AED</strong></div>
-                <div class="t-line grand"><span>Net Amount With 5% VAT:</span><strong id="netAmt">0.00 AED</strong></div>
+                <div class="t-line"><span>Total VAT 5%:</span><strong id="vatAmt">0.00 AED</strong></div>
+                <div class="t-line grand"><span>Net With 5% VAT:</span><strong id="netAmt">0.00 AED</strong></div>
                 <div class="words-box"><strong>Amount in Words:</strong> <span id="amtWords">ZERO DIRHAMS ONLY</span></div>
             </div>
         </div>
 
         <div class="action-bar">
-            <button class="btn btn-dark"  onclick="newDocInvQuot(currentTab)">🆕 New</button>
-            <button class="btn btn-teal"   onclick="copyDoc()">📋 Copy</button>
+            <button class="btn btn-dark" onclick="newDocInvQuot(currentTab)">🆕 New</button>
+            <button class="btn btn-teal" onclick="copyDoc()">📋 Copy</button>
             <button class="btn btn-green" onclick="sharePDF('whatsapp')">💬 WhatsApp</button>
-            <button class="btn btn-blue"  onclick="sharePDF('email')">📧 Email</button>
-            <button class="btn btn-blue"   onclick="printDoc()">🖨️ Print</button>
-            <button class="btn btn-red"    onclick="downloadPDF()">📥 Download PDF</button>
-            <button class="btn btn-purple" onclick="downloadHTML()">⬇️ Download HTML</button>
-            <button class="btn btn-green"  onclick="saveLocal()">💾 Save</button>
-            <button class="btn btn-lock"  onclick="toggleHist()">🗂️ History</button>
+            <button class="btn btn-blue" onclick="sharePDF('email')">📧 Email</button>
+            <button class="btn btn-blue" onclick="printDoc()">🖨️ Print</button>
+            <button class="btn btn-red" onclick="downloadPDF()">📥 PDF</button>
+            <button class="btn btn-purple" onclick="downloadHTML()">⬇️ HTML</button>
+            <button class="btn btn-green" onclick="saveLocal()">💾 Save</button>
+            <button class="btn btn-lock" onclick="toggleHist()">🗂️ History</button>
+            <button class="btn btn-orange" onclick="convertTo('quotation')" id="cvToQuot">→ Quotation</button>
+            <button class="btn btn-orange" onclick="convertTo('invoice')" id="cvToInv" style="display:none">→ Invoice</button>
+            <button class="btn btn-orange" onclick="convertTo('do')">→ Delivery Note</button>
         </div>
 
         <div class="section" id="histWrap" style="display:none">
@@ -301,16 +329,12 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
 
     <div id="tradingEditor" style="display:none">
         <div class="section">
-            <div class="section-header">🔄 Trading / Trade-In Document</div>
+            <div class="section-header">🔄 Trading / Trade-In</div>
             <div class="tr-toolbar">
                 <select id="trLang" onchange="buildTradingDoc()">
-                    <option value="en">English</option>
-                    <option value="ar">العربية</option>
-                    <option value="both" selected>English + العربية</option>
+                    <option value="en">English</option><option value="ar">العربية</option><option value="both" selected>English + العربية</option>
                 </select>
-                <select id="trStatus">
-                    <option>Completed</option><option>Pending</option><option>Cancelled</option>
-                </select>
+                <select id="trStatus"><option>Completed</option><option>Pending</option><option>Cancelled</option></select>
                 <button class="btn btn-dark" onclick="newTrading()">🆕 New</button>
                 <button class="btn btn-green" onclick="saveTrading()">💾 Save</button>
                 <button class="btn btn-teal" onclick="copyDoc()">📋 Copy</button>
@@ -320,128 +344,130 @@ table.tr-table { width:100%; border-collapse:collapse; font-size:12.5px; margin-
                 <button class="btn btn-red" onclick="downloadPDF()">📥 PDF</button>
                 <button class="btn btn-purple" onclick="shareTrading()">📤 Share</button>
                 <button class="btn btn-lock" onclick="toggleHistory()">🗂️ History</button>
+                <button class="btn btn-orange" onclick="convertTo('invoice')">→ Invoice</button>
+                <button class="btn btn-orange" onclick="convertTo('quotation')">→ Quotation</button>
+                <button class="btn btn-orange" onclick="convertTo('do')">→ Delivery Note</button>
             </div>
             <div class="form-grid">
-                <div class="form-group"><label>Trading No. (auto / manual)</label><input class="form-control" id="trNumber" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Date (auto today / changeable)</label><input type="date" class="form-control" id="trDate" oninput="buildTradingDoc()"></div>
+                <div class="form-group"><label>Trading No.</label><input class="form-control" id="trNumber" oninput="buildTradingDoc()"></div>
+                <div class="form-group"><label>Date</label><input type="date" class="form-control" id="trDate" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>Staff Name</label><input class="form-control" id="trStaff" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>Currency</label><input class="form-control" id="trCurrency" value="AED" oninput="buildTradingDoc()"></div>
             </div>
         </div>
-
         <div class="section">
             <div class="section-header">👤 Customer Information</div>
-            <button class="btn btn-blue" style="margin-bottom:10px" onclick="loadLastCustomer()">♻️ Load last Invoice customer</button>
             <div class="form-grid">
                 <div class="form-group"><label>Full Name *</label><input class="form-control" id="trName" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>Contact Number *</label><input class="form-control" id="trContact" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Email Address</label><input class="form-control" id="trEmail" oninput="buildTradingDoc()"></div>
+                <div class="form-group"><label>Email</label><input class="form-control" id="trEmail" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>Nationality</label><input class="form-control" id="trNat" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Date of Birth</label><input type="date" class="form-control" id="trDob" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>Emirate</label><input class="form-control" id="trEmirate" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>City</label><input class="form-control" id="trCity" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Country</label><input class="form-control" id="trCountry" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Customer Type</label><input class="form-control" id="trType" placeholder="Individual / Company" oninput="buildTradingDoc()"></div>
                 <div class="form-group" style="grid-column:1/-1"><label>Address</label><input class="form-control" id="trAddr" oninput="buildTradingDoc()"></div>
-                <div class="form-group" style="grid-column:1/-1"><label>Additional Notes</label><input class="form-control" id="trNotes" oninput="buildTradingDoc()"></div>
             </div>
         </div>
-
         <div class="section">
-            <div class="section-header">🪪 Emirates ID Information (private — added to document only if enabled)</div>
+            <div class="section-header">🪪 Emirates ID (private)</div>
             <div class="form-grid">
-                <div class="form-group"><label>Emirates ID Number</label><input class="form-control" id="eidNo" placeholder="784-YYYY-NNNNNNN-C" oninput="buildTradingDoc()"></div>
+                <div class="form-group"><label>Emirates ID Number</label><input class="form-control" id="eidNo" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>ID Name</label><input class="form-control" id="eidName" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Nationality</label><input class="form-control" id="eidNat" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Date of Birth</label><input class="form-control" id="eidDob" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>ID Issue Date</label><input class="form-control" id="eidIssue" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>ID Expiry Date</label><input class="form-control" id="eidExpiry" oninput="buildTradingDoc()"></div>
                 <div class="form-group"><label>Occupation</label><input class="form-control" id="eidOcc" oninput="buildTradingDoc()"></div>
-                <div class="form-group"><label>Issuing Place</label><input class="form-control" id="eidPlace" oninput="buildTradingDoc()"></div>
-            </div>
-            <div class="form-grid" style="margin-top:10px">
-                <div class="form-group">
-                    <label>Front Side Image</label>
-                    <input type="file" accept="image/*" style="font-size:12px" onchange="trIdImg(event,'front')">
-                    <div id="trFrontPrev" style="font-size:11px;color:#27ae60;margin-top:4px"></div>
-                    <button class="btn btn-red" style="padding:4px 10px;margin-top:4px" onclick="trIdRemove('front')">✕ Remove</button>
-                </div>
-                <div class="form-group">
-                    <label>Back Side Image</label>
-                    <input type="file" accept="image/*" style="font-size:12px" onchange="trIdImg(event,'back')">
-                    <div id="trBackPrev" style="font-size:11px;color:#27ae60;margin-top:4px"></div>
-                    <button class="btn btn-red" style="padding:4px 10px;margin-top:4px" onclick="trIdRemove('back')">✕ Remove</button>
-                </div>
                 <div class="form-group" style="display:flex;align-items:flex-end">
                     <label style="display:flex;gap:8px;align-items:center;font-size:13px;text-transform:none">
-                        <input type="checkbox" id="trIncEID" onchange="buildTradingDoc()" style="width:18px;height:18px">
-                        Include Emirates ID image in document
+                        <input type="checkbox" id="trIncEID" onchange="buildTradingDoc()" style="width:18px;height:18px"> Include ID images in document
                     </label>
                 </div>
+                <div class="form-group"><label>Front Image</label><input type="file" accept="image/*" style="font-size:12px" onchange="trIdImg(event,'front')"><div id="trFrontPrev" style="font-size:11px;color:#27ae60"></div></div>
+                <div class="form-group"><label>Back Image</label><input type="file" accept="image/*" style="font-size:12px" onchange="trIdImg(event,'back')"><div id="trBackPrev" style="font-size:11px;color:#27ae60"></div></div>
             </div>
         </div>
-
         <div class="section">
             <div class="section-header">📱 Traded Devices</div>
             <div id="trDevices"></div>
             <button class="btn btn-green" onclick="trAddDevice()">+ Add Device</button>
             <div class="t-line grand" style="margin-top:14px"><span>Grand Total:</span><strong id="trTotalPrev">AED 0.00</strong></div>
         </div>
-
         <div class="section">
             <div class="section-header">📜 Declarations & Signature</div>
-            <div class="form-group" style="margin-bottom:10px"><label>English Declaration</label><textarea class="form-control" id="trDeclEn" rows="7" oninput="buildTradingDoc()">I hereby declare that the device(s) listed above are legally owned by me and are not subject to any claim, lien, dispute, or ownership rights by any third party. I confirm that I have full authority to transfer ownership of the device(s) to the company and that the information provided is true and accurate.
+            <div class="form-group" style="margin-bottom:10px"><label>English Declaration</label><textarea class="form-control" id="trDeclEn" rows="6" oninput="buildTradingDoc()">I hereby declare that the device(s) listed above are legally owned by me and are not subject to any claim, lien, dispute, or ownership rights by any third party. I confirm that I have full authority to transfer ownership of the device(s) to the company and that the information provided is true and accurate.
 
 I understand and agree that any personal information stored on the device(s) should be removed before handing over the device(s). I acknowledge that the company shall not be responsible for any loss, damage, or disclosure of information remaining on the device(s) after the trade-in transaction.
 
 I understand that traded device(s) cannot be returned after completion of the trade-in transaction.</textarea></div>
-            <div class="form-group" style="margin-bottom:10px"><label>Arabic Declaration (إقرار وتعهد)</label><textarea class="form-control" id="trDeclAr" rows="7" dir="rtl" oninput="buildTradingDoc()">أقر أنا بأن الأجهزة المذكورة أعلاه مملوكة لي ملكية كاملة قانونية، وأنها غير خاضعة لأي مطالبة أو رهن أو نزاع أو حقوق ملكية من قبل أي طرف ثالث. وأؤكد أن لدي السلطة الكاملة لنقل ملكية هذه الأجهزة إلى الشركة، وأن جميع المعلومات المقدمة صحيحة ودقيقة.
+            <div class="form-group"><label>Arabic Declaration</label><textarea class="form-control" id="trDeclAr" rows="6" dir="rtl" oninput="buildTradingDoc()">أقر أنا بأن الأجهزة المذكورة أعلاه مملوكة لي ملكية كاملة قانونية، وأنها غير خاضعة لأي مطالبة أو رهن أو نزاع أو حقوق ملكية من قبل أي طرف ثالث. وأؤكد أن لدي السلطة الكاملة لنقل ملكية هذه الأجهزة إلى الشركة، وأن جميع المعلومات المقدمة صحيحة ودقيقة.
 
 ألتزم بإزالة أي بيانات أو معلومات شخصية مخزنة على الأجهزة قبل تسليمها، وأقر بأن الشركة لا تتحمل أي مسؤولية عن أي فقدان أو ضرر أو إفشاء للمعلومات المتبقية على الأجهزة بعد إتمام عملية الاستبدال.
 
 أقر بعلمي بأن الأجهزة المستبدلة لا يمكن استرجاعها أو إعادتها بعد إتمام عملية الاستبدال.</textarea></div>
-            <div class="form-grid">
-                <div class="form-group">
-                    <label>Customer Signature (optional upload)</label>
-                    <input type="file" accept="image/*" style="font-size:12px" onchange="trSigImg(event)">
-                    <div id="trSigPrev" style="font-size:11px;color:#27ae60;margin-top:4px"></div>
-                    <button class="btn btn-red" style="padding:4px 10px;margin-top:4px" onclick="trSigRemove()">✕ Remove</button>
-                </div>
-            </div>
         </div>
-
         <div class="section" id="trHistoryWrap" style="display:none">
             <div class="section-header">🗂️ Trading History</div>
-            <input class="form-control" id="trSearch" placeholder="Search number / customer / IMEI…" oninput="renderHistory()" style="margin-bottom:10px">
+            <input class="form-control" id="trSearch" placeholder="Search…" oninput="renderHistory()" style="margin-bottom:10px">
             <div id="trHistoryBody"></div>
         </div>
+    </div>
 
+    <div id="doEditor" style="display:none">
         <div class="section">
-            <div class="section-header">👁️ A4 Preview (exactly as printed)</div>
+            <div class="section-header">🚚 Delivery Note (DO)</div>
+            <div class="tr-toolbar">
+                <button class="btn btn-dark" onclick="newDo()">🆕 New DO</button>
+                <button class="btn btn-green" onclick="saveDo()">💾 Save</button>
+                <button class="btn btn-blue" onclick="printDoc()">🖨️ Print</button>
+                <button class="btn btn-red" onclick="downloadPDF()">📥 PDF</button>
+                <button class="btn btn-green" onclick="sharePDF('whatsapp')">💬 WhatsApp</button>
+                <button class="btn btn-blue" onclick="sharePDF('email')">📧 Email</button>
+                <button class="btn btn-orange" onclick="convertTo('do','invoice')">← From Invoice</button>
+                <button class="btn btn-orange" onclick="convertTo('do','quotation')">← From Quotation</button>
+                <button class="btn btn-orange" onclick="convertTo('do','trading')">← From Trading</button>
+            </div>
+            <div class="form-grid">
+                <div class="form-group"><label>DO Number (auto)</label><input class="form-control" id="doNumber" oninput="buildDoDoc()"></div>
+                <div class="form-group"><label>Date</label><input type="date" class="form-control" id="doDate" oninput="buildDoDoc()"></div>
+                <div class="form-group"><label>Inv. No (reference)</label><input class="form-control" id="doInvNo" oninput="buildDoDoc()"></div>
+                <div class="form-group"><label>LPO No.</label><input class="form-control" id="doLpo" oninput="buildDoDoc()"></div>
+                <div class="form-group"><label>Customer / Company Name</label><input class="form-control" id="doCust" oninput="buildDoDoc()"></div>
+                <div class="form-group"><label>Receiver's Name</label><input class="form-control" id="doRecv" oninput="buildDoDoc()"></div>
+                <div class="form-group"><label>Receiver Mobile No.</label><input class="form-control" id="doMobile" oninput="buildDoDoc()"></div>
+            </div>
+        </div>
+        <div class="section">
+            <div class="section-header">📦 Delivery Items</div>
+            <table class="ed-table">
+                <thead><tr><th style="width:50px">SLNo</th><th>Description</th><th style="width:90px">Quantity</th><th style="width:60px"></th></tr></thead>
+                <tbody id="doItems"></tbody>
+            </table>
+            <button class="btn btn-green" style="margin-top:12px" onclick="addDoRow()">+ Add Line</button>
+        </div>
+        <div class="section">
+            <div class="section-header">📝 Delivery Terms & Conditions</div>
+            <textarea class="form-control" id="doTerms" rows="4" oninput="buildDoDoc()">1.Customers are requested to check the goods at the time of delivery
+2.No claim for any shortage or damage will be accepted once the goods are delivered
+3.Terms and conditions of warranty will only be as per company's policy</textarea>
         </div>
     </div>
 
     <div class="section">
-        <div class="section-header">🛡️ Backup & Restore (all app data)</div>
+        <div class="section-header">🛡️ Backup & Restore</div>
         <div class="tr-toolbar">
-            <button class="btn btn-purple" onclick="exportBackup()">⬇️ Export Backup (JSON)</button>
+            <button class="btn btn-purple" onclick="exportBackup()">️ Export Backup (JSON)</button>
             <button class="btn btn-blue" onclick="document.getElementById('backupFile').click()">⬆️ Import Backup</button>
             <input type="file" id="backupFile" accept=".json,application/json" style="display:none" onchange="importBackup(event)">
             <button class="btn btn-lock" onclick="restoreAutoSnapshot()">♻️ Restore Auto-Snapshot</button>
         </div>
         <div id="backupInfo" style="font-size:12px;color:#778;margin-top:6px"></div>
-        <div style="font-size:11px;color:#99a;margin-top:4px">Auto-snapshot updates automatically every time you Save an Invoice, Quotation or Trading document. Keep exported JSON files in a safe place (email/cloud/USB).</div>
     </div>
 
     </div>
 </div>
 
 <div id="invoiceDoc">
-    <div class="invoice-top-bar" id="docTopbar"><img id="docLogo" src="" alt="E SMART" style="display:none"></div>
+    <div class="invoice-top-bar" id="docTopbar"><img id="docLogo" src="" alt="" style="display:none"></div>
     <div class="invoice-title-section">
         <h1 id="docTitleAr">فاتورة ضريبية</h1>
         <h2 id="docTitleEn">TAX INVOICE</h2>
-        <div class="trn-number" id="docTRN">TRN No.100429672700003</div>
+        <div class="trn-number" id="docTRN">TRN No.</div>
     </div>
     <div class="inv-meta">
         <div class="inv-cust">
@@ -451,9 +477,9 @@ I understand that traded device(s) cannot be returned after completion of the tr
             <div class="sub" id="docCustMore"></div>
         </div>
         <div class="inv-refs">
-            <div class="r"><span id="docInvNoLabel">Invoice No رقم الفاتورة :</span><span id="docInvNo">—</span></div>
-            <div class="r"><span>Date تاريخ الفاتورة :</span><span id="docDateV">—</span></div>
-            <div class="r"><span>Staff موظف المبيعات :</span><span id="docStaffV">—</span></div>
+            <div class="r"><span id="docInvNoLabel">Invoice No :</span><span id="docInvNo">—</span></div>
+            <div class="r"><span>Date :</span><span id="docDateV">—</span></div>
+            <div class="r"><span>Staff :</span><span id="docStaffV">—</span></div>
             <div class="r" id="docPORow" style="display:none"><span>L.PO :</span><span id="docPOV"></span></div>
         </div>
     </div>
@@ -465,7 +491,7 @@ I understand that traded device(s) cannot be returned after completion of the tr
                 <th>البيان<span>Description</span></th>
                 <th style="width:52px">كمية<span>Quantity</span></th>
                 <th style="width:80px">سعر الوحدة<span>Price</span></th>
-                <th style="width:86px">المبلغ الإجمالي قبل الضريبة ٥٪<span>Gross Amount Before VAT</span></th>
+                <th style="width:86px">المبلغ الإجمالي قبل الضريبة ٥٪<span>Gross Before VAT</span></th>
                 <th style="width:70px">الضريبة<span>VAT 5%</span></th>
                 <th style="width:86px">السعر<span>Amount</span></th>
             </tr></thead>
@@ -473,15 +499,12 @@ I understand that traded device(s) cannot be returned after completion of the tr
         </table>
         <div class="inv-space"><img id="docStamp" class="inv-stamp" src="" alt="" style="display:none"></div>
         <div class="inv-totals">
-            <div class="inv-words">
-                <div class="w-lbl">Amount in Words :</div>
-                <div class="w-val" id="docWords">—</div>
-            </div>
+            <div class="inv-words"><div class="w-lbl">Amount in Words :</div><div class="w-val" id="docWords">—</div></div>
             <div class="inv-sum">
-                <div class="r"><span class="en">Gross Amount Before VAT 5%</span><span class="ar">: المبلغ الإجمالي قبل ضريبة القيمة المضافة</span><span class="v" id="docGross">0.00</span></div>
+                <div class="r"><span class="en">Gross Before VAT 5%</span><span class="ar">: المبلغ الإجمالي قبل الضريبة</span><span class="v" id="docGross">0.00</span></div>
                 <div class="r"><span class="en">Discount</span><span class="ar">: خصم</span><span class="v" id="docDisc">0.00</span></div>
-                <div class="r"><span class="en">Total VAT Amount 5%</span><span class="ar">: إجمالي ضريبة القيمة المضافة ٪</span><span class="v" id="docVAT">0.00</span></div>
-                <div class="r"><span class="en">Net Amount With 5%</span><span class="ar">: صافي المبلغ مع ضريبة القيمة المضافة ٪</span><span class="v" id="docNet">0.00</span></div>
+                <div class="r"><span class="en">Total VAT 5%</span><span class="ar">: إجمالي الضريبة ٥٪</span><span class="v" id="docVAT">0.00</span></div>
+                <div class="r"><span class="en">Net With 5%</span><span class="ar">: الصافي مع الضريبة ٥٪</span><span class="v" id="docNet">0.00</span></div>
             </div>
         </div>
     </div>
@@ -499,1072 +522,722 @@ I understand that traded device(s) cannot be returned after completion of the tr
 
 <div id="tradingDoc"></div>
 
+<div id="doDoc">
+    <div class="do-head">
+        <div class="lh">
+            <img id="doLogo" src="" alt="" style="display:none">
+            <div class="cname" id="doCompName">E SMART ELECTRONICS LLC</div>
+        </div>
+        <div class="rh">
+            <div id="doAddr1">Mushrif Mall, Abu Dhabi U.A.E</div>
+            <div id="doAddr2">E-Mail: info@esmartme.com</div>
+        </div>
+    </div>
+    <div class="do-title">DELIVERY NOTE</div>
+    <div class="do-meta">
+        <div class="to">
+            <div class="lbl">To</div>
+            <div class="nm" id="doCustV">—</div>
+        </div>
+        <div class="rf">
+            <div>Date : <span class="v" id="doDateV">—</span></div>
+            <div>Inv.No : <span class="v" id="doInvNoV">—</span></div>
+            <div>LPO No. : <span class="v" id="doLpoV">—</span></div>
+        </div>
+    </div>
+    <table class="do-table">
+        <thead><tr><th style="width:60px">SLNo</th><th>Description</th><th style="width:110px">Quantity</th></tr></thead>
+        <tbody id="doItemsBody"></tbody>
+        <tbody>
+            <tr><td colspan="3" class="do-space" id="doSpace"></td></tr>
+            <tr class="do-total"><td colspan="2" style="text-align:right">Total Qty :</td><td class="q" id="doTotalQty">0.00</td></tr>
+        </tbody>
+    </table>
+    <div class="do-terms">
+        <div class="t">Terms & Conditions :</div>
+        <div id="doTermsV"></div>
+    </div>
+    <div class="do-sig">
+        <div>
+            <div>Receiver's Name. : <span id="doRecvV"></span></div>
+            <div style="margin-top:10px">Mobile No: <span id="doMobileV"></span></div>
+        </div>
+        <div>Signature........................................</div>
+    </div>
+</div>
+
 <script>
 let appUnlocked=true;
 document.addEventListener('contextmenu',e=>e.preventDefault());
-document.addEventListener('keydown',e=>{
-    const k=e.key.toUpperCase();
-    if(e.key==='F12')e.preventDefault();
-    if(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(k))e.preventDefault();
-    if(e.ctrlKey&&k==='U')e.preventDefault();
-    if(e.ctrlKey&&k==='S')e.preventDefault();
-    if(e.ctrlKey&&k==='P')e.preventDefault();
-});
+document.addEventListener('keydown',e=>{const k=e.key.toUpperCase();if(e.key==='F12')e.preventDefault();if(e.ctrlKey&&e.shiftKey&&['I','J','C'].includes(k))e.preventDefault();if(e.ctrlKey&&k==='U')e.preventDefault();if(e.ctrlKey&&k==='S')e.preventDefault();if(e.ctrlKey&&k==='P')e.preventDefault();});
 
-/* ================= CORE ================= */
 let currentMode='invoice', currentTab='invoice', invoiceType='tax', logoDataUrl=null, trEditingId=null, histEditing=null;
 const $=id=>document.getElementById(id);
 const fmt=n=>(n||0).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
 function esc(s){return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');}
 function showStatus(m,t){const e=$('statusMsg');e.textContent=m;e.className=t;e.style.display='block';setTimeout(()=>e.style.display='none',4000);}
 function fmtDate(v){if(!v)return'';const p=v.split('-');return p.length===3?`${p[2]}/${p[1]}/${p[0]}`:v;}
-function todayISO(){ const d=new Date(); return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0'); }
+function todayISO(){const d=new Date();return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');}
 
-/* ================= NUMBERING ================= */
-function seqGet(t){ return parseInt(localStorage.getItem('invApp_seq_'+t)||'10000',10); }
-function usedGet(t){ try{ return JSON.parse(localStorage.getItem('invApp_used_'+t)||'[]'); }catch(e){ return []; } }
-function usedSet(t,u){ try{ localStorage.setItem('invApp_used_'+t,JSON.stringify(u)); }catch(e){} }
-function issueNum(t,n){ n=parseInt(n,10); if(isNaN(n))return; if(n>seqGet(t))localStorage.setItem('invApp_seq_'+t,String(n)); const u=usedGet(t); if(!u.includes(n))u.push(n); usedSet(t,u); }
-function nextNum(t){ let n=seqGet(t)+1; const u=usedGet(t); while(u.includes(n))n++; return n; }
+function seqGet(t){return parseInt(localStorage.getItem('invApp_seq_'+t)||'10000',10);}
+function usedGet(t){try{return JSON.parse(localStorage.getItem('invApp_used_'+t)||'[]');}catch(e){return[];}}
+function usedSet(t,u){try{localStorage.setItem('invApp_used_'+t,JSON.stringify(u));}catch(e){}}
+function issueNum(t,n){n=parseInt(n,10);if(isNaN(n))return;if(n>seqGet(t))localStorage.setItem('invApp_seq_'+t,String(n));const u=usedGet(t);if(!u.includes(n))u.push(n);usedSet(t,u);}
+function nextNum(t){let n=seqGet(t)+1;const u=usedGet(t);while(u.includes(n))n++;return n;}
 
-/* ================= WORKING-DOC PERSISTENCE ================= */
-let WORK={invoice:null,quotation:null};
-function storedWork(t){ try{ return JSON.parse(localStorage.getItem('invApp_work_'+t)||'null'); }catch(e){ return null; } }
-function persistWork(t){ try{ localStorage.setItem('invApp_work_'+t,JSON.stringify(WORK[t])); }catch(e){} }
-function captureInvQuot(){ return { number:$('docNumber').value, date:$('docDate').value, staff:$('staffName').value, poRef:$('poRef').value,
-    cust:{name:$('custName').value,trn:$('custTRN').value,phone:$('custPhone').value,address:$('custAddress').value},
-    discount:$('discount').value,
-    items:[...$('itemsBody').rows].map(r=>({code:r.querySelector('.code').value,desc:r.querySelector('.desc').value,qty:r.querySelector('.qty').value,price:r.querySelector('.price').value})) }; }
-function saveWorkInvQuot(t){ if(!WORK[t])WORK[t]={}; const issued=WORK[t].issued; WORK[t]=captureInvQuot(); WORK[t].issued=issued; persistWork(t); }
-function loadWorkIntoEditor(t){ const w=WORK[t]; if(!w)return;
-    $('docNumber').value=w.number||''; $('docDate').value=w.date||todayISO(); $('staffName').value=w.staff||''; $('poRef').value=w.poRef||'';
-    const c=w.cust||{}; $('custName').value=c.name||''; $('custTRN').value=c.trn||''; $('custPhone').value=c.phone||''; $('custAddress').value=c.address||'';
-    $('discount').value=w.discount||0;
-    $('itemsBody').innerHTML='';
-    (w.items&&w.items.length?w.items:[{}]).forEach(it=>addRow(it.code||'',it.desc||'',(it.qty===undefined?'':it.qty),(it.price===undefined?'':it.price)));
-    calcTotals(); buildDocument(); }
-function freshWork(t){ const n=nextNum(t); issueNum(t,n); return { number:String(n), date:todayISO(), staff:$('staffName').value, poRef:'', cust:{name:'',trn:'',phone:'',address:''}, discount:0, items:[], issued:n }; }
-function newDocInvQuot(t){
-    if(t!=='invoice'&&t!=='quotation')t=currentMode;
-    if(!confirm('Create NEW '+t.toUpperCase()+' document? Current unsaved entries will be cleared.'))return;
-    if(histEditing&&histEditing.type===t)histEditing=null;
-    WORK[t]=freshWork(t); persistWork(t);
-    if(currentTab===t)loadWorkIntoEditor(t);
-    showStatus('🆕 New '+t+' #'+WORK[t].number+' created (today\'s date)','ok');
-}
+let WORK={invoice:null,quotation:null,trading:null,do:null};
+function storedWork(t){try{return JSON.parse(localStorage.getItem('invApp_work_'+t)||'null');}catch(e){return null;}}
+function persistWork(t){try{localStorage.setItem('invApp_work_'+t,JSON.stringify(WORK[t]));}catch(e){}}
+function captureInvQuot(){return {number:$('docNumber').value,date:$('docDate').value,staff:$('staffName').value,poRef:$('poRef').value,
+ cust:{name:$('custName').value,trn:$('custTRN').value,phone:$('custPhone').value,address:$('custAddress').value},discount:$('discount').value,
+ items:[...$('itemsBody').rows].map(r=>({code:r.querySelector('.code').value,desc:r.querySelector('.desc').value,qty:r.querySelector('.qty').value,price:r.querySelector('.price').value}))};}
+function saveWorkInvQuot(t){if(!WORK[t])WORK[t]={};const issued=WORK[t].issued;WORK[t]=captureInvQuot();WORK[t].issued=issued;persistWork(t);}
+function loadWorkIntoEditor(t){const w=WORK[t];if(!w)return;
+ $('docNumber').value=w.number||'';$('docDate').value=w.date||todayISO();$('staffName').value=w.staff||'';$('poRef').value=w.poRef||'';
+ const c=w.cust||{};$('custName').value=c.name||'';$('custTRN').value=c.trn||'';$('custPhone').value=c.phone||'';$('custAddress').value=c.address||'';
+ $('discount').value=w.discount||0;$('itemsBody').innerHTML='';
+ (w.items&&w.items.length?w.items:[{}]).forEach(it=>addRow(it.code||'',it.desc||'',(it.qty===undefined?'':it.qty),(it.price===undefined?'':it.price)));
+ calcTotals();buildDocument();}
+function freshWork(t){const n=nextNum(t);issueNum(t,n);return {number:String(n),date:todayISO(),staff:$('staffName').value,poRef:'',cust:{name:'',trn:'',phone:'',address:''},discount:0,items:[],issued:n};}
+function newDocInvQuot(t){if(t!=='invoice'&&t!=='quotation')t=currentMode;
+ if(!confirm('Create NEW '+t.toUpperCase()+'? Unsaved entries cleared.'))return;
+ if(histEditing&&histEditing.type===t)histEditing=null;
+ WORK[t]=freshWork(t);persistWork(t);if(currentTab===t)loadWorkIntoEditor(t);
+ showStatus('🆕 New '+t+' #'+WORK[t].number,'ok');}
 let workSaveTimer=null;
-function scheduleWorkSave(){ clearTimeout(workSaveTimer); workSaveTimer=setTimeout(()=>{
-    if(currentTab==='trading')saveWorkTrading();
-    else if(WORK[currentTab])saveWorkInvQuot(currentTab);
-},400); }
+function scheduleWorkSave(){clearTimeout(workSaveTimer);workSaveTimer=setTimeout(()=>{
+ if(currentTab==='trading')saveWorkTrading();
+ else if(currentTab==='do')saveWorkDo();
+ else if(WORK[currentTab])saveWorkInvQuot(currentTab);},400);}
 document.addEventListener('input',scheduleWorkSave);
 document.addEventListener('change',scheduleWorkSave);
 
-/* ================= HISTORY ================= */
-function histList(){ try{ return JSON.parse(localStorage.getItem('invApp_history')||'[]'); }catch(e){ return []; } }
-function histSaveList(l){ try{ localStorage.setItem('invApp_history',JSON.stringify(l)); }catch(e){} }
-function histRec(t){ return { id:t+'_'+(($('docNumber').value||'').trim()), type:t, number:$('docNumber').value, date:$('docDate').value,
-    staff:$('staffName').value, poRef:$('poRef').value, invType:invoiceType,
-    cust:{name:$('custName').value,trn:$('custTRN').value,phone:$('custPhone').value,address:$('custAddress').value},
-    discount:$('discount').value,
-    items:[...$('itemsBody').rows].map(r=>({code:r.querySelector('.code').value,desc:r.querySelector('.desc').value,qty:r.querySelector('.qty').value,price:r.querySelector('.price').value})),
-    net:getTotals().net, savedAt:new Date().toISOString() }; }
-function histPush(t){
-    const rec=histRec(t);
-    let list=histList();
-    if(histEditing&&histEditing.type===t&&histEditing.id!==rec.id)list=list.filter(x=>x.id!==histEditing.id);
-    const ix=list.findIndex(x=>x.id===rec.id);
-    if(ix>=0)list[ix]=rec; else list.unshift(rec);
-    histSaveList(list);
-    histEditing={id:rec.id,type:t};
-    renderHist();
-}
-function toggleHist(){ const w=$('histWrap'); w.style.display=w.style.display==='none'?'':'none'; renderHist(); }
-function renderHist(){
-    const el=$('histBody'); if(!el)return;
-    const q=($('histSearch').value||'').toLowerCase();
-    const list=histList().filter(r=>!q||(r.number||'').toLowerCase().includes(q)||(r.cust&&r.cust.name||'').toLowerCase().includes(q)||(r.items||[]).some(it=>(it.desc||'').toLowerCase().includes(q)));
-    el.innerHTML=list.length?`<table class="hist-table"><thead><tr><th>Number</th><th>Type</th><th>Date</th><th>Customer</th><th>Net (AED)</th><th>Actions</th></tr></thead><tbody>`+
-        list.map(r=>`<tr><td><b>${esc(r.number)}</b></td><td>${r.type==='quotation'?'QUOTATION':'INVOICE'}</td><td>${fmtDate(r.date)}</td><td>${esc(r.cust&&r.cust.name||'')}</td><td>${fmt(r.net||0)}</td>
-        <td style="white-space:nowrap">
-            <button class="btn btn-blue" onclick="histView('${r.id}')">View/Edit</button>
-            <button class="btn btn-teal" onclick="histPrint('${r.id}')">Print</button>
-            <button class="btn btn-purple" onclick="histPDF('${r.id}')">PDF</button>
-            <button class="btn btn-red" onclick="histDel('${r.id}')">Del</button>
-        </td></tr>`).join('')+`</tbody></table>`:'<div style="color:#778;font-size:13px">No saved invoices/quotations yet. Use 💾 Save to store one.</div>';
-}
-function histView(id){
-    const r=histList().find(x=>x.id===id); if(!r)return;
-    const t=r.type;
-    WORK[t]={ number:r.number, date:r.date, staff:r.staff||'', poRef:r.poRef||'', cust:r.cust||{}, discount:r.discount||0, items:r.items||[], issued:parseInt(r.number,10)||undefined };
-    persistWork(t);
-    histEditing={id:r.id,type:t};
-    if(currentTab==='trading'||currentTab!==t)setMode(t); else loadWorkIntoEditor(t);
-    showStatus('👁️ Loaded '+t+' '+r.number+' (original date kept) — edit & Save to update','ok');
-}
-function histPrint(id){ histView(id); setTimeout(()=>printDoc(),250); }
-function histPDF(id){ histView(id); setTimeout(()=>downloadPDF(),250); }
-function histDel(id){ if(!confirm('Delete this saved document from history?'))return; histSaveList(histList().filter(x=>x.id!==id)); if(histEditing&&histEditing.id===id)histEditing=null; renderHist(); showStatus('🗑️ Deleted from history','ok'); }
+function histList(){try{return JSON.parse(localStorage.getItem('invApp_history')||'[]');}catch(e){return[];}}
+function histSaveList(l){try{localStorage.setItem('invApp_history',JSON.stringify(l));}catch(e){}}
+function histRec(t){return {id:t+'_'+(($('docNumber').value||'').trim()),type:t,number:$('docNumber').value,date:$('docDate').value,staff:$('staffName').value,poRef:$('poRef').value,invType:invoiceType,
+ cust:{name:$('custName').value,trn:$('custTRN').value,phone:$('custPhone').value,address:$('custAddress').value},discount:$('discount').value,
+ items:[...$('itemsBody').rows].map(r=>({code:r.querySelector('.code').value,desc:r.querySelector('.desc').value,qty:r.querySelector('.qty').value,price:r.querySelector('.price').value})),net:getTotals().net,savedAt:new Date().toISOString()};}
+function histPush(t){const rec=histRec(t);let list=histList();
+ if(histEditing&&histEditing.type===t&&histEditing.id!==rec.id)list=list.filter(x=>x.id!==histEditing.id);
+ const ix=list.findIndex(x=>x.id===rec.id);if(ix>=0)list[ix]=rec;else list.unshift(rec);
+ histSaveList(list);histEditing={id:rec.id,type:t};renderHist();}
+function toggleHist(){const w=$('histWrap');w.style.display=w.style.display==='none'?'':'none';renderHist();}
+function renderHist(){const el=$('histBody');if(!el)return;const q=($('histSearch').value||'').toLowerCase();
+ const list=histList().filter(r=>!q||(r.number||'').toLowerCase().includes(q)||(r.cust&&r.cust.name||'').toLowerCase().includes(q)||(r.items||[]).some(it=>(it.desc||'').toLowerCase().includes(q)));
+ el.innerHTML=list.length?`<table class="hist-table"><thead><tr><th>Number</th><th>Type</th><th>Date</th><th>Customer</th><th>Net</th><th>Actions</th></tr></thead><tbody>`+list.map(r=>`<tr><td><b>${esc(r.number)}</b></td><td>${r.type==='quotation'?'QUOT':'INV'}</td><td>${fmtDate(r.date)}</td><td>${esc(r.cust&&r.cust.name||'')}</td><td>${fmt(r.net||0)}</td><td style="white-space:nowrap"><button class="btn btn-blue" onclick="histView('${r.id}')">View</button> <button class="btn btn-teal" onclick="histPrint('${r.id}')">Print</button> <button class="btn btn-purple" onclick="histPDF('${r.id}')">PDF</button> <button class="btn btn-red" onclick="histDel('${r.id}')">Del</button></td></tr>`).join('')+`</tbody></table>`:'<div style="color:#778;font-size:13px">No saved documents yet.</div>';}
+function histView(id){const r=histList().find(x=>x.id===id);if(!r)return;const t=r.type;
+ WORK[t]={number:r.number,date:r.date,staff:r.staff||'',poRef:r.poRef||'',cust:r.cust||{},discount:r.discount||0,items:r.items||[],issued:parseInt(r.number,10)||undefined};
+ persistWork(t);histEditing={id:r.id,type:t};
+ if(currentTab!==t)setMode(t);else loadWorkIntoEditor(t);
+ showStatus('👁️ Loaded '+t+' '+r.number,'ok');}
+function histPrint(id){histView(id);setTimeout(()=>printDoc(),250);}
+function histPDF(id){histView(id);setTimeout(()=>downloadPDF(),250);}
+function histDel(id){if(!confirm('Delete?'))return;histSaveList(histList().filter(x=>x.id!==id));if(histEditing&&histEditing.id===id)histEditing=null;renderHist();}
 
-/* ================= BACKUP ================= */
-function collectAllData(){ const out={app:'ESmart Invoice/Quotation/Trading', generatedAt:new Date().toISOString(), data:{}}; for(let i=0;i<localStorage.length;i++){ const k=localStorage.key(i); if(k&&k.indexOf('invApp_')===0&&k!=='invApp_autobackup'){ out.data[k]=localStorage.getItem(k); } } return out; }
-function updateAutoBackup(){ try{ localStorage.setItem('invApp_autobackup',JSON.stringify(collectAllData())); const el=$('backupInfo'); if(el)el.textContent='Last auto-snapshot: '+new Date().toLocaleString(); }catch(e){} }
-function exportBackup(){ const j=collectAllData(); const blob=new Blob([JSON.stringify(j,null,1)],{type:'application/json'}); saveBlob(blob,'ESmart-Backup-'+todayISO()+'.json'); showStatus('⬇️ Backup JSON downloaded — keep it safe','ok'); }
-function importBackup(e){
-    const f=e.target.files[0]; if(!f)return;
-    const r=new FileReader();
-    r.onload=ev=>{
-        try{
-            const j=JSON.parse(ev.target.result);
-            if(!j||!j.data)throw new Error('bad');
-            if(!confirm('Restore backup? Current data on THIS device will be replaced.'))return;
-            Object.keys(j.data).forEach(k=>{ if(k.indexOf('invApp_')===0)localStorage.setItem(k,j.data[k]); });
-            showStatus('✅ Backup restored — reloading…','ok');
-            setTimeout(()=>location.reload(),900);
-        }catch(err){ showStatus('⚠️ Invalid backup file','err'); }
-    };
-    r.readAsText(f); e.target.value='';
-}
-function restoreAutoSnapshot(){
-    try{
-        const s=localStorage.getItem('invApp_autobackup');
-        if(!s){ showStatus('⚠️ No auto-snapshot found yet','err'); return; }
-        const j=JSON.parse(s);
-        if(!confirm('Restore last auto-snapshot ('+new Date(j.generatedAt).toLocaleString()+')? Current data will be replaced.'))return;
-        Object.keys(j.data).forEach(k=>{ if(k.indexOf('invApp_')===0)localStorage.setItem(k,j.data[k]); });
-        showStatus('✅ Snapshot restored — reloading…','ok');
-        setTimeout(()=>location.reload(),900);
-    }catch(e){ showStatus('⚠️ Snapshot restore failed','err'); }
-}
+function collectAllData(){const out={app:'ESmart',generatedAt:new Date().toISOString(),data:{}};for(let i=0;i<localStorage.length;i++){const k=localStorage.key(i);if(k&&k.indexOf('invApp_')===0&&k!=='invApp_autobackup')out.data[k]=localStorage.getItem(k);}return out;}
+function updateAutoBackup(){try{localStorage.setItem('invApp_autobackup',JSON.stringify(collectAllData()));const el=$('backupInfo');if(el)el.textContent='Last auto-snapshot: '+new Date().toLocaleString();}catch(e){}}
+function exportBackup(){saveBlob(new Blob([JSON.stringify(collectAllData(),null,1)],{type:'application/json'}),'ESmart-Backup-'+todayISO()+'.json');showStatus('⬇️ Backup downloaded','ok');}
+function importBackup(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{try{const j=JSON.parse(ev.target.result);if(!j||!j.data)throw 0;if(!confirm('Restore backup? Current device data replaced.'))return;Object.keys(j.data).forEach(k=>{if(k.indexOf('invApp_')===0)localStorage.setItem(k,j.data[k]);});showStatus('✅ Restored — reloading','ok');setTimeout(()=>location.reload(),900);}catch(err){showStatus('⚠️ Invalid backup','err');}};r.readAsText(f);e.target.value='';}
+function restoreAutoSnapshot(){try{const s=localStorage.getItem('invApp_autobackup');if(!s){showStatus('⚠️ No snapshot','err');return;}const j=JSON.parse(s);if(!confirm('Restore snapshot?'))return;Object.keys(j.data).forEach(k=>{if(k.indexOf('invApp_')===0)localStorage.setItem(k,j.data[k]);});showStatus('✅ Restored — reloading','ok');setTimeout(()=>location.reload(),900);}catch(e){showStatus('⚠️ Failed','err');}}
 
-/* ================= TRADING WORK ================= */
-function captureTrading(){ return { editingId:trEditingId, number:$('trNumber').value, date:$('trDate').value, status:$('trStatus').value, lang:$('trLang').value,
-    staff:$('trStaff').value, currency:$('trCurrency').value,
-    cust:{name:$('trName').value,contact:$('trContact').value,email:$('trEmail').value,nat:$('trNat').value,dob:$('trDob').value,emirate:$('trEmirate').value,city:$('trCity').value,country:$('trCountry').value,type:$('trType').value,addr:$('trAddr').value,notes:$('trNotes').value},
-    eid:{no:$('eidNo').value,name:$('eidName').value,nat:$('eidNat').value,dob:$('eidDob').value,issue:$('eidIssue').value,expiry:$('eidExpiry').value,occ:$('eidOcc').value,place:$('eidPlace').value,front:trIdFront,back:trIdBack,include:$('trIncEID').checked},
-    devices:collectDevices(), declEn:$('trDeclEn').value, declAr:$('trDeclAr').value, sig:trSig }; }
-function saveWorkTrading(){ try{ localStorage.setItem('invApp_work_trading',JSON.stringify(captureTrading())); }catch(e){} }
-function loadTradingWork(w){
-    trEditingId=w.editingId||null;
-    $('trNumber').value=w.number||''; $('trDate').value=w.date||todayISO(); $('trStatus').value=w.status||'Completed'; $('trLang').value=w.lang||'both';
-    $('trStaff').value=w.staff||''; $('trCurrency').value=w.currency||'AED';
-    const c=w.cust||{};
-    $('trName').value=c.name||''; $('trContact').value=c.contact||''; $('trEmail').value=c.email||''; $('trNat').value=c.nat||''; $('trDob').value=c.dob||'';
-    $('trEmirate').value=c.emirate||''; $('trCity').value=c.city||''; $('trCountry').value=c.country||''; $('trType').value=c.type||''; $('trAddr').value=c.addr||''; $('trNotes').value=c.notes||'';
-    const e=w.eid||{};
-    $('eidNo').value=e.no||''; $('eidName').value=e.name||''; $('eidNat').value=e.nat||''; $('eidDob').value=e.dob||''; $('eidIssue').value=e.issue||''; $('eidExpiry').value=e.expiry||''; $('eidOcc').value=e.occ||''; $('eidPlace').value=e.place||'';
-    trIdFront=e.front||null; trIdBack=e.back||null; trSig=w.sig||null;
-    $('trIncEID').checked=!!e.include;
-    $('trFrontPrev').textContent=trIdFront?'✅ Front uploaded':''; $('trBackPrev').textContent=trIdBack?'✅ Back uploaded':''; $('trSigPrev').textContent=trSig?'✅ Signature uploaded':'';
-    $('trDeclEn').value=w.declEn||''; $('trDeclAr').value=w.declAr||'';
-    $('trDevices').innerHTML='';
-    (w.devices&&w.devices.length?w.devices:[{}]).forEach(d=>trAddDevice(d));
-    buildTradingDoc();
-}
-
-function getTitles(){
-    if(currentMode==='quotation')return{ar:'عرض سعر',en:'QUOTATION',file:'quotation'};
-    if(invoiceType==='cash')return{ar:'فاتورة نقدية',en:'CASH INVOICE',file:'cash_invoice'};
-    return{ar:'فاتورة ضريبية',en:'TAX INVOICE',file:'tax_invoice'};
-}
-
-function setMode(m){
-    const prev=currentTab;
-    if((prev==='invoice'||prev==='quotation')&&WORK[prev])saveWorkInvQuot(prev);
-    currentTab=m;
-    if(m!=='trading')currentMode=m;
-    $('btnInvoice').classList.toggle('active',m==='invoice');
-    $('btnQuotation').classList.toggle('active',m==='quotation');
-    $('btnTrading').classList.toggle('active',m==='trading');
-    $('docNumLabel').textContent=m==='quotation'?'Quotation Number (auto / manual)':'Invoice Number (auto / manual)';
-    $('invTypeWrap').style.display=(m==='invoice')?'':'none';
-    $('invQuotEditor').style.display=(m==='trading')?'none':'';
-    $('tradingEditor').style.display=(m==='trading')?'':'none';
-    $('tradingDoc').style.display=(m==='trading')?'block':'none';
-    if(m==='invoice'||m==='quotation'){ if(!WORK[m]){WORK[m]=freshWork(m);persistWork(m);} loadWorkIntoEditor(m); }
-    if(m==='trading'){ buildTradingDoc(); }
-    scheduleWorkSave();
-}
-
-function setInvType(t){ invoiceType=t; $('btnTax').classList.toggle('active',t==='tax'); $('btnCash').classList.toggle('active',t==='cash'); scheduleWorkSave(); }
-
-/* ===== LOGO / STAMP ===== */
-function logoActive(){ return !!(logoDataUrl && $('logoOn').checked); }
-function saveLogoState(){ try{ localStorage.setItem('invApp_logoOn', $('logoOn').checked?'1':'0'); }catch(e){} }
-function refreshLogo(){ updateHeaderFooterState(); buildDocument(); if(currentTab==='trading')buildTradingDoc(); }
-function handleLogo(e){
-    const f=e.target.files[0]; if(!f)return;
-    const r=new FileReader();
-    r.onload=ev=>{ logoDataUrl=ev.target.result; try{localStorage.setItem('invApp_logo',logoDataUrl);}catch(err){} $('logoPreview').innerHTML=`<img src="${logoDataUrl}">`; $('logoOn').checked=true; saveLogoState(); refreshLogo(); showStatus('✅ Logo uploaded — switch ON','ok'); };
-    r.readAsDataURL(f);
-}
+function logoActive(){return !!(logoDataUrl&&$('logoOn').checked);}
+function saveLogoState(){try{localStorage.setItem('invApp_logoOn',$('logoOn').checked?'1':'0');}catch(e){}}
+function refreshLogo(){updateHeaderFooterState();buildDocument();buildDoDoc();if(currentTab==='trading')buildTradingDoc();}
+function handleLogo(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{logoDataUrl=ev.target.result;try{localStorage.setItem('invApp_logo',logoDataUrl);}catch(err){}$('logoPreview').innerHTML=`<img src="${logoDataUrl}">`;$('logoOn').checked=true;saveLogoState();refreshLogo();showStatus('✅ Logo uploaded','ok');};r.readAsDataURL(f);}
 let stampDataUrl=null;
-function handleStamp(e){
-    const f=e.target.files[0]; if(!f)return;
-    const r=new FileReader();
-    r.onload=ev=>{ stampDataUrl=ev.target.result; $('stampPreview').innerHTML=`<img src="${stampDataUrl}">`; saveStampState(); buildDocument(); showStatus('✅ Stamp uploaded','ok'); };
-    r.readAsDataURL(f);
-}
-function saveStampState(){ try{ localStorage.setItem('invApp_stamp',JSON.stringify({img:stampDataUrl,on:$('stampOn').checked})); }catch(e){} }
-function updateStamp(){
-    const st=$('docStamp'); if(!st)return;
-    if(stampDataUrl && $('stampOn').checked){ st.src=stampDataUrl; st.style.display='block'; }
-    else { st.style.display='none'; }
-}
-function updateHeaderFooterState(){
-    const topbar=$('docTopbar'), footerBar=$('footerBlackBar'), foot=$('docFoot');
-    if(logoActive()){ topbar.classList.remove('no-logo'); footerBar.classList.add('show'); foot.classList.remove('no-logo'); }
-    else { topbar.classList.add('no-logo'); footerBar.classList.remove('show'); foot.classList.add('no-logo'); }
+function handleStamp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{stampDataUrl=ev.target.result;$('stampPreview').innerHTML=`<img src="${stampDataUrl}">`;saveStampState();buildDocument();buildDoDoc();showStatus('✅ Stamp uploaded','ok');};r.readAsDataURL(f);}
+function saveStampState(){try{localStorage.setItem('invApp_stamp',JSON.stringify({img:stampDataUrl,on:$('stampOn').checked}));}catch(e){}}
+function updateStamp(){const st=$('docStamp');if(!st)return;if(stampDataUrl&&$('stampOn').checked){st.src=stampDataUrl;st.style.display='block';}else st.style.display='none';}
+function updateHeaderFooterState(){const t=$('docTopbar'),f=$('footerBlackBar'),fo=$('docFoot');
+ if(logoActive()){t.classList.remove('no-logo');f.classList.add('show');fo.classList.remove('no-logo');}
+ else{t.classList.add('no-logo');f.classList.remove('show');fo.classList.add('no-logo');}}
+
+function addRow(code='',desc='',qty='',price=''){const tr=document.createElement('tr');
+ tr.innerHTML=`<td class="row-num"></td><td><input class="code" value="${code}"></td><td><input class="desc" value="${desc}"></td><td><input type="number" class="qty" value="${qty}" min="0" step="1" oninput="calcRow(this)"></td><td><input type="number" class="price" value="${price}" min="0" step="0.01" oninput="calcRow(this)"></td><td class="vat-cell num">0.00</td><td class="total-cell num">0.00</td><td><button class="btn btn-red" style="padding:4px 10px" onclick="delRow(this)">✕</button></td>`;
+ $('itemsBody').appendChild(tr);renumber();calcRow(tr.querySelector('.qty'));scheduleWorkSave();}
+function delRow(b){if($('itemsBody').rows.length<=1){showStatus('⚠️ At least one row','err');return;}b.closest('tr').remove();renumber();calcTotals();scheduleWorkSave();}
+function renumber(){[...$('itemsBody').rows].forEach((r,i)=>r.querySelector('.row-num').textContent=i+1);}
+function calcRow(inp){const r=inp.closest('tr');const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p,v=g*0.05;r.querySelector('.vat-cell').textContent=fmt(v);r.querySelector('.total-cell').textContent=fmt(g+v);calcTotals();}
+function getTotals(){let gross=0,vat=0;[...$('itemsBody').rows].forEach(r=>{const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p;gross+=g;vat+=g*0.05;});const d=parseFloat($('discount').value)||0;return{gross,vat,disc:d,net:gross+vat-d};}
+function calcTotals(){const t=getTotals();$('grossAmt').textContent=fmt(t.gross)+' AED';$('vatAmt').textContent=fmt(t.vat)+' AED';$('netAmt').textContent=fmt(t.net)+' AED';$('amtWords').textContent=numberToWords(Math.round(t.net))+' DIRHAMS ONLY';}
+function numberToWords(num){if(num===0)return'ZERO';const o=['','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE'],t=['TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN','FIFTEEN','SIXTEEN','SEVENTEEN','EIGHTEEN','NINETEEN'],x=['','','TWENTY','THIRTY','FORTY','FIFTY','SIXTY','SEVENTY','EIGHTY','NINETY'];
+ const g=n=>n<10?o[n]:n<20?t[n-10]:n<100?x[n/10|0]+(n%10?' '+o[n%10]:''):o[n/100|0]+' HUNDRED'+(n%100?' '+g(n%100):'');
+ let r='';const b=num/1e9|0,m=(num%1e9)/1e6|0,th=(num%1e6)/1e3|0,rem=num%1e3;if(b)r+=g(b)+' BILLION ';if(m)r+=g(m)+' MILLION ';if(th)r+=g(th)+' THOUSAND ';if(rem)r+=g(rem);return r.trim();}
+function bankRows(){return [['Bank Name',$('bankName').value],['Account Name',$('bankAccName').value],['Account Number',$('bankAccNo').value],['IBAN',$('bankIBAN').value],['SWIFT / BIC',$('bankSwift').value],['Branch',$('bankBranch').value]].filter(r=>r[1]&&r[1].trim());}
+function termsLines(){return $('termsText').value.split('\n').map(s=>s.trim()).filter(Boolean);}
+
+function buildDocument(){calcTotals();const t=getTotals(),T=getTitles();
+ if(logoActive()){$('docLogo').src=logoDataUrl;$('docLogo').style.display='block';}else $('docLogo').style.display='none';
+ updateHeaderFooterState();
+ $('docTitleAr').textContent=T.ar;$('docTitleEn').textContent=T.en;
+ $('docTRN').textContent='TRN No.'+($('compTRN').value||'—');
+ $('docCustName').textContent=$('custName').value||'—';
+ const c=$('custTRN').value;$('docCustTRN').style.display=c?'block':'none';$('docCustTRN').textContent=c?'TRN: '+c:'';
+ $('docCustMore').textContent=[$('custPhone').value,$('custAddress').value].filter(Boolean).join(' | ');
+ $('docInvNoLabel').textContent=(currentMode==='invoice'?'Invoice No :':'Quotation No :');
+ $('docInvNo').textContent=$('docNumber').value||'—';
+ $('docDateV').textContent=fmtDate($('docDate').value)||'—';
+ $('docStaffV').textContent=$('staffName').value||'—';
+ const po=$('poRef').value;$('docPORow').style.display=po?'flex':'none';$('docPOV').textContent=po;
+ let rows='';[...$('itemsBody').rows].forEach((r,i)=>{const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p,v=g*0.05;
+  rows+=`<tr><td>${i+1}</td><td>${esc(r.querySelector('.code').value)||''}</td><td>${esc(r.querySelector('.desc').value)||''}</td><td class="num">${q}</td><td class="num">${fmt(p)}</td><td class="num">${fmt(g)}</td><td class="num">${fmt(v)}</td><td class="num">${fmt(g+v)}</td></tr>`;});
+ $('docItemsBody').innerHTML=rows;
+ $('docWords').textContent='AED: '+$('amtWords').textContent;
+ $('docGross').textContent=fmt(t.gross);$('docDisc').textContent=fmt(t.disc);$('docVAT').textContent=fmt(t.vat);$('docNet').textContent=fmt(t.net);
+ if(currentMode==='quotation'){$('docQuoteExtras').style.display='block';$('docTermsList').innerHTML=termsLines().map(l=>`<div class="line">${esc(l)}</div>`).join('');
+  const br=bankRows();$('docBankBody').innerHTML=br.length?br.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join(''):'<tr><td colspan="2">—</td></tr>';
+ } else $('docQuoteExtras').style.display='none';
+ $('docFootName').textContent=$('compName').value||'';
+ $('docFootAddress').textContent=$('compAddress').value||'';
+ $('docFootContact').textContent=`Web: ${$('compWeb').value} , E Mail: ${$('compEmail').value}   Tel: ${$('compPhone').value} , Mob: ${$('compMobile').value}`;
+ updateStamp();}
+
+/* ===== DELIVERY NOTE editor/build (seal anchored inside reserved blank row) ===== */
+function addDoRow(desc='',qty=''){const tr=document.createElement('tr');
+ tr.innerHTML=`<td class="row-num"></td><td><textarea class="d-desc" rows="2" style="width:100%;padding:6px;border:1px solid #cfd6dd;border-radius:4px;font-size:13px" oninput="buildDoDoc();scheduleWorkSave()">${esc(desc)}</textarea></td><td><input type="number" class="d-qty" value="${qty}" min="0" step="1" style="width:100%;padding:6px;border:1px solid #cfd6dd;border-radius:4px" oninput="buildDoDoc();scheduleWorkSave()"></td><td><button class="btn btn-red" style="padding:4px 10px" onclick="delDoRow(this)">✕</button></td>`;
+ $('doItems').appendChild(tr);renumberDo();buildDoDoc();}
+function delDoRow(b){if($('doItems').rows.length<=1){showStatus('⚠️ At least one line','err');return;}b.closest('tr').remove();renumberDo();buildDoDoc();scheduleWorkSave();}
+function renumberDo(){[...$('doItems').rows].forEach((r,i)=>r.querySelector('.row-num').textContent=i+1);}
+function captureDo(){return {number:$('doNumber').value,date:$('doDate').value,invNo:$('doInvNo').value,lpo:$('doLpo').value,cust:$('doCust').value,recv:$('doRecv').value,mobile:$('doMobile').value,terms:$('doTerms').value,
+ items:[...$('doItems').rows].map(r=>({desc:r.querySelector('.d-desc').value,qty:r.querySelector('.d-qty').value}))};}
+function saveWorkDo(){WORK.do=captureDo();persistWork('do');}
+function loadDoIntoEditor(){const w=WORK.do;if(!w)return;
+ $('doNumber').value=w.number||'';$('doDate').value=w.date||todayISO();$('doInvNo').value=w.invNo||'';$('doLpo').value=w.lpo||'';
+ $('doCust').value=w.cust||'';$('doRecv').value=w.recv||'';$('doMobile').value=w.mobile||'';if(w.terms)$('doTerms').value=w.terms;
+ $('doItems').innerHTML='';(w.items&&w.items.length?w.items:[{}]).forEach(it=>addDoRow(it.desc||'',it.qty===undefined?'':it.qty));
+ buildDoDoc();}
+function newDo(){if(!confirm('Create NEW Delivery Note?'))return;
+ const n=nextNum('do');issueNum('do',n);
+ WORK.do={number:'DO-'+n,date:todayISO(),invNo:'',lpo:'',cust:'',recv:'',mobile:'',terms:$('doTerms').value,items:[]};
+ persistWork('do');loadDoIntoEditor();showStatus('🆕 New DO '+WORK.do.number,'ok');}
+function saveDo(){const w=captureDo();if(!w.number){showStatus('⚠️ DO number missing','err');return;}
+ WORK.do=w;persistWork('do');
+ try{localStorage.setItem('invApp_do_last',JSON.stringify(w));}catch(e){}
+ updateAutoBackup();showStatus('✅ DO '+w.number+' saved','ok');}
+function buildDoDoc(){
+ if(logoActive()){$('doLogo').src=logoDataUrl;$('doLogo').style.display='block';}else $('doLogo').style.display='none';
+ $('doCompName').textContent=($('compName').value||'').toUpperCase()||'E SMART ELECTRONICS LLC';
+ $('doAddr1').textContent=$('compAddress').value||'Mushrif Mall, Abu Dhabi U.A.E';
+ $('doAddr2').textContent='E-Mail: '+($('compEmail').value||'');
+ $('doCustV').textContent=$('doCust').value||'—';
+ $('doDateV').textContent=fmtDate($('doDate').value)||'—';
+ $('doInvNoV').textContent=$('doInvNo').value||'—';
+ $('doLpoV').textContent=$('doLpo').value||'—';
+ let rows='';let tot=0;
+ [...$('doItems').rows].forEach((r,i)=>{const q=parseFloat(r.querySelector('.d-qty').value)||0;tot+=q;
+  const dl=(r.querySelector('.d-desc').value||'').split('\n').filter(Boolean);
+  rows+=`<tr><td style="text-align:center">${i+1}</td><td>${dl.map(l=>esc(l)).join('<br>')||'&nbsp;'}</td><td class="q">${q}</td></tr>`;});
+ $('doItemsBody').innerHTML=rows;
+ $('doTotalQty').textContent=fmt(tot);
+ /* seal lives ONLY inside the reserved blank row (#doSpace); CSS gives that row a real 330px height */
+ const sp=$('doSpace');sp.innerHTML='';
+ if(stampDataUrl&&$('stampOn').checked){const im=document.createElement('img');im.className='stamp';im.src=stampDataUrl;sp.appendChild(im);}
+ $('doTermsV').innerHTML=($('doTerms').value||'').split('\n').filter(Boolean).map(l=>`<div>${esc(l)}</div>`).join('');
+ $('doRecvV').textContent=$('doRecv').value||'';
+ $('doMobileV').textContent=$('doMobile').value||'';
 }
 
-/* ===== ITEMS / CALC ===== */
-function addRow(code='',desc='',qty='',price=''){
-    const tr=document.createElement('tr');
-    tr.innerHTML=`<td class="row-num"></td>
-        <td><input class="code" value="${code}"></td>
-        <td><input class="desc" value="${desc}"></td>
-        <td><input type="number" class="qty" value="${qty}" min="0" step="1" oninput="calcRow(this)"></td>
-        <td><input type="number" class="price" value="${price}" min="0" step="0.01" oninput="calcRow(this)"></td>
-        <td class="vat-cell num">0.00</td><td class="total-cell num">0.00</td>
-        <td><button class="btn btn-red" style="padding:4px 10px" onclick="delRow(this)">✕</button></td>`;
-    $('itemsBody').appendChild(tr); renumber(); calcRow(tr.querySelector('.qty')); scheduleWorkSave();
+/* ===== CONVERSIONS ===== */
+function srcSnapshot(type){
+ if(type==='invoice'||type==='quotation'){ if(currentTab===type)return captureInvQuot(); return WORK[type]||storedWork(type)||{items:[],cust:{}}; }
+ if(type==='trading'){ if(currentTab==='trading')return captureTrading(); return WORK.trading||storedWork('trading')||{devices:[],cust:{}}; }
+ return null;
 }
-function delRow(b){ if($('itemsBody').rows.length<=1){ showStatus('⚠️ At least one row required','err'); return; } b.closest('tr').remove(); renumber(); calcTotals(); scheduleWorkSave(); }
-function renumber(){ [...$('itemsBody').rows].forEach((r,i)=>r.querySelector('.row-num').textContent=i+1); }
-function calcRow(inp){
-    const r=inp.closest('tr');
-    const q=parseFloat(r.querySelector('.qty').value)||0, p=parseFloat(r.querySelector('.price').value)||0;
-    const g=q*p, v=g*0.05;
-    r.querySelector('.vat-cell').textContent=fmt(v);
-    r.querySelector('.total-cell').textContent=fmt(g+v);
-    calcTotals();
-}
-function getTotals(){
-    let gross=0,vat=0;
-    [...$('itemsBody').rows].forEach(r=>{
-        const q=parseFloat(r.querySelector('.qty').value)||0, p=parseFloat(r.querySelector('.price').value)||0;
-        const g=q*p; gross+=g; vat+=g*0.05;
-    });
-    const disc=parseFloat($('discount').value)||0;
-    return {gross,vat,disc,net:gross+vat-disc};
-}
-function calcTotals(){
-    const t=getTotals();
-    $('grossAmt').textContent=fmt(t.gross)+' AED';
-    $('vatAmt').textContent=fmt(t.vat)+' AED';
-    $('netAmt').textContent=fmt(t.net)+' AED';
-    $('amtWords').textContent=numberToWords(Math.round(t.net))+' DIRHAMS ONLY';
-}
-function numberToWords(num){
-    if(num===0)return'ZERO';
-    const o=['','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE'],
-          t=['TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN','FIFTEEN','SIXTEEN','SEVENTEEN','EIGHTEEN','NINETEEN'],
-          x=['','','TWENTY','THIRTY','FORTY','FIFTY','SIXTY','SEVENTY','EIGHTY','NINETY'];
-    const g=n=>n<10?o[n]:n<20?t[n-10]:n<100?x[n/10|0]+(n%10?' '+o[n%10]:''):o[n/100|0]+' HUNDRED'+(n%100?' '+g(n%100):'');
-    let r='';const b=num/1e9|0,m=(num%1e9)/1e6|0,th=(num%1e6)/1e3|0,rem=num%1e3;
-    if(b)r+=g(b)+' BILLION '; if(m)r+=g(m)+' MILLION '; if(th)r+=g(th)+' THOUSAND '; if(rem)r+=g(rem);
-    return r.trim();
-}
-function bankRows(){
-    return [['Bank Name',$('bankName').value],['Account Name',$('bankAccName').value],['Account Number',$('bankAccNo').value],
-            ['IBAN',$('bankIBAN').value],['SWIFT / BIC',$('bankSwift').value],['Branch',$('bankBranch').value]].filter(r=>r[1]&&r[1].trim());
-}
-function termsLines(){ return $('termsText').value.split('\n').map(s=>s.trim()).filter(Boolean); }
-
-function buildDocument(){
-    calcTotals();
-    const t=getTotals(), T=getTitles();
-    if(logoActive()){ $('docLogo').src=logoDataUrl; $('docLogo').style.display='block'; } else { $('docLogo').style.display='none'; }
-    updateHeaderFooterState();
-    $('docTitleAr').textContent=T.ar; $('docTitleEn').textContent=T.en;
-    $('docTRN').textContent='TRN No.'+($('compTRN').value||'—');
-    $('docCustName').textContent=$('custName').value||'—';
-    const ctrn=$('custTRN').value;
-    $('docCustTRN').style.display=ctrn?'block':'none';
-    $('docCustTRN').textContent=ctrn?'TRN: '+ctrn:'';
-    $('docCustMore').textContent=[$('custPhone').value,$('custAddress').value].filter(Boolean).join(' | ');
-    $('docInvNoLabel').textContent=currentMode==='invoice'?'Invoice No رقم الفاتورة :':'Quotation No رقم العرض :';
-    $('docInvNo').textContent=$('docNumber').value||'—';
-    $('docDateV').textContent=fmtDate($('docDate').value)||'—';
-    $('docStaffV').textContent=$('staffName').value||'—';
-    const po=$('poRef').value;
-    $('docPORow').style.display=po?'flex':'none';
-    $('docPOV').textContent=po;
-    let rows='';
-    [...$('itemsBody').rows].forEach((r,i)=>{
-        const q=parseFloat(r.querySelector('.qty').value)||0, p=parseFloat(r.querySelector('.price').value)||0;
-        const g=q*p, v=g*0.05;
-        rows+=`<tr><td>${i+1}</td><td>${esc(r.querySelector('.code').value)||''}</td><td>${esc(r.querySelector('.desc').value)||''}</td>
-            <td class="num">${q}</td><td class="num">${fmt(p)}</td><td class="num">${fmt(g)}</td><td class="num">${fmt(v)}</td><td class="num">${fmt(g+v)}</td></tr>`;
-    });
-    $('docItemsBody').innerHTML=rows;
-    $('docWords').textContent='AED: '+$('amtWords').textContent;
-    $('docGross').textContent=fmt(t.gross); $('docDisc').textContent=fmt(t.disc);
-    $('docVAT').textContent=fmt(t.vat); $('docNet').textContent=fmt(t.net);
-    if(currentMode==='quotation'){
-        $('docQuoteExtras').style.display='block';
-        $('docTermsList').innerHTML=termsLines().map(l=>`<div class="line">${esc(l)}</div>`).join('');
-        const br=bankRows();
-        $('docBankBody').innerHTML=br.length?br.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join('')
-            :'<tr><td colspan="2">Please contact our accounts department for payment details.</td></tr>';
-    } else $('docQuoteExtras').style.display='none';
-    $('docFootName').textContent=$('compName').value||'';
-    $('docFootAddress').textContent=$('compAddress').value||'';
-    $('docFootContact').textContent=`Web: ${$('compWeb').value} , E Mail: ${$('compEmail').value}   Tel: ${$('compPhone').value} , Mob: ${$('compMobile').value}`;
-    updateStamp();
+function convertTo(target,forceSrc){
+ const srcType=forceSrc||currentTab;
+ const s=srcSnapshot(srcType);
+ if(!s){showStatus('⚠️ No source document loaded','err');return;}
+ if(target==='do'){
+  let items=[],cust='',invNo='',lpo='',date='';
+  if(srcType==='trading'){
+   (s.devices||[]).forEach(d=>{const ser=[d.imei1,d.imei2,d.serial].filter(Boolean).join(',');
+    items.push({desc:[[d.brand,d.name,d.model,d.storage,d.color].filter(Boolean).join(' ').toUpperCase(),ser].filter(Boolean).join('\n'),qty:d.qty});});
+   cust=s.cust&&s.cust.name||'';date=s.date||todayISO();
+  } else {
+   (s.items||[]).forEach(it=>{items.push({desc:[it.desc,it.code].filter(Boolean).join('\n'),qty:it.qty});});
+   cust=s.cust&&s.cust.name||'';invNo=s.number||'';lpo=s.poRef||'';date=s.date||todayISO();
+  }
+  const n=nextNum('do');issueNum('do',n);
+  WORK.do={number:'DO-'+n,date:date,invNo:invNo,lpo:lpo,cust:cust,recv:'',mobile:'',terms:$('doTerms').value,items:items};
+  persistWork('do');
+  if(currentTab!=='do')setMode('do');else loadDoIntoEditor();
+  showStatus('🚚 Delivery Note created from '+srcType+' (original unchanged)','ok');
+  return;
+ }
+ if(target==='invoice'||target==='quotation'){
+  let items=[],cust={},poRef='',date='';
+  if(srcType==='trading'){
+   (s.devices||[]).forEach(d=>{items.push({code:'',desc:[d.brand,d.name,d.model,d.storage,d.color].filter(Boolean).join(' ').toUpperCase(),qty:d.qty,price:d.value});});
+   cust={name:s.cust&&s.cust.name||'',phone:s.cust&&s.cust.contact||'',address:s.cust&&s.cust.addr||'',trn:''};
+   date=s.date||todayISO();
+  } else {
+   items=(s.items||[]).map(it=>({code:it.code,desc:it.desc,qty:it.qty,price:it.price}));
+   cust=s.cust||{};poRef=s.poRef||'';date=s.date||todayISO();
+  }
+  const n=nextNum(target);issueNum(target,n);
+  WORK[target]={number:String(n),date:date,staff:$('staffName').value,poRef:poRef,cust:cust,discount:0,items:items,issued:n};
+  persistWork(target);
+  if(currentTab!==target)setMode(target);else loadWorkIntoEditor(target);
+  showStatus('✅ Converted '+srcType+' → '+target+' #'+n+' (original unchanged)','ok');
+ }
 }
 
-/* ===== COPY ===== */
-function invoiceText(){
-    const T=getTitles(), t=getTotals(), L=[];
-    L.push($('compName').value); L.push(T.en+' — '+($('docNumber').value||''));
-    L.push('Date: '+fmtDate($('docDate').value)+' | Staff: '+$('staffName').value);
-    L.push('Customer: '+$('custName').value);
-    L.push('---- Items ----');
-    [...$('itemsBody').rows].forEach((r,i)=>{ L.push((i+1)+'. '+r.querySelector('.desc').value+' | Qty '+r.querySelector('.qty').value+' | '+fmt(parseFloat(r.querySelector('.price').value)||0)+' | Total '+r.querySelector('.total-cell').textContent); });
-    L.push('Gross: '+fmt(t.gross)+' AED | VAT 5%: '+fmt(t.vat)+' AED | NET: '+fmt(t.net)+' AED');
-    L.push($('amtWords').textContent);
-    return L.join('\n');
-}
-function tradingText(){
-    const L=[];
-    L.push($('compName').value);
-    L.push('Trading No: '+$('trNumber').value+' | Date: '+trLongDate($('trDate').value));
-    L.push('Customer: '+$('trName').value+' | Contact: '+$('trContact').value);
-    if($('eidNo').value)L.push('Emirates ID: '+$('eidNo').value);
-    L.push('---- Devices ----');
-    collectDevices().forEach((d,i)=>{ L.push((i+1)+'. '+devDesc(d)+' | IMEI/SN: '+devId(d)+' | Qty '+d.qty+' | '+trCur()+' '+fmt(d.value)+' | Total '+trCur()+' '+fmt(d.qty*d.value)); });
-    L.push('GRAND TOTAL: '+trCur()+' '+fmt(trTotal()));
-    L.push('Staff: '+$('trStaff').value);
-    return L.join('\n');
-}
-function copyDoc(){
-    const txt=(currentTab==='trading')?tradingText():invoiceText();
-    const done=()=>showStatus('📋 Copied to clipboard — paste anywhere','ok');
-    if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(txt).then(done).catch(()=>fallbackCopy(txt,done)); }
-    else fallbackCopy(txt,done);
-}
-function fallbackCopy(txt,done){
-    const ta=document.createElement('textarea'); ta.value=txt; ta.style.position='fixed'; ta.style.left='-9999px';
-    document.body.appendChild(ta); ta.select();
-    try{ document.execCommand('copy'); done(); }catch(e){ showStatus('⚠️ Copy failed','err'); }
-    ta.remove();
-}
+/* trading helpers */
+let trIdFront=null,trIdBack=null,trSig=null;
+function trLang(){return $('trLang').value;}
+function trCur(){return ($('trCurrency').value||'AED').trim();}
+function trLongDate(iso){if(!iso)return'';const d=new Date(iso+'T00:00:00');if(isNaN(d))return iso;return d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'});}
+function trList(){try{return JSON.parse(localStorage.getItem('invApp_trading_list')||'[]');}catch(e){return[];}}
+function trSaveList(l){localStorage.setItem('invApp_trading_list',JSON.stringify(l));}
+function nextTRD(){const seq=parseInt(localStorage.getItem('invApp_trd_seq')||'0',10);const used=trList().map(r=>r.number);let n=seq+1;let c='TRD-'+String(n).padStart(6,'0');while(used.includes(c)){n++;c='TRD-'+String(n).padStart(6,'0');}return c;}
+function newTrading(){trEditingId=null;
+ ['trName','trContact','trEmail','trNat','trEmirate','trCity','trAddr'].forEach(id=>$(id).value='');
+ $('trNumber').value=nextTRD();$('trDate').value=todayISO();$('trStaff').value=$('staffName').value||'';$('trStatus').value='Completed';
+ trIdFront=trIdBack=trSig=null;$('trIncEID').checked=false;$('trFrontPrev').textContent='';$('trBackPrev').textContent='';
+ $('trDevices').innerHTML='';trAddDevice();buildTradingDoc();saveWorkTrading();showStatus('🆕 New Trading '+$('trNumber').value,'ok');}
+function trAddDevice(d){d=d||{};const card=document.createElement('div');card.className='tr-devcard';
+ card.innerHTML=`<div class="form-grid"><div class="form-group"><label>Brand</label><input class="form-control d-brand" value="${esc(d.brand||'')}"></div><div class="form-group"><label>Product</label><input class="form-control d-name" value="${esc(d.name||'')}"></div><div class="form-group"><label>Model</label><input class="form-control d-model" value="${esc(d.model||'')}"></div><div class="form-group"><label>Storage</label><input class="form-control d-storage" value="${esc(d.storage||'')}"></div><div class="form-group"><label>Color</label><input class="form-control d-color" value="${esc(d.color||'')}"></div><div class="form-group"><label>IMEI 1</label><input class="form-control d-imei1" value="${esc(d.imei1||'')}" maxlength="15"></div><div class="form-group"><label>Serial</label><input class="form-control d-serial" value="${esc(d.serial||'')}"></div><div class="form-group"><label>Qty</label><input type="number" class="form-control d-qty" value="${d.qty||1}" min="1"></div><div class="form-group"><label>Value</label><input type="number" class="form-control d-value" value="${d.value||0}" min="0" step="0.01"></div></div><div style="margin-top:8px;display:flex;gap:8px"><button class="btn btn-blue" style="padding:5px 12px" onclick="trDupDevice(this)">⧉ Dup</button><button class="btn btn-red" style="padding:5px 12px" onclick="trDelDevice(this)">✕ Del</button></div>`;
+ $('trDevices').appendChild(card);buildTradingDoc();scheduleWorkSave();}
+function trDupDevice(b){const c=b.closest('.tr-devcard');trAddDevice(collectCard(c));}
+function trDelDevice(b){if(document.querySelectorAll('.tr-devcard').length<=1){showStatus('⚠️ At least one device','err');return;}b.closest('.tr-devcard').remove();buildTradingDoc();scheduleWorkSave();}
+function collectCard(c){return{brand:c.querySelector('.d-brand').value,name:c.querySelector('.d-name').value,model:c.querySelector('.d-model').value,storage:c.querySelector('.d-storage').value,color:c.querySelector('.d-color').value,imei1:c.querySelector('.d-imei1').value.trim(),serial:c.querySelector('.d-serial').value.trim(),qty:parseFloat(c.querySelector('.d-qty').value)||0,value:parseFloat(c.querySelector('.d-value').value)||0};}
+function collectDevices(){return [...document.querySelectorAll('.tr-devcard')].map(collectCard);}
+function devDesc(d){return [d.brand,d.name,d.model,d.storage,d.color].filter(Boolean).join(' ').toUpperCase();}
+function devId(d){return d.imei1||d.serial||'';}
+function trTotal(){return collectDevices().reduce((s,d)=>s+(d.qty*d.value),0);}
+function trIdImg(e,side){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=ev=>{if(side==='front'){trIdFront=ev.target.result;$('trFrontPrev').textContent='✅ Front';}else{trIdBack=ev.target.result;$('trBackPrev').textContent='✅ Back';}buildTradingDoc();scheduleWorkSave();};r.readAsDataURL(f);}
+function captureTrading(){return {editingId:trEditingId,number:$('trNumber').value,date:$('trDate').value,status:$('trStatus').value,lang:$('trLang').value,staff:$('trStaff').value,currency:$('trCurrency').value,
+ cust:{name:$('trName').value,contact:$('trContact').value,addr:$('trAddr').value},eid:{no:$('eidNo').value,front:trIdFront,back:trIdBack,include:$('trIncEID').checked},devices:collectDevices(),declEn:$('trDeclEn').value,declAr:$('trDeclAr').value,sig:trSig};}
+function saveWorkTrading(){try{localStorage.setItem('invApp_work_trading',JSON.stringify(captureTrading()));}catch(e){}}
+function loadTradingWork(w){trEditingId=w.editingId||null;
+ $('trNumber').value=w.number||'';$('trDate').value=w.date||todayISO();$('trStatus').value=w.status||'Completed';$('trLang').value=w.lang||'both';$('trStaff').value=w.staff||'';$('trCurrency').value=w.currency||'AED';
+ const c=w.cust||{};$('trName').value=c.name||'';$('trContact').value=c.contact||'';$('trAddr').value=c.addr||'';
+ const e=w.eid||{};$('eidNo').value=e.no||'';trIdFront=e.front||null;trIdBack=e.back||null;$('trIncEID').checked=!!e.include;
+ $('trFrontPrev').textContent=trIdFront?'✅ Front':'';$('trBackPrev').textContent=trIdBack?'✅ Back':'';
+ $('trDeclEn').value=w.declEn||'';$('trDeclAr').value=w.declAr||'';
+ $('trDevices').innerHTML='';(w.devices&&w.devices.length?w.devices:[{}]).forEach(d=>trAddDevice(d));buildTradingDoc();}
+function validateTrading(){const e=[];if(!$('trName').value.trim())e.push('Customer Name required');if(!$('trContact').value.trim())e.push('Contact required');if(!$('trNumber').value.trim())e.push('Trading No required');return e;}
+function buildTradingDoc(){const m=trLang();const en=m!=='ar',ar=m!=='en';const devs=collectDevices();const total=trTotal();const cur=trCur();
+ const biH=(a,b)=>en&&ar?a+' / '+b:(en?a:b);
+ let lines='';const addL=(l,v)=>{if(v)lines+=`<div><span class="lbl">${l}:</span> ${esc(v)}</div>`;};
+ addL(biH('Name','الاسم'),$('trName').value);addL(biH('Contact','رقم الاتصال'),$('trContact').value);addL(biH('Emirates ID','الهوية'),$('eidNo').value);addL(biH('Address','العنوان'),$('trAddr').value);addL(biH('Staff','الموظف'),$('trStaff').value);
+ let rows='';devs.forEach((d,i)=>{rows+=`<tr><td class="cen">${i+1}</td><td>${esc(devDesc(d))}</td><td>${esc(devId(d))}</td><td class="cen">${d.qty}</td><td class="num">${cur} ${fmt(d.value)}</td><td class="num tot">${cur} ${fmt(d.qty*d.value)}</td></tr>`;});
+ for(let i=0;i<2;i++)rows+='<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>';
+ let idBlock='';if($('trIncEID').checked&&(trIdFront||trIdBack)){idBlock=`<div class="tr-h">${biH('Emirates ID Copy','صورة الهوية')}</div><div class="tr-idimgs">${trIdFront?`<div class="card"><img src="${trIdFront}"></div>`:''}${trIdBack?`<div class="card"><img src="${trIdBack}"></div>`:''}</div>`;}
+ const doc=$('tradingDoc');doc.dir=(m==='ar')?'rtl':'ltr';
+ doc.innerHTML=`<div class="tr-head"><div class="tr-logo">${logoActive()?`<img src="${logoDataUrl}">`:`<div class="noname">${esc($('compName').value||'')}</div>`}</div><div class="tr-refs"><div class="r"><b>${biH('Trading No.','رقم المستند')}:</b><span>${esc($('trNumber').value)}</span></div><div class="r"><b>${biH('Date','التاريخ')}:</b><span>${trLongDate($('trDate').value)}</span></div></div></div>
+ <div class="tr-h">${biH('Customer Information','معلومات العميل')}</div><div class="tr-cust">${lines||'—'}</div>
+ <div class="tr-h">${biH('Traded Device(s)','الأجهزة المستبدلة')}</div>
+ <table class="tr-table"><thead><tr><th class="cen" style="width:44px">${biH('Item','م')}</th><th>${biH('Description','الوصف')}</th><th style="width:150px">${biH('IMEI/Serial','التسلسلي')}</th><th class="cen" style="width:48px">${biH('Qty','الكمية')}</th><th class="num" style="width:100px">${biH('Price','السعر')}</th><th class="num" style="width:110px">${biH('Total','الإجمالي')}</th></tr></thead><tbody>${rows}<tr><td colspan="3" style="font-weight:800">${biH('Total','الإجمالي')}</td><td class="cen">${devs.reduce((s,d)=>s+d.qty,0)}</td><td></td><td class="num tot">${cur} ${fmt(total)}</td></tr></tbody></table>
+ ${en?`<div class="tr-h">Declaration</div><div class="tr-decl">${$('trDeclEn').value.split('\n').filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('')}</div>`:''}
+ ${ar?`<div class="tr-h" style="direction:rtl;text-align:right">إقرار وتعهد</div><div class="tr-decl-ar">${$('trDeclAr').value.split('\n').filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('')}</div>`:''}
+ <div class="tr-sig"><div class="cell"><div class="line">${biH('Customer Signature','توقيع العميل')}</div></div><div class="cell"><div class="line">${biH('Staff Signature','توقيع الموظف')}</div></div></div>
+ ${idBlock}
+ <div class="tr-foot">${esc($('compName').value||'')} — ${esc($('compAddress').value||'')}<br>${esc($('compWeb').value||'')} | ${esc($('compEmail').value||'')}</div>`;
+ $('trTotalPrev').textContent=cur+' '+fmt(total);}
+function printTrading(){buildTradingDoc();document.body.classList.add('print-trading');const t=document.title;document.title=' ';setTimeout(()=>{window.print();document.title=t;},60);}
+function saveTrading(){const errs=validateTrading();if(errs.length){showStatus('⚠️ '+errs[0],'err');return;}
+ const rec=captureTrading();rec.id=trEditingId||('t'+Date.now());
+ const list=trList();const dup=list.find(x=>x.number===rec.number&&x.id!==rec.id);if(dup){showStatus('⚠️ Duplicate number','err');return;}
+ const ix=list.findIndex(x=>x.id===rec.id);if(ix>=0)list[ix]=rec;else list.unshift(rec);
+ trSaveList(list);trEditingId=rec.id;
+ const num=parseInt(String(rec.number).replace(/\D/g,''),10)||0;const seq=parseInt(localStorage.getItem('invApp_trd_seq')||'0',10);if(num>seq)localStorage.setItem('invApp_trd_seq',String(num));
+ renderHistory();saveWorkTrading();updateAutoBackup();showStatus('✅ Trading '+rec.number+' saved','ok');}
+function toggleHistory(){const w=$('trHistoryWrap');w.style.display=w.style.display==='none'?'':'none';renderHistory();}
+function renderHistory(){const q=($('trSearch').value||'').toLowerCase();
+ const list=trList().filter(r=>!q||(r.number||'').toLowerCase().includes(q)||(r.cust&&r.cust.name||'').toLowerCase().includes(q));
+ $('trHistoryBody').innerHTML=list.length?`<table><thead><tr><th>Number</th><th>Date</th><th>Customer</th><th>Total</th><th>Actions</th></tr></thead><tbody>`+list.map(r=>`<tr><td><b>${esc(r.number)}</b></td><td>${fmtDate(r.date)}</td><td>${esc(r.cust&&r.cust.name||'')}</td><td>${fmt(r.total||0)}</td><td style="white-space:nowrap"><button class="btn btn-blue" onclick="trView('${r.id}')">View</button> <button class="btn btn-green" onclick="trDup('${r.id}')">Dup</button> <button class="btn btn-red" onclick="trDel('${r.id}')">Del</button></td></tr>`).join('')+`</tbody></table>`:'<div style="color:#778;font-size:13px">No trading docs.</div>';}
+function trLoadRec(r){trEditingId=r.id;$('trNumber').value=r.number;$('trDate').value=r.date;$('trStatus').value=r.status||'Completed';$('trLang').value=r.lang||'both';$('trStaff').value=r.staff||'';$('trCurrency').value=r.currency||'AED';
+ const c=r.cust||{};$('trName').value=c.name||'';$('trContact').value=c.contact||'';$('trAddr').value=c.addr||'';
+ const e=r.eid||{};$('eidNo').value=e.no||'';trIdFront=e.front||null;trIdBack=e.back||null;$('trIncEID').checked=!!e.include;
+ $('trDeclEn').value=r.declEn||'';$('trDeclAr').value=r.declAr||'';
+ $('trDevices').innerHTML='';(r.devices&&r.devices.length?r.devices:[{}]).forEach(d=>trAddDevice(d));buildTradingDoc();saveWorkTrading();}
+function trView(id){const r=trList().find(x=>x.id===id);if(r){trLoadRec(r);showStatus('👁️ Loaded '+r.number,'ok');}}
+function trDup(id){const r=trList().find(x=>x.id===id);if(r){const c=JSON.parse(JSON.stringify(r));c.id=null;trEditingId=null;c.number=nextTRD();c.date=todayISO();trLoadRec(c);trEditingId=null;saveWorkTrading();showStatus('⧉ Duplicated '+c.number,'ok');}}
+function trDel(id){if(!confirm('Delete?'))return;trSaveList(trList().filter(x=>x.id!==id));renderHistory();}
+function shareTrading(){buildTradingDoc();const txt=$('trNumber').value+' — '+$('trName').value+' — '+trCur()+' '+fmt(trTotal());
+ if(navigator.share){navigator.share({title:'Trading',text:txt}).catch(()=>{});}else showStatus('📋 Use PDF share for file','inf');}
 
-/* ===== PRINT (master, unchanged) ===== */
-function printDoc(){
-    if(!appUnlocked)return;
-    if(currentTab==='trading'){ printTrading(); return; }
-    buildDocument();
-    const oldTitle=document.title; document.title=' ';
-    setTimeout(()=>{ window.print(); document.title=oldTitle; },60);
-}
-window.addEventListener('beforeprint',()=>{ window._savedTitle=document.title; document.title=' '; });
-window.addEventListener('afterprint',()=>{ if(window._savedTitle!==undefined)document.title=window._savedTitle; document.body.classList.remove('print-trading'); });
+function getTitles(){if(currentMode==='quotation')return{ar:'عرض سعر',en:'QUOTATION',file:'quotation'};
+ if(invoiceType==='cash')return{ar:'فاتورة نقدية',en:'CASH INVOICE',file:'cash_invoice'};
+ return{ar:'فاتورة ضريبية',en:'TAX INVOICE',file:'tax_invoice'};}
+function setMode(m){const prev=currentTab;
+ if(prev==='invoice'||prev==='quotation'){if(WORK[prev])saveWorkInvQuot(prev);}
+ if(prev==='trading')saveWorkTrading();
+ if(prev==='do')saveWorkDo();
+ currentTab=m;if(m!=='trading'&&m!=='do')currentMode=m;
+ ['invoice','quotation','trading'].forEach(k=>{const b=$('btn'+k.charAt(0).toUpperCase()+k.slice(1));if(b)b.classList.toggle('active',k===m);});
+ $('btnDo').classList.toggle('active',m==='do');
+ $('docNumLabel').textContent=m==='quotation'?'Quotation Number (auto / manual)':'Invoice Number (auto / manual)';
+ $('invTypeWrap').style.display=(m==='invoice')?'':'none';
+ $('cvToQuot').style.display=(m==='invoice')?'':'none';
+ $('cvToInv').style.display=(m==='quotation')?'':'none';
+ $('invQuotEditor').style.display=(m==='invoice'||m==='quotation')?'':'none';
+ $('tradingEditor').style.display=(m==='trading')?'':'none';
+ $('doEditor').style.display=(m==='do')?'':'none';
+ $('tradingDoc').style.display=(m==='trading')?'block':'none';
+ $('doDoc').style.display=(m==='do')?'flex':'none';
+ if(m==='invoice'||m==='quotation'){if(!WORK[m]){WORK[m]=freshWork(m);persistWork(m);}loadWorkIntoEditor(m);}
+ if(m==='trading'){if(!WORK.trading){WORK.trading=storedWork('trading');}if(WORK.trading)loadTradingWork(WORK.trading);else buildTradingDoc();}
+ if(m==='do'){if(!WORK.do){WORK.do=storedWork('do');}if(WORK.do)loadDoIntoEditor();else buildDoDoc();}
+ scheduleWorkSave();}
+function setInvType(t){invoiceType=t;$('btnTax').classList.toggle('active',t==='tax');$('btnCash').classList.toggle('active',t==='cash');scheduleWorkSave();}
 
-/* =====================================================================
-   PDF ENGINE — pure vector (no foreignObject, no page-canvas).
-   Works on every browser incl. Brave. Arabic drawn as rendered text images.
-   ===================================================================== */
-const PW=595.28, PH=841.89, SS=3;
-const BLACK='0.07 0.07 0.09', GRAY='0.4 0.4 0.4', DGRAY='0.2 0.2 0.2', LGRAY='0.75 0.75 0.75', GOLD='0.95 0.76 0.29', WHITE='1 1 1';
-function b64ToBytes(b64){const bin=atob(b64);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
+function invoiceText(){const T=getTitles(),t=getTotals(),L=[];L.push($('compName').value);L.push(T.en+' — '+$('docNumber').value);L.push('Customer: '+$('custName').value);
+ [...$('itemsBody').rows].forEach((r,i)=>L.push((i+1)+'. '+r.querySelector('.desc').value+' | Qty '+r.querySelector('.qty').value+' | Total '+r.querySelector('.total-cell').textContent));
+ L.push('NET: '+fmt(t.net)+' AED');return L.join('\n');}
+function tradingText(){return $('trNumber').value+' — '+$('trName').value+' — '+trCur()+' '+fmt(trTotal());}
+function doText(){return $('doNumber').value+' — '+$('doCust').value+' — Total Qty '+$('doTotalQty').textContent;}
+function copyDoc(){const txt=currentTab==='trading'?tradingText():(currentTab==='do'?doText():invoiceText());
+ const done=()=>showStatus('📋 Copied','ok');
+ if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(txt).then(done).catch(()=>fbCopy(txt,done));else fbCopy(txt,done);}
+function fbCopy(t,d){const ta=document.createElement('textarea');ta.value=t;ta.style.position='fixed';ta.style.left='-9999px';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');d();}catch(e){}ta.remove();}
+
+function printDoc(){if(!appUnlocked)return;
+ if(currentTab==='trading'){printTrading();return;}
+ if(currentTab==='do'){buildDoDoc();document.body.classList.add('print-do');const t=document.title;document.title=' ';setTimeout(()=>{window.print();document.title=t;},60);return;}
+ buildDocument();const t=document.title;document.title=' ';setTimeout(()=>{window.print();document.title=t;},60);}
+window.addEventListener('beforeprint',()=>{window._st=document.title;document.title=' ';});
+window.addEventListener('afterprint',()=>{if(window._st!==undefined)document.title=window._st;document.body.classList.remove('print-trading');document.body.classList.remove('print-do');});
+
+/* ================= PDF ENGINE ================= */
+const PT=0.75, PW=595.28, PH=841.89, SS=3;
+const BLACK='0.07 0.07 0.09',GRAY='0.4 0.4 0.4',DGRAY='0.2 0.2 0.2',LGRAY='0.75 0.75 0.75',GOLD='0.95 0.76 0.29',WHITE='1 1 1';
+function b64ToBytes(b){const bin=atob(b);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
 function strBytes(s){const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i)&0xff;return u;}
 function pdfEsc(s){return String(s).replace(/\\/g,'\\\\').replace(/\(/g,'\\(').replace(/\)/g,'\\)');}
 function ascii(s){return String(s||'').replace(/[\u2018\u2019]/g,"'").replace(/[\u201C\u201D]/g,'"').replace(/[^\x20-\x7E]/g,'');}
-function approxW(s,size){return size*0.56*String(s).length;}
-function wrapText(s,size,maxW){const words=String(s).split(' ');const out=[];let cur='';words.forEach(w=>{if(approxW((cur?cur+' ':'')+w,size)>maxW){if(cur)out.push(cur);cur=w;}else cur=(cur?cur+' ':'')+w;});if(cur)out.push(cur);return out;}
-function saveBlob(blob,filename){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href),2000); }
-function professionalName(){ if(currentTab==='trading')return 'Trading-'+($('trNumber').value||'TRD')+'.pdf'; return (currentMode==='quotation'?'Quotation':'Invoice')+'-'+($('docNumber').value||'doc')+'.pdf'; }
-
+function approxW(s,z){return z*0.56*String(s).length;}
+function wrapText(s,z,mw){const w=String(s).split(' ');const o=[];let c='';w.forEach(x=>{if(approxW((c?c+' ':'')+x,z)>mw){if(c)o.push(c);c=x;}else c=(c?c+' ':'')+x;});if(c)o.push(c);return o;}
+function saveBlob(b,f){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
+function professionalName(){if(currentTab==='do')return 'DeliveryNote-'+($('doNumber').value||'DO')+'.pdf';
+ if(currentTab==='trading')return 'Trading-'+($('trNumber').value||'TRD')+'.pdf';
+ return (currentMode==='quotation'?'Quotation':'Invoice')+'-'+($('docNumber').value||'doc')+'.pdf';}
 const arCache={};
-function arabicImg(text,pt,bold){
-    const key=text+'|'+pt+'|'+(bold?1:0);
-    if(arCache[key])return arCache[key];
-    const fontPx=pt*SS;
-    const font=(bold?'bold ':'')+fontPx+'px "Segoe UI", Tahoma, Arial, sans-serif';
-    let c=document.createElement('canvas');
-    let ctx=c.getContext('2d');
-    ctx.font=font;
-    const w=Math.ceil(ctx.measureText(text).width)+10;
-    const h=Math.ceil(fontPx*1.6);
-    c.width=w; c.height=h;
-    ctx=c.getContext('2d');
-    ctx.fillStyle='#ffffff'; ctx.fillRect(0,0,w,h);
-    ctx.font=font; ctx.fillStyle='#111111'; ctx.textBaseline='middle';
-    try{ ctx.direction='rtl'; }catch(e){}
-    ctx.fillText(text, w-5, h/2);
-    const img={bytes:b64ToBytes(c.toDataURL('image/jpeg',0.92).split(',')[1]),w:w,h:h};
-    arCache[key]=img;
-    return img;
-}
-function wrapArabic(text,pt,maxW){
-    const words=String(text).split(' '); const out=[]; let cur='';
-    const c=document.createElement('canvas'); const ctx=c.getContext('2d');
-    ctx.font=(pt*SS)+'px "Segoe UI", Tahoma, Arial, sans-serif';
-    const mw=maxW*SS;
-    words.forEach(w=>{ const test=cur?cur+' '+w:w; if(ctx.measureText(test).width>mw&&cur){out.push(cur);cur=w;} else cur=test; });
-    if(cur)out.push(cur);
-    return out;
-}
-async function imgFromDataUrl(du){
-    try{
-        const im=new Image();
-        await new Promise((res,rej)=>{im.onload=res;im.onerror=rej;im.src=du;});
-        const c=document.createElement('canvas'); c.width=im.naturalWidth||300; c.height=im.naturalHeight||150;
-        const cx=c.getContext('2d'); cx.fillStyle='#ffffff'; cx.fillRect(0,0,c.width,c.height); cx.drawImage(im,0,0);
-        return {bytes:b64ToBytes(c.toDataURL('image/jpeg',0.9).split(',')[1]),w:c.width,h:c.height};
-    }catch(e){ return null; }
-}
+function arabicImg(text,pt,bold){const k=text+'|'+pt+'|'+(bold?1:0);if(arCache[k])return arCache[k];
+ const fp=pt*SS;const font=(bold?'bold ':'')+fp+'px "Segoe UI",Tahoma,Arial,sans-serif';
+ let c=document.createElement('canvas');let x=c.getContext('2d');x.font=font;
+ const w=Math.ceil(x.measureText(text).width)+10,h=Math.ceil(fp*1.6);c.width=w;c.height=h;x=c.getContext('2d');
+ x.fillStyle='#fff';x.fillRect(0,0,w,h);x.font=font;x.fillStyle='#111';x.textBaseline='middle';try{x.direction='rtl';}catch(e){}
+ x.fillText(text,w-5,h/2);
+ const img={bytes:b64ToBytes(c.toDataURL('image/jpeg',0.92).split(',')[1]),w:w,h:h};arCache[k]=img;return img;}
+function wrapArabic(text,pt,mw){const words=String(text).split(' ');const o=[];let c='';
+ const cv=document.createElement('canvas');const x=cv.getContext('2d');x.font=(pt*SS)+'px "Segoe UI",Tahoma,Arial,sans-serif';const M=mw*SS;
+ words.forEach(w=>{const t=c?c+' '+w:w;if(x.measureText(t).width>M&&c){o.push(c);c=w;}else c=t;});if(c)o.push(c);return o;}
+async function imgFromDataUrl(du){try{const im=new Image();await new Promise((r,j)=>{im.onload=r;im.onerror=j;im.src=du;});
+ const c=document.createElement('canvas');c.width=im.naturalWidth||300;c.height=im.naturalHeight||150;const x=c.getContext('2d');x.fillStyle='#fff';x.fillRect(0,0,c.width,c.height);x.drawImage(im,0,0);
+ return{bytes:b64ToBytes(c.toDataURL('image/jpeg',0.9).split(',')[1]),w:c.width,h:c.height};}catch(e){return null;}}
+function pdfBuilder(){const B={pages:[],pg:null,extra:[],map:new Map()};
+ B.newPage=function(){B.pg={ops:[]};B.pages.push(B.pg);};B.newPage();
+ B.rect=function(x,t,w,h,c){B.pg.ops.push(c+' rg '+x.toFixed(2)+' '+(PH-t-h).toFixed(2)+' '+w.toFixed(2)+' '+h.toFixed(2)+' re f');};
+ B.reg=function(im){if(B.map.has(im))return B.map.get(im);B.extra.push(im);const i=B.extra.length;B.map.set(im,i);return i;};
+ B.placeImg=function(im,x,t,w,h){const i=B.reg(im);B.pg.ops.push('q '+w.toFixed(2)+' 0 0 '+h.toFixed(2)+' '+x.toFixed(2)+' '+(PH-t-h).toFixed(2)+' cm /Ex'+i+' Do Q');};
+ B.text=function(s,x,t,z,b,c,al,mw){
+  if(/[\u0600-\u06FF]/.test(s)){try{const im=arabicImg(s,z,b);const w=im.w/SS,h=im.h/SS;let tx=x;if(al==='center')tx=x-w/2;else if(al==='right')tx=x-w;B.placeImg(im,tx,t-h+z*0.85,w,h);return;}catch(e){}}
+  s=ascii(s);if(!s)return;
+  if(mw&&approxW(s,z)>mw){while(s.length>3&&approxW(s+'...',z)>mw)s=s.slice(0,-1);s+='...';}
+  let tx=x;if(al==='center')tx=x-approxW(s,z)/2;if(al==='right')tx=x-approxW(s,z);
+  B.pg.ops.push('BT /'+(b?'F2':'F1')+' '+z+' Tf '+c+' rg 1 0 0 1 '+tx.toFixed(2)+' '+(PH-t).toFixed(2)+' Tm ('+pdfEsc(s)+') Tj ET');};
+ return B;}
+function finalizePDF(B){const objs=[];const add=o=>{objs.push(o);return objs.length;};
+ const f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
+ const f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
+ const ex=B.extra.map(()=>add(null));
+ const pn=[],cn=[];
+ B.pages.forEach(pg=>{const c=add(null);let res='/Font << /F1 '+f1+' 0 R /F2 '+f2+' 0 R >>';if(ex.length)res+=' /XObject << '+ex.map((n,i)=>'/Ex'+(i+1)+' '+n+' 0 R').join(' ')+' >>';
+  const p=add('<< /Type /Page /Parent 0 0 R /MediaBox [0 0 595.28 841.89] /Resources << '+res+' >> /Contents '+c+' 0 R >>');pn.push(p);cn.push({num:c,stream:pg.ops.join('\n')});});
+ const pagesNum=add(null);const cat=add('<< /Type /Catalog /Pages '+pagesNum+' 0 R >>');
+ objs[pagesNum-1]='<< /Type /Pages /Kids ['+pn.map(n=>n+' 0 R').join(' ')+'] /Count '+pn.length+' >>';
+ pn.forEach(n=>{objs[n-1]=objs[n-1].replace('/Parent 0 0 R','/Parent '+pagesNum+' 0 R');});
+ cn.forEach(c=>{objs[c.num-1]='<< /Length '+c.stream.length+' >>\nstream\n'+c.stream+'\nendstream';});
+ ex.forEach((n,i)=>{objs[n-1]='PH';});
+ const ch=[];let off=0;const ofs=[];
+ const push=s=>{let u=(typeof s==='string')?strBytes(s):s;if(!u)u=new Uint8Array(0);ch.push(u);off+=u.length;};
+ push('%PDF-1.4\n');
+ objs.forEach((o,i)=>{ofs[i]=off;push((i+1)+' 0 obj\n');
+  const ei=B.extra.findIndex((im,k)=>ex[k]===(i+1));
+  if(ei>=0){const im=B.extra[ei];push('<< /Type /XObject /Subtype /Image /Width '+im.w+' /Height '+im.h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+im.bytes.length+' >>\nstream\n');push(im.bytes);push('\nendstream');}
+  else push(o);
+  push('\nendobj\n');});
+ const xref=off;
+ push('xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n');
+ ofs.forEach(o=>push(String(o).padStart(10,'0')+' 00000 n \n'));
+ push('trailer\n<< /Size '+(objs.length+1)+' /Root '+cat+' 0 R >>\nstartxref\n'+xref+'\n%%EOF');
+ let tot=0;ch.forEach(c=>tot+=c.length);
+ const out=new Uint8Array(tot);let p=0;ch.forEach(c=>{out.set(c,p);p+=c.length;});
+ return out;}
 
-function pdfBuilder(){
-    const B={pages:[],pg:null,extra:[],extraMap:new Map()};
-    B.newPage=function(){ B.pg={ops:[]}; B.pages.push(B.pg); };
-    B.newPage();
-    B.rect=function(x,top,w,h,col){ B.pg.ops.push(col+' rg '+x.toFixed(2)+' '+(PH-top-h).toFixed(2)+' '+w.toFixed(2)+' '+h.toFixed(2)+' re f'); };
-    B.reg=function(img){ if(B.extraMap.has(img))return B.extraMap.get(img); B.extra.push(img); const i=B.extra.length; B.extraMap.set(img,i); return i; };
-    B.placeImg=function(img,x,top,wPt,hPt){ const idx=B.reg(img); B.pg.ops.push('q '+wPt.toFixed(2)+' 0 0 '+hPt.toFixed(2)+' '+x.toFixed(2)+' '+(PH-top-hPt).toFixed(2)+' cm /Ex'+idx+' Do Q'); };
-    B.text=function(s,x,top,size,bold,col,align,maxW){
-        if(/[\u0600-\u06FF]/.test(s)){
-            try{
-                const im=arabicImg(s,size,bold);
-                const wPt=im.w/SS, hPt=im.h/SS;
-                let tx=x; if(align==='center')tx=x-wPt/2; else if(align==='right')tx=x-wPt;
-                B.placeImg(im,tx,top-hPt+size*0.85,wPt,hPt);
-                return;
-            }catch(e){ /* fall through to stripped */ }
-        }
-        s=ascii(s); if(!s)return;
-        if(maxW&&approxW(s,size)>maxW){while(s.length>3&&approxW(s+'...',size)>maxW)s=s.slice(0,-1);s+='...';}
-        let tx=x; if(align==='center')tx=x-approxW(s,size)/2; if(align==='right')tx=x-approxW(s,size);
-        B.pg.ops.push('BT /'+(bold?'F2':'F1')+' '+size+' Tf '+col+' rg 1 0 0 1 '+tx.toFixed(2)+' '+(PH-top).toFixed(2)+' Tm ('+pdfEsc(s)+') Tj ET');
-    };
-    return B;
-}
-
-function finalizePDF(B){
-    const objs=[]; const add=o=>{objs.push(o);return objs.length;};
-    const f1=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica >>');
-    const f2=add('<< /Type /Font /Subtype /Type1 /BaseFont /Helvetica-Bold >>');
-    const exNums=B.extra.map(()=>add(null));
-    const pageNums=[],conts=[];
-    B.pages.forEach(pg=>{
-        const cNum=add(null);
-        let res='/Font << /F1 '+f1+' 0 R /F2 '+f2+' 0 R >>';
-        if(exNums.length)res+=' /XObject << '+exNums.map((n,i)=>'/Ex'+(i+1)+' '+n+' 0 R').join(' ')+' >>';
-        const pNum=add('<< /Type /Page /Parent 0 0 R /MediaBox [0 0 595.28 841.89] /Resources << '+res+' >> /Contents '+cNum+' 0 R >>');
-        pageNums.push(pNum); conts.push({num:cNum,stream:pg.ops.join('\n')});
-    });
-    const pagesNum=add(null);
-    const catalog=add('<< /Type /Catalog /Pages '+pagesNum+' 0 R >>');
-    objs[pagesNum-1]='<< /Type /Pages /Kids ['+pageNums.map(n=>n+' 0 R').join(' ')+'] /Count '+pageNums.length+' >>';
-    pageNums.forEach(n=>{objs[n-1]=objs[n-1].replace('/Parent 0 0 R','/Parent '+pagesNum+' 0 R');});
-    conts.forEach(c=>{objs[c.num-1]='<< /Length '+c.stream.length+' >>\nstream\n'+c.stream+'\nendstream';});
-    B.extra.forEach((im,i)=>{ objs[exNums[i]-1]='PLACEHOLDER'; });
-    const chunks=[]; let off=0; const offsets=[];
-    const push=s=>{ let u=(typeof s==='string')?strBytes(s):s; if(!u)u=new Uint8Array(0); chunks.push(u); off+=u.length; };
-    push('%PDF-1.4\n');
-    objs.forEach((o,i)=>{
-        offsets[i]=off; push((i+1)+' 0 obj\n');
-        const ei=B.extra.findIndex((im,k)=>exNums[k]===(i+1));
-        if(ei>=0){ const im=B.extra[ei]; push('<< /Type /XObject /Subtype /Image /Width '+im.w+' /Height '+im.h+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+im.bytes.length+' >>\nstream\n'); push(im.bytes); push('\nendstream'); }
-        else push(o);
-        push('\nendobj\n');
-    });
-    const xref=off;
-    push('xref\n0 '+(objs.length+1)+'\n0000000000 65535 f \n');
-    offsets.forEach(o=>push(String(o).padStart(10,'0')+' 00000 n \n'));
-    push('trailer\n<< /Size '+(objs.length+1)+' /Root '+catalog+' 0 R >>\nstartxref\n'+xref+'\n%%EOF');
-    let total=0;chunks.forEach(c=>total+=c.length);
-    const out=new Uint8Array(total);let p=0;chunks.forEach(c=>{out.set(c,p);p+=c.length;});
-    return out;
-}
-
-/* ---- Invoice / Quotation PDF (vector, matches print layout) ---- */
 async function makeInvoicePDF(){
-    buildDocument();
-    const t=getTotals(), T=getTitles(), isQ=currentMode==='quotation';
-    const hasLogo=logoActive();
-    const B=pdfBuilder();
-    const ML=40, MR=555.28;
-    const logoImg=hasLogo?await imgFromDataUrl(logoDataUrl):null;
-    const stampImg=(stampDataUrl&&$('stampOn').checked)?await imgFromDataUrl(stampDataUrl):null;
-    const cols=[{x:40,w:24},{x:64,w:60},{x:124,w:176},{x:300,w:40,r:1},{x:340,w:58,r:1},{x:398,w:60,r:1},{x:458,w:48,r:1},{x:506,w:49.28,r:1}];
-    const bounds=[64,124,300,340,398,458,506];
-    function tableHead(top){
-        B.rect(ML,top,MR-ML,1.1,BLACK);
-        const hd=[['رقم','SINo'],['رمز الصنف','Item Code'],['البيان','Description'],['كمية','Quantity'],['سعر الوحدة','Price'],['المبلغ الإجمالي قبل الضريبة ٥٪','Gross Before VAT'],['الضريبة','VAT 5%'],['السعر','Amount']];
-        cols.forEach((c,i)=>{
-            const lx=c.r?c.x+c.w-4:c.x+4;
-            const al=c.r?'right':'left';
-            B.text(hd[i][0],lx,top+9,7.5,true,BLACK,al);
-            B.text(hd[i][1],lx,top+17,7,true,BLACK,al);
-        });
-        bounds.forEach(bx=>B.rect(bx,top,0.7,20,BLACK));
-        B.rect(ML,top+20,MR-ML,1.1,BLACK);
-        return top+21;
-    }
-    const tcLineH=isQ?10:11, bankRowH=isQ?12:14, totalsH=isQ?72:78, bottomPad=isQ?90:96, exGap=isQ?10:12;
-    const tcWrapped=[]; if(isQ)termsLines().forEach(l=>wrapText(l,8,505).forEach(w=>tcWrapped.push(w)));
-    const br=isQ?bankRows():[];
-    const exH=isQ?(40+tcWrapped.length*tcLineH+Math.max(br.length,1)*bankRowH):0;
-    const footerReserveH=hasLogo?26:0, footerUpOffset=hasLogo?0:28;
-    const boxBottom=PH-bottomPad-footerReserveH-(isQ?exH+exGap:0);
-    const totalsTop=boxBottom-totalsH, itemsLimit=totalsTop-8;
-    let y=0;
-    if(hasLogo){ B.rect(0,0,PW,74,BLACK); if(logoImg){ const h=50,w=Math.min(200,h*logoImg.w/logoImg.h); B.placeImg(logoImg,40,12,w,h); } y=74; } else y=74;
-    y+=30; B.text(T.ar,PW/2,y,15,true,BLACK,'center'); y+=20; B.text(T.en,PW/2,y,16,true,BLACK,'center');
-    y+=16; B.text('TRN No. '+($('compTRN').value||''),PW/2,y,10,true,BLACK,'center');
-    y+=22;
-    B.text('Customer Name',ML,y,8,false,GRAY); y+=12;
-    B.text($('custName').value||'-',ML,y,12,true,BLACK,'left',260); y+=12;
-    const csub=[$('custPhone').value,$('custAddress').value].filter(Boolean).join(' | ');
-    if(csub){B.text(csub,ML,y,8,false,GRAY,'left',260);y+=12;}
-    let ry=y-24;
-    function refRow(en,ar,val){ B.text(en,330,ry,9,true,BLACK); B.text(ar,MR-80,ry,9,true,BLACK,'right'); B.text(val,MR-8,ry,9,true,BLACK,'right'); ry+=15; }
-    refRow(currentMode==='invoice'?'Invoice No':'Quotation No','رقم الفاتورة :',$('docNumber').value||'-');
-    refRow('Date','تاريخ الفاتورة :',fmtDate($('docDate').value)||'-');
-    refRow('Staff','موظف المبيعات :',$('staffName').value||'-');
-    if($('poRef').value)refRow('L.PO','المراجع :',$('poRef').value);
-    y=Math.max(y,ry)+8;
-    const headTop=y; y=tableHead(headTop);
-    const boxTop=headTop-1;
-    [...$('itemsBody').rows].forEach((r,i)=>{
-        const desc=r.querySelector('.desc').value||'';
-        const maxDescLines=isQ?2:3;
-        const dLines=wrapText(desc,9,168).slice(0,maxDescLines);
-        const rowH=isQ?Math.max(16,6+dLines.length*10):Math.max(20,8+dLines.length*11);
-        if(y+rowH>itemsLimit){ B.newPage(); y=40; y=tableHead(y); }
-        const q=parseFloat(r.querySelector('.qty').value)||0, pr=parseFloat(r.querySelector('.price').value)||0;
-        const g=q*pr, v=g*0.05;
-        B.text(String(i+1),cols[0].x+4,y+12,9,false,BLACK);
-        B.text(r.querySelector('.code').value,cols[1].x+4,y+12,9,false,BLACK,'left',56);
-        dLines.forEach((ln,k)=>B.text(ln,cols[2].x+4,y+12+k*(isQ?10:11),9,false,BLACK));
-        B.text(String(q),cols[3].x+cols[3].w-4,y+12,9,false,BLACK,'right');
-        B.text(fmt(pr),cols[4].x+cols[4].w-4,y+12,9,false,BLACK,'right');
-        B.text(fmt(g),cols[5].x+cols[5].w-4,y+12,9,false,BLACK,'right');
-        B.text(fmt(v),cols[6].x+cols[6].w-4,y+12,9,false,BLACK,'right');
-        B.text(fmt(g+v),cols[7].x+cols[7].w-4,y+12,9,true,BLACK,'right');
-        y+=rowH;
-    });
-    if(stampImg){ const sh=150, sw=Math.min(160,sh*stampImg.w/stampImg.h); const sTop=Math.min(y+20,totalsTop-20-sh); B.placeImg(stampImg,(PW-sw)/2,sTop,sw,sh); }
-    B.rect(ML,totalsTop,MR-ML,1.2,BLACK); B.rect(300,totalsTop,1,totalsH,BLACK);
-    B.rect(ML,boxTop,0.001,0.001,WHITE);
-    B.text('Amount in Words :',ML+8,totalsTop+13,9,true,BLACK);
-    const wl=wrapText('AED: '+$('amtWords').textContent,8.5,240).slice(0,3);
-    wl.forEach((ln,k)=>B.text(ln,ML+8,totalsTop+28+k*12,8.5,true,BLACK));
-    let ty=totalsTop+3;
-    function sumRow(en,ar,val,bold){ B.text(en,308,ty+12,8.5,bold,BLACK); B.text(ar,MR-100,ty+12,8.5,bold,BLACK,'right'); B.text(val,MR-8,ty+12,9.5,true,BLACK,'right'); ty+=(isQ?16:18); }
-    sumRow('Gross Amount Before VAT 5%','المبلغ الإجمالي قبل ضريبة القيمة المضافة',fmt(t.gross),false);
-    sumRow('Discount','خصم',fmt(t.disc),false);
-    sumRow('Total VAT Amount 5%','إجمالي ضريبة القيمة المضافة ٥٪',fmt(t.vat),false);
-    sumRow('Net Amount With 5%','صافي المبلغ مع ضريبة القيمة المضافة ٥٪',fmt(t.net),true);
-    if(isQ){
-        let ey=boxBottom+exGap;
-        B.text('Terms & Conditions',ML,ey+9,9.5,true,BLACK); B.rect(ML,ey+12,110,0.8,BLACK); ey+=17;
-        tcWrapped.forEach(ln=>{B.text(ln,ML,ey+7,8,false,DGRAY);ey+=tcLineH;});
-        ey+=7;
-        B.text('Bank Account Details',ML,ey+9,9.5,true,BLACK); B.rect(ML,ey+12,125,0.8,BLACK); ey+=16;
-        if(br.length){ br.forEach(rw=>{ B.rect(ML,ey,140,bankRowH,'0.94 0.94 0.94'); B.rect(ML,ey,MR-ML,0.8,LGRAY); B.rect(ML,ey+bankRowH-0.8,MR-ML,0.8,LGRAY); B.rect(ML+140,ey,0.8,bankRowH,LGRAY); B.text(rw[0],ML+5,ey+8.5,8,true,BLACK); B.text(rw[1],ML+148,ey+8.5,8,false,BLACK,'left',360); ey+=bankRowH; }); }
-        else { B.rect(ML,ey,MR-ML,0.8,LGRAY); B.text('Please contact our accounts department for payment details.',ML+5,ey+8.5,8,false,DGRAY); }
-    }
-    B.text($('compName').value,PW/2,PH-64-footerReserveH+footerUpOffset,10,true,BLACK,'center');
-    B.text($('compAddress').value,PW/2,PH-50-footerReserveH+footerUpOffset,8,false,GRAY,'center',520);
-    B.text(`Web: ${$('compWeb').value} , E Mail: ${$('compEmail').value}   Tel: ${$('compPhone').value} , Mob: ${$('compMobile').value}`,PW/2,PH-38-footerReserveH+footerUpOffset,8,false,GRAY,'center',520);
-    if(hasLogo){ B.rect(0,PH-26,PW,26,BLACK); B.text($('compWeb').value,PW/2,PH-13,9,true,GOLD,'center'); }
-    const out=finalizePDF(B);
-    return { blob:new Blob([out],{type:'application/pdf'}), filename:professionalName() };
+ buildDocument();
+ const t=getTotals(),T=getTitles(),isQ=currentMode==='quotation',hasLogo=logoActive();
+ const B=pdfBuilder();
+ const LM=26*PT, RM=PW-26*PT;
+ const logoImg=hasLogo?await imgFromDataUrl(logoDataUrl):null;
+ const stampImg=(stampDataUrl&&$('stampOn').checked)?await imgFromDataUrl(stampDataUrl):null;
+ const cols=[{x:LM,w:36*PT},{x:LM+36*PT,w:90*PT},{x:0,w:0},{x:0,w:52*PT},{x:0,w:80*PT},{x:0,w:86*PT},{x:0,w:70*PT},{x:0,w:86*PT}];
+ const fixedW=(36+90+52+80+86+70+86)*PT;
+ cols[2].w=(RM-LM)-fixedW;
+ let cx=LM;cols.forEach(c=>{c.x=cx;cx+=c.w;});
+ const bounds=cols.slice(1).map(c=>c.x);
+ function head(top){
+  B.rect(LM,top,RM-LM,1.1*PT*1.5,BLACK);
+  const hd=[['رقم','SINo'],['رمز الصنف','Item Code'],['البيان','Description'],['كمية','Qty'],['سعر الوحدة','Price'],['المبلغ قبل الضريبة ٥٪','Gross Before VAT'],['الضريبة','VAT 5%'],['السعر','Amount']];
+  cols.forEach((c,i)=>{const lx=c.x+4;const al=(i>=3)?'right':'left';const rx=c.x+c.w-4;
+   B.text(hd[i][0],(i>=3)?rx:lx,top+10*PT,8,true,BLACK,al);
+   B.text(hd[i][1],(i>=3)?rx:lx,top+20*PT,7.5,true,BLACK,al);});
+  bounds.forEach(bx=>B.rect(bx,top,0.7,26*PT,BLACK));
+  B.rect(LM,top+26*PT,RM-LM,1.1*PT*1.5,BLACK);
+  return top+27*PT;
+ }
+ const totalsH=78*PT, bottomPad=96*PT, exGap=10*PT;
+ const tcW=[];if(isQ)termsLines().forEach(l=>wrapText(l,8,RM-LM-10).forEach(w=>tcW.push(w)));
+ const br=isQ?bankRows():[];
+ const exH=isQ?(40*PT+tcW.length*10*PT+Math.max(br.length,1)*12*PT):0;
+ const footRes=hasLogo?26*PT:0, footUp=hasLogo?0:37*PT;
+ const boxBottom=PH-bottomPad-footRes-(isQ?exH+exGap:0);
+ const totalsTop=boxBottom-totalsH, itemsLimit=totalsTop-8;
+ let y=0;
+ if(hasLogo){B.rect(0,0,PW,74*PT,BLACK);if(logoImg){const h=50*PT,w=Math.min(200*PT,h*logoImg.w/logoImg.h);B.placeImg(logoImg,30*PT,12*PT,w,h);}y=74*PT;}
+ else y=74*PT;
+ y+=25*PT+35*PT;
+ B.text(T.ar,PW/2,y,18,true,BLACK,'center'); y+=12*PT+24*PT*0.9;
+ B.text(T.en,PW/2,y,16.5,true,BLACK,'center'); y+=15*PT+22*PT*0.9;
+ B.text('TRN No. '+($('compTRN').value||''),PW/2,y,10.5,true,BLACK,'center'); y+=25*PT+12*PT;
+ B.text('Customer Name',LM,y,9,false,GRAY); y+=12*PT;
+ B.text($('custName').value||'-',LM,y,12,true,BLACK,'left',cols[2].w); y+=12*PT;
+ const cs=[$('custPhone').value,$('custAddress').value].filter(Boolean).join(' | ');
+ if(cs){B.text(cs,LM,y,8,false,GRAY,'left',cols[2].w);y+=12*PT;}
+ let ry=y-24*PT;
+ function ref(en,ar,v){B.text(en,LM+300*PT,ry,9,true,BLACK);B.text(ar,RM-70*PT,ry,9,true,BLACK,'right');B.text(v,RM,ry,9,true,BLACK,'right');ry+=15*PT;}
+ ref(currentMode==='invoice'?'Invoice No':'Quotation No','رقم الفاتورة :',$('docNumber').value||'-');
+ ref('Date','تاريخ الفاتورة :',fmtDate($('docDate').value)||'-');
+ ref('Staff','موظف المبيعات :',$('staffName').value||'-');
+ if($('poRef').value)ref('L.PO','المرجع :',$('poRef').value);
+ y=Math.max(y,ry)+8*PT;
+ const hTop=y;y=head(hTop);
+ [...$('itemsBody').rows].forEach((r,i)=>{
+  const desc=r.querySelector('.desc').value||'';
+  const dl=wrapText(desc,9,cols[2].w-8).slice(0,3);
+  const rowH=Math.max(20*PT,(16+dl.length*15.6)*PT);
+  if(y+rowH>itemsLimit){B.newPage();y=40*PT;y=head(y);}
+  const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p,v=g*0.05;
+  B.text(String(i+1),cols[0].x+4,y+12*PT,9,false,BLACK);
+  B.text(r.querySelector('.code').value,cols[1].x+4,y+12*PT,9,false,BLACK,'left',cols[1].w-8);
+  dl.forEach((ln,k)=>B.text(ln,cols[2].x+4,y+12*PT+k*11*PT,9,false,BLACK));
+  B.text(String(q),cols[3].x+cols[3].w-4,y+12*PT,9,false,BLACK,'right');
+  B.text(fmt(p),cols[4].x+cols[4].w-4,y+12*PT,9,false,BLACK,'right');
+  B.text(fmt(g),cols[5].x+cols[5].w-4,y+12*PT,9,false,BLACK,'right');
+  B.text(fmt(v),cols[6].x+cols[6].w-4,y+12*PT,9,false,BLACK,'right');
+  B.text(fmt(g+v),cols[7].x+cols[7].w-4,y+12*PT,9,true,BLACK,'right');
+  y+=rowH;});
+ if(stampImg){const sh=150*PT,sw=Math.min(160*PT,sh*stampImg.w/stampImg.h);const sT=Math.min(y+20*PT,totalsTop-20*PT-sh);B.placeImg(stampImg,(PW-sw)/2,sT,sw,sh);}
+ B.rect(LM,totalsTop,RM-LM,1.2*PT*1.4,BLACK);B.rect(LM+300*PT,totalsTop,1,totalsH,BLACK);
+ B.text('Amount in Words :',LM+8,totalsTop+13*PT,9,true,BLACK);
+ wrapText('AED: '+$('amtWords').textContent,8.5,280*PT).slice(0,3).forEach((ln,k)=>B.text(ln,LM+8,totalsTop+28*PT+k*12*PT,8.5,true,BLACK));
+ let ty=totalsTop+3*PT;
+ function sum(en,ar,v,b){B.text(en,LM+308*PT,ty+12*PT,8.5,b,BLACK);B.text(ar,RM-100*PT,ty+12*PT,8.5,b,BLACK,'right');B.text(v,RM-8*PT,ty+12*PT,9.5,true,BLACK,'right');ty+=(isQ?16:18)*PT;}
+ sum('Gross Before VAT 5%','المبلغ الإجمالي قبل الضريبة',fmt(t.gross),false);
+ sum('Discount','خصم',fmt(t.disc),false);
+ sum('Total VAT 5%','إجمالي الضريبة ٥٪',fmt(t.vat),false);
+ sum('Net With 5%','الصافي مع الضريبة ٥٪',fmt(t.net),true);
+ if(isQ){let ey=boxBottom+exGap;
+  B.text('Terms & Conditions',LM,ey+9*PT,9.5,true,BLACK);B.rect(LM,ey+12*PT,110*PT,0.8,BLACK);ey+=17*PT;
+  tcW.forEach(ln=>{B.text(ln,LM,ey+7*PT,8,false,DGRAY);ey+=10*PT;});
+  ey+=7*PT;B.text('Bank Account Details',LM,ey+9*PT,9.5,true,BLACK);B.rect(LM,ey+12*PT,125*PT,0.8,BLACK);ey+=16*PT;
+  if(br.length){br.forEach(rw=>{B.rect(LM,ey,140*PT,12*PT,'0.94 0.94 0.94');B.rect(LM,ey,RM-LM,0.8,LGRAY);B.rect(LM,ey+12*PT-0.8,RM-LM,0.8,LGRAY);B.rect(LM+140*PT,ey,0.8,12*PT,LGRAY);B.text(rw[0],LM+5,ey+8.5*PT,8,true,BLACK);B.text(rw[1],LM+148*PT,ey+8.5*PT,8,false,BLACK,'left',RM-LM-160*PT);ey+=12*PT;});}
+ }
+ B.text($('compName').value,PW/2,PH-64*PT-footRes+footUp,10,true,BLACK,'center');
+ B.text($('compAddress').value,PW/2,PH-50*PT-footRes+footUp,8,false,GRAY,'center',520);
+ B.text('Web: '+$('compWeb').value+' , E Mail: '+$('compEmail').value+'   Tel: '+$('compPhone').value+' , Mob: '+$('compMobile').value,PW/2,PH-38*PT-footRes+footUp,8,false,GRAY,'center',520);
+ if(hasLogo){B.rect(0,PH-26*PT,PW,26*PT,BLACK);B.text($('compWeb').value,PW/2,PH-13*PT,9,true,GOLD,'center');}
+ return {blob:new Blob([finalizePDF(B)],{type:'application/pdf'}),filename:professionalName()};
 }
 
-/* ---- Trading PDF (vector) ---- */
 async function makeTradingPDF(){
-    const errs=validateTrading();
-    if(errs.length)throw new Error(errs[0]);
-    buildTradingDoc();
-    const B=pdfBuilder();
-    const LM=48, RM=PW-48;
-    const m=trLang(); const en=m!=='ar', ar=m!=='en';
-    const logoImg=logoActive()?await imgFromDataUrl(logoDataUrl):null;
-    const devs=collectDevices(); const total=trTotal(); const cur=trCur();
-    let y=40;
-    if(logoImg){ const h=60,w=Math.min(220,h*logoImg.w/logoImg.h); B.placeImg(logoImg,LM,y,w,h); }
-    else B.text($('compName').value,LM,y+30,18,true,BLACK);
-    B.text((en?'Trading No.':'')+(ar&&en?' / ':'')+(ar?'رقم المستند :':''),RM-120,y+10,9,true,BLACK,'right');
-    B.text($('trNumber').value,RM,y+10,9,true,BLACK,'right');
-    B.text((en?'Date:':'')+(ar&&en?' ':'')+(ar?'التاريخ :':''),RM-120,y+26,9,true,BLACK,'right');
-    B.text(trLongDate($('trDate').value),RM,y+26,9,true,BLACK,'right');
-    y+=90; B.rect(LM,y,RM-LM,1.5,BLACK); y+=22;
-    B.text(en?'Customer Information':'',LM,y,11,true,BLACK);
-    if(ar)B.text('معلومات العميل',LM+150,y,11,true,BLACK);
-    y+=18;
-    const lines=[];
-    const addL=(e,a,v)=>{ if(v)lines.push([e,a,v]); };
-    addL('Name','الاسم',$('trName').value); addL('Contact No','رقم الاتصال',$('trContact').value);
-    addL('Email','البريد الإلكتروني',$('trEmail').value); addL('Emirates ID','الهوية الإماراتية',$('eidNo').value);
-    addL('Nationality','الجنسية',$('trNat').value||$('eidNat').value);
-    addL('Address','العنوان',[$('trAddr').value,$('trCity').value,$('trEmirate').value,$('trCountry').value].filter(Boolean).join(', '));
-    addL('Staff','الموظف',$('trStaff').value);
-    lines.forEach(ln=>{
-        if(en)B.text(ln[0]+' :',LM,y,9,true,BLACK);
-        if(ar)B.text(ln[1]+' :',LM+130,y,9,true,BLACK);
-        B.text(ln[2],LM+210,y,9,false,BLACK,'left',RM-LM-210);
-        y+=15;
-    });
-    y+=10;
-    const cNo=LM+30, cDesc=LM+30+150, cImei=RM-230, cQty=RM-150, cPrice=RM-110, cTot=RM;
-    B.rect(LM,y,RM-LM,1,BLACK);
-    B.text('Item',LM+4,y+12,8.5,true,BLACK); B.text('م',cNo-4,y+12,8.5,true,BLACK,'right');
-    B.text('Product / Device Description',cDesc+4,y+12,8.5,true,BLACK);
-    B.text('IMEI / Serial',cImei+4,y+12,8,true,BLACK);
-    B.text('Qty',cQty-4,y+12,8,true,BLACK,'right');
-    B.text('Price',cPrice-4,y+12,8,true,BLACK,'right');
-    B.text('Total',cTot-4,y+12,8,true,BLACK,'right');
-    y+=18; B.rect(LM,y,RM-LM,0.8,LGRAY);
-    devs.forEach((d,i)=>{
-        if(y>PH-140){ B.newPage(); y=40; }
-        const dLines=wrapText(devDesc(d),8.5,cImei-cDesc-8).slice(0,2);
-        const rowH=Math.max(16,6+dLines.length*11);
-        B.text(String(i+1),cNo-4,y+11,8.5,false,BLACK,'right');
-        dLines.forEach((ln,k)=>B.text(ln,cDesc+4,y+11+k*11,8.5,false,BLACK));
-        B.text(devId(d),cImei+4,y+11,7.5,false,BLACK,'left',75);
-        B.text(String(d.qty),cQty-4,y+11,8.5,false,BLACK,'right');
-        B.text(fmt(d.value),cPrice-4,y+11,8.5,false,BLACK,'right');
-        B.text(fmt(d.qty*d.value),cTot-4,y+11,8.5,true,BLACK,'right');
-        y+=rowH; B.rect(LM,y,RM-LM,0.8,LGRAY);
-    });
-    y+=6;
-    B.text(en?'Total':'',RM-160,y+12,9,true,BLACK,'right');
-    if(ar)B.text('الإجمالي',RM-100,y+12,9,true,BLACK,'right');
-    B.text(cur+' '+fmt(total),RM-4,y+12,9.5,true,BLACK,'right');
-    y+=26;
-    if(en){
-        B.text('Declaration & Undertaking',LM,y,10,true,BLACK); y+=16;
-        $('trDeclEn').value.split('\n').filter(Boolean).forEach(p=>{
-            wrapText(p,8.5,RM-LM).forEach(ln=>{ if(y>PH-90){B.newPage();y=40;} B.text(ln,LM,y,8.5,false,DGRAY); y+=12; });
-            y+=4;
-        });
-    }
-    if(ar){
-        y+=8; B.text('إقرار وتعهد',RM,y,10,true,BLACK,'right'); y+=18;
-        $('trDeclAr').value.split('\n').filter(Boolean).forEach(p=>{
-            wrapArabic(p,8.5,RM-LM).forEach(ln=>{ if(y>PH-90){B.newPage();y=40;} B.text(ln,RM,y,8.5,false,DGRAY,'right'); y+=13; });
-            y+=4;
-        });
-    }
-    y+=26;
-    if(y>PH-120){ B.newPage(); y=60; }
-    B.rect(LM,y,200,0.001,BLACK); B.rect(RM-200,y,200,0.001,BLACK);
-    B.rect(LM,y+40,200,1,BLACK); B.rect(RM-200,y+40,200,1,BLACK);
-    B.text('Customer Signature / توقيع العميل',LM+100,y+54,8,false,DGRAY,'center');
-    B.text('Staff Signature / توقيع الموظف',RM-100,y+54,8,false,DGRAY,'center');
-    y+=80;
-    if($('trIncEID').checked&&(trIdFront||trIdBack)){
-        const fw=(RM-LM-16)/2;
-        let fx=LM;
-        for(const du of [trIdFront,trIdBack]){
-            if(du){ const im=await imgFromDataUrl(du); if(im){ const h=Math.min(150,fw*im.h/im.w); B.placeImg(im,fx,y,fw,h); } }
-            fx+=fw+16;
-        }
-        y+=160;
-    }
-    B.text($('compName').value+' — '+$('compAddress').value,PW/2,PH-40,8,false,GRAY,'center',520);
-    B.text($('compWeb').value+' | '+$('compEmail').value+' | Tel: '+$('compPhone').value,PW/2,PH-28,8,false,GRAY,'center',520);
-    const out=finalizePDF(B);
-    return { blob:new Blob([out],{type:'application/pdf'}), filename:professionalName() };
+ const errs=validateTrading();if(errs.length)throw new Error(errs[0]);
+ buildTradingDoc();
+ const B=pdfBuilder();const LM=48*PT,RM=PW-48*PT;
+ const m=trLang();const en=m!=='ar',ar=m!=='en';
+ const logoImg=logoActive()?await imgFromDataUrl(logoDataUrl):null;
+ const devs=collectDevices();const total=trTotal();const cur=trCur();
+ let y=40*PT;
+ if(logoImg){const h=60*PT,w=Math.min(220*PT,h*logoImg.w/logoImg.h);B.placeImg(logoImg,LM,y,w,h);}else B.text($('compName').value,LM,y+30*PT,18,true,BLACK);
+ B.text('Trading No. / رقم المستند',RM-120*PT,y+10*PT,9,true,BLACK,'right');B.text($('trNumber').value,RM,y+10*PT,9,true,BLACK,'right');
+ B.text('Date / التاريخ',RM-120*PT,y+26*PT,9,true,BLACK,'right');B.text(trLongDate($('trDate').value),RM,y+26*PT,9,true,BLACK,'right');
+ y+=90*PT;B.rect(LM,y,RM-LM,1.5*PT,BLACK);y+=22*PT;
+ B.text('Customer Information / معلومات العميل',LM,y,11,true,BLACK);y+=18*PT;
+ const L=[];const add=(a,b,v)=>{if(v)L.push([a,b,v]);};
+ add('Name','الاسم',$('trName').value);add('Contact','رقم الاتصال',$('trContact').value);add('Emirates ID','الهوية',$('eidNo').value);add('Address','العنوان',$('trAddr').value);add('Staff','الموظف',$('trStaff').value);
+ L.forEach(ln=>{B.text(ln[0]+' :',LM,y,9,true,BLACK);B.text(ln[1]+' :',LM+130*PT,y,9,true,BLACK);B.text(ln[2],LM+210*PT,y,9,false,BLACK,'left',RM-LM-210*PT);y+=15*PT;});
+ y+=10*PT;
+ const cN=LM+30*PT,cD=LM+30*PT+150*PT,cI=RM-230*PT,cQ=RM-150*PT,cP=RM-110*PT,cT=RM;
+ B.rect(LM,y,RM-LM,1,BLACK);
+ B.text('Item',LM+4,y+12*PT,8.5,true,BLACK);B.text('Description',cD+4,y+12*PT,8.5,true,BLACK);B.text('IMEI/Serial',cI+4,y+12*PT,8,true,BLACK);B.text('Qty',cQ-4,y+12*PT,8,true,BLACK,'right');B.text('Price',cP-4,y+12*PT,8,true,BLACK,'right');B.text('Total',cT-4,y+12*PT,8,true,BLACK,'right');
+ y+=18*PT;B.rect(LM,y,RM-LM,0.8,LGRAY);
+ devs.forEach((d,i)=>{if(y>PH-140*PT){B.newPage();y=40*PT;}
+  const dl=wrapText(devDesc(d),8.5,cI-cD-8).slice(0,2);const rh=Math.max(16*PT,(6+dl.length*11)*PT);
+  B.text(String(i+1),cN-4,y+11*PT,8.5,false,BLACK,'right');
+  dl.forEach((ln,k)=>B.text(ln,cD+4,y+11*PT+k*11*PT,8.5,false,BLACK));
+  B.text(devId(d),cI+4,y+11*PT,7.5,false,BLACK,'left',75*PT);
+  B.text(String(d.qty),cQ-4,y+11*PT,8.5,false,BLACK,'right');
+  B.text(fmt(d.value),cP-4,y+11*PT,8.5,false,BLACK,'right');
+  B.text(fmt(d.qty*d.value),cT-4,y+11*PT,8.5,true,BLACK,'right');
+  y+=rh;B.rect(LM,y,RM-LM,0.8,LGRAY);});
+ y+=6*PT;B.text('Total / الإجمالي',RM-160*PT,y+12*PT,9,true,BLACK,'right');B.text(cur+' '+fmt(total),RM-4,y+12*PT,9.5,true,BLACK,'right');
+ y+=26*PT;
+ if(en){B.text('Declaration & Undertaking',LM,y,10,true,BLACK);y+=16*PT;
+  $('trDeclEn').value.split('\n').filter(Boolean).forEach(p=>{wrapText(p,8.5,RM-LM).forEach(ln=>{if(y>PH-90*PT){B.newPage();y=40*PT;}B.text(ln,LM,y,8.5,false,DGRAY);y+=12*PT;});y+=4*PT;});}
+ if(ar){y+=8*PT;B.text('إقرار وتعهد',RM,y,10,true,BLACK,'right');y+=18*PT;
+  $('trDeclAr').value.split('\n').filter(Boolean).forEach(p=>{wrapArabic(p,8.5,RM-LM).forEach(ln=>{if(y>PH-90*PT){B.newPage();y=40*PT;}B.text(ln,RM,y,8.5,false,DGRAY,'right');y+=13*PT;});y+=4*PT;});}
+ y+=26*PT;if(y>PH-120*PT){B.newPage();y=60*PT;}
+ B.rect(LM,y+40*PT,200*PT,1,BLACK);B.rect(RM-200*PT,y+40*PT,200*PT,1,BLACK);
+ B.text('Customer Signature / توقيع العميل',LM+100*PT,y+54*PT,8,false,DGRAY,'center');
+ B.text('Staff Signature / توقيع الموظف',RM-100*PT,y+54*PT,8,false,DGRAY,'center');
+ y+=80*PT;
+ if($('trIncEID').checked&&(trIdFront||trIdBack)){const fw=(RM-LM-16*PT)/2;let fx=LM;
+  for(const du of [trIdFront,trIdBack]){if(du){const im=await imgFromDataUrl(du);if(im){const h=Math.min(150*PT,fw*im.h/im.w);B.placeImg(im,fx,y,fw,h);}}fx+=fw+16*PT;}
+  y+=160*PT;}
+ B.text($('compName').value+' — '+$('compAddress').value,PW/2,PH-40*PT,8,false,GRAY,'center',520);
+ B.text($('compWeb').value+' | '+$('compEmail').value,PW/2,PH-28*PT,8,false,GRAY,'center',520);
+ return {blob:new Blob([finalizePDF(B)],{type:'application/pdf'}),filename:professionalName()};
 }
 
-async function downloadPDF(){
-    if(!appUnlocked)return;
-    try{
-        showStatus('📥 Generating PDF…','inf');
-        const r=(currentTab==='trading')?await makeTradingPDF():await makeInvoicePDF();
-        saveBlob(r.blob,r.filename);
-        showStatus('✅ PDF downloaded: '+r.filename,'ok');
-    }catch(err){
-        console.error(err);
-        showStatus('⚠️ PDF error: '+err.message,'err');
-    }
+/* ---- Delivery Note PDF — seal anchored inside the reserved blank/plain area ---- */
+async function makeDOPDF(){
+ buildDoDoc();
+ const B=pdfBuilder();
+ const LM=40*PT, RM=PW-40*PT;
+ const logoImg=logoActive()?await imgFromDataUrl(logoDataUrl):null;
+ const stampImg=(stampDataUrl&&$('stampOn').checked)?await imgFromDataUrl(stampDataUrl):null;
+ let y=36*PT;
+ if(logoImg){const h=70*PT,w=Math.min(220*PT,h*logoImg.w/logoImg.h);B.placeImg(logoImg,LM,y,w,h);}
+ B.text(($('compName').value||'').toUpperCase(),LM,y+78*PT,11.5,true,BLACK);
+ B.text($('doAddr1').value,RM,y+10*PT,9.5,true,BLACK,'right');
+ B.text($('doAddr2').value,RM,y+26*PT,9.5,true,BLACK,'right');
+ y+=78*PT+26*PT+22*PT;
+ B.text('DELIVERY NOTE',PW/2,y,13,true,BLACK,'center');
+ B.rect(PW/2-60*PT,y+4*PT,120*PT,0.8,BLACK);
+ y+=22*PT+14*PT;
+ B.text('To',LM,y,9.5,true,BLACK);
+ B.text($('doCust').value||'—',LM,y+14*PT,10.5,true,BLACK);
+ B.text('Date :',RM-90*PT,y,9.5,true,BLACK);B.text($('doDateV').textContent,RM,y,9.5,true,BLACK,'right');
+ B.text('Inv.No :',RM-90*PT,y+14*PT,9.5,true,BLACK);B.text($('doInvNoV').textContent,RM,y+14*PT,9.5,true,BLACK,'right');
+ B.text('LPO No. :',RM-90*PT,y+28*PT,9.5,true,BLACK);B.text($('doLpoV').textContent,RM,y+28*PT,9.5,true,BLACK,'right');
+ y+=44*PT;
+ const cS=LM+60*PT, cQ=RM-110*PT;
+ B.rect(LM,y,RM-LM,1,BLACK);
+ B.text('SLNo',LM+6,y+12*PT,9.5,true,BLACK);
+ B.text('Description',cS+6,y+12*PT,9.5,true,BLACK);
+ B.text('Quantity',RM-6,y+12*PT,9.5,true,BLACK,'right');
+ B.rect(LM,y+18*PT,RM-LM,1,BLACK);
+ B.rect(cS,y,0.8,18*PT,BLACK);B.rect(cQ,y,0.8,18*PT,BLACK);
+ y+=18*PT;
+ const rows=[...$('doItems').rows];
+ rows.forEach((r,i)=>{
+  const dl=(r.querySelector('.d-desc').value||'').split('\n').filter(Boolean);
+  const q=parseFloat(r.querySelector('.d-qty').value)||0;
+  const rh=Math.max(20*PT,(16+dl.length*15.6)*PT);
+  if(y+rh>PH-260*PT){B.newPage();y=40*PT;}
+  B.text(String(i+1),LM+6,y+12*PT,9.5,false,BLACK);
+  dl.forEach((ln,k)=>B.text(ln,cS+6,y+12*PT+k*11*PT,9.5,false,BLACK,'left',cQ-cS-12));
+  B.text(String(q),RM-6,y+12*PT,9.5,true,BLACK,'right');
+  B.rect(cS,y,0.8,rh,LGRAY);B.rect(cQ,y,0.8,rh,LGRAY);B.rect(LM,y+rh-0.8,RM-LM,0.8,LGRAY);
+  y+=rh;});
+ /* reserved blank/plain area: dynamic height from current content position to the
+    page limit that must stay free for Total Qty + Terms + Signature */
+ const yBlank=y;
+ const pageLimit=PH-260*PT;
+ const avail=pageLimit-yBlank;
+ const spaceH=Math.min(247*PT, Math.max(170*PT, avail>0?avail:170*PT));
+ B.rect(cS,yBlank,0.8,spaceH,LGRAY);B.rect(cQ,yBlank,0.8,spaceH,LGRAY);
+ if(stampImg){
+   const sh=Math.min(150*PT, spaceH-16*PT);          /* seal fits inside blank with margin */
+   const sw=Math.min(150*PT, sh*stampImg.w/stampImg.h);
+   B.placeImg(stampImg, RM-30*PT-sw, yBlank+spaceH-sh-8*PT, sw, sh);  /* lower-right of blank area */
+ }
+ y=yBlank+spaceH;
+ let tot=0;rows.forEach(r=>tot+=parseFloat(r.querySelector('.d-qty').value)||0);
+ B.text('Total Qty :',cQ-6,y+12*PT,9.5,true,BLACK,'right');
+ B.text(fmt(tot),RM-6,y+12*PT,9.5,true,BLACK,'right');
+ B.rect(LM,y+18*PT,RM-LM,1,BLACK);
+ y+=18*PT+14*PT;
+ B.text('Terms & Conditions :',LM,y,9,true,BLACK);
+ B.rect(LM,y+3*PT,110*PT,0.8,BLACK);
+ y+=14*PT;
+ ($('doTerms').value||'').split('\n').filter(Boolean).forEach(ln=>{B.text(ln,LM,y,8.5,false,DGRAY);y+=11*PT;});
+ y+=34*PT;
+ B.text("Receiver's Name. : "+($('doRecv').value||''),LM,y,9.5,true,BLACK);
+ B.text('Signature........................................',RM,y,9.5,true,BLACK,'right');
+ y+=14*PT;
+ B.text('Mobile No: '+($('doMobile').value||''),LM,y,9.5,true,BLACK);
+ return {blob:new Blob([finalizePDF(B)],{type:'application/pdf'}),filename:professionalName()};
 }
 
-/* ===== SAVE ===== */
-function saveLocal(){
-    if(!appUnlocked)return;
-    const t=currentMode;
-    const numRaw=($('docNumber').value||'').trim();
-    const num=parseInt(numRaw,10);
-    if(!numRaw||isNaN(num)){ showStatus('⚠️ Enter a valid document number','err'); return; }
-    const w=WORK[t];
-    if(w && num!==w.issued){
-        if(usedGet(t).includes(num)){ showStatus('⚠️ Number '+num+' already used — choose another','err'); return; }
-        issueNum(t,num); w.issued=num;
-    }
-    if(!w){ WORK[t]=captureInvQuot(); WORK[t].issued=num; issueNum(t,num); }
-    const items=[...$('itemsBody').rows].map(r=>({code:r.querySelector('.code').value,desc:r.querySelector('.desc').value,qty:r.querySelector('.qty').value,price:r.querySelector('.price').value}));
-    const data={mode:currentMode,invType:invoiceType,logo:logoDataUrl,discount:$('discount').value,items,terms:$('termsText').value,
-        bank:{name:$('bankName').value,accName:$('bankAccName').value,accNo:$('bankAccNo').value,iban:$('bankIBAN').value,swift:$('bankSwift').value,branch:$('bankBranch').value},
-        company:{name:$('compName').value,trn:$('compTRN').value,address:$('compAddress').value,email:$('compEmail').value,phone:$('compPhone').value,mobile:$('compMobile').value,web:$('compWeb').value,po:$('compPOBox').value},
-        doc:{number:$('docNumber').value,date:$('docDate').value,staff:$('staffName').value,poRef:$('poRef').value},
-        cust:{name:$('custName').value,trn:$('custTRN').value,phone:$('custPhone').value,address:$('custAddress').value}};
-    try{
-        localStorage.setItem('invApp_v15',JSON.stringify(data));
-        saveWorkInvQuot(t);
-        histPush(t);
-        updateAutoBackup();
-        showStatus('✅ Saved #'+num+' to history (date kept: '+fmtDate($('docDate').value)+')','ok');
-    }
-    catch(e){showStatus('⚠️ Save failed — use Download HTML / Export Backup','err');}
-}
-function standaloneHTML(){
-    buildDocument();
-    return `<!DOCTYPE html><html><head><meta charset="UTF-8"><title>Invoice</title>
-    <style>${$('mainStyle').textContent}\n#invoiceDoc{display:flex !important;}\n#tradingDoc{display:none !important;}</style></head>
-    <body>${$('invoiceDoc').outerHTML}</body></html>`;
-}
-function downloadHTML(){
-    if(!appUnlocked)return;
-    const blob=new Blob([standaloneHTML()],{type:'text/html'});
-    saveBlob(blob, professionalName().replace('.pdf','.html'));
-    showStatus('⬇️ HTML file downloaded','ok');
-}
+async function downloadPDF(){if(!appUnlocked)return;
+ try{showStatus('📥 Generating PDF…','inf');
+  const r=(currentTab==='trading')?await makeTradingPDF():(currentTab==='do')?await makeDOPDF():await makeInvoicePDF();
+  saveBlob(r.blob,r.filename);showStatus('✅ PDF downloaded: '+r.filename,'ok');
+ }catch(err){console.error(err);showStatus('⚠️ PDF error: '+err.message,'err');}}
 
-/* ===== WHATSAPP / EMAIL (same exact PDF) ===== */
-async function sharePDF(kind){
-    if(!appUnlocked)return;
-    try{
-        showStatus('📄 Preparing PDF…','inf');
-        const res=(currentTab==='trading')?await makeTradingPDF():await makeInvoicePDF();
-        const file=new File([res.blob],res.filename,{type:'application/pdf'});
-        if(navigator.canShare&&navigator.canShare({files:[file]})){
-            try{ await navigator.share({files:[file],title:res.filename,text:res.filename}); return; }
-            catch(e){ if(e&&e.name==='AbortError')return; }
-        }
-        saveBlob(res.blob,res.filename);
-        if(kind==='whatsapp'){ showStatus('💬 PDF saved — opening WhatsApp… attach '+res.filename,'inf'); setTimeout(()=>window.open('https://wa.me/','_blank'),900); }
-        else { showStatus('📧 PDF saved — opening email… attach '+res.filename,'inf'); setTimeout(()=>{ window.location.href='mailto:?subject='+encodeURIComponent(res.filename.replace(/\.pdf$/,''))+'&body='+encodeURIComponent('Dear Customer,\n\nPlease find attached '+res.filename+'.\n\nThank you.'); },900); }
-    }catch(err){
-        console.error(err);
-        showStatus('⚠️ Share failed: '+err.message,'err');
-    }
-}
+async function sharePDF(kind){if(!appUnlocked)return;
+ try{showStatus('📄 Preparing PDF…','inf');
+  const r=(currentTab==='trading')?await makeTradingPDF():(currentTab==='do')?await makeDOPDF():await makeInvoicePDF();
+  const f=new File([r.blob],r.filename,{type:'application/pdf'});
+  if(navigator.canShare&&navigator.canShare({files:[f]})){try{await navigator.share({files:[f],title:r.filename,text:r.filename});return;}catch(e){if(e&&e.name==='AbortError')return;}}
+  saveBlob(r.blob,r.filename);
+  if(kind==='whatsapp'){showStatus('💬 PDF saved — opening WhatsApp…','inf');setTimeout(()=>window.open('https://wa.me/','_blank'),900);}
+  else{showStatus('📧 PDF saved — opening email…','inf');setTimeout(()=>{location.href='mailto:?subject='+encodeURIComponent(r.filename.replace(/\.pdf$/,''))+'&body='+encodeURIComponent('Please find attached '+r.filename+'.');},900);}
+ }catch(err){console.error(err);showStatus('⚠️ Share failed: '+err.message,'err');}}
 
-/* ================= TRADING MODULE ================= */
-let trIdFront=null, trIdBack=null, trSig=null;
-function trLang(){ return $('trLang').value; }
-function trCur(){ return ($('trCurrency').value||'AED').trim(); }
-function trLongDate(iso){ if(!iso)return''; const d=new Date(iso+'T00:00:00'); if(isNaN(d))return iso; return d.toLocaleDateString('en-GB',{day:'numeric',month:'long',year:'numeric'}); }
-function trList(){ try{return JSON.parse(localStorage.getItem('invApp_trading_list')||'[]');}catch(e){return[];} }
-function trSaveList(l){ localStorage.setItem('invApp_trading_list',JSON.stringify(l)); }
-function nextTRD(){ const seq=parseInt(localStorage.getItem('invApp_trd_seq')||'0',10); const used=trList().map(r=>r.number); let n=seq+1; let cand='TRD-'+String(n).padStart(6,'0'); while(used.includes(cand)){n++;cand='TRD-'+String(n).padStart(6,'0');} return cand; }
+function saveLocal(){if(!appUnlocked)return;const t=currentMode;
+ const nr=($('docNumber').value||'').trim();const num=parseInt(nr,10);
+ if(!nr||isNaN(num)){showStatus('⚠️ Enter valid number','err');return;}
+ const w=WORK[t];
+ if(w&&num!==w.issued){if(usedGet(t).includes(num)){showStatus('⚠️ Number used','err');return;}issueNum(t,num);w.issued=num;}
+ if(!w){WORK[t]=captureInvQuot();WORK[t].issued=num;issueNum(t,num);}
+ const data={mode:currentMode,invType:invoiceType,logo:logoDataUrl,discount:$('discount').value,
+  items:[...$('itemsBody').rows].map(r=>({code:r.querySelector('.code').value,desc:r.querySelector('.desc').value,qty:r.querySelector('.qty').value,price:r.querySelector('.price').value})),
+  terms:$('termsText').value,
+  bank:{name:$('bankName').value,accName:$('bankAccName').value,accNo:$('bankAccNo').value,iban:$('bankIBAN').value,swift:$('bankSwift').value,branch:$('bankBranch').value},
+  company:{name:$('compName').value,trn:$('compTRN').value,address:$('compAddress').value,email:$('compEmail').value,phone:$('compPhone').value,mobile:$('compMobile').value,web:$('compWeb').value,po:$('compPOBox').value},
+  doc:{number:$('docNumber').value,date:$('docDate').value,staff:$('staffName').value,poRef:$('poRef').value},
+  cust:{name:$('custName').value,trn:$('custTRN').value,phone:$('custPhone').value,address:$('custAddress').value}};
+ try{localStorage.setItem('invApp_v15',JSON.stringify(data));saveWorkInvQuot(t);histPush(t);updateAutoBackup();showStatus('✅ Saved #'+num,'ok');}
+ catch(e){showStatus('⚠️ Save failed','err');}}
+function standaloneHTML(){buildDocument();return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>${$('mainStyle').textContent}\n#invoiceDoc{display:flex !important;}</style></head><body>${$('invoiceDoc').outerHTML}</body></html>`;}
+function downloadHTML(){saveBlob(new Blob([standaloneHTML()],{type:'text/html'}),professionalName().replace('.pdf','.html'));showStatus('⬇️ HTML downloaded','ok');}
 
-function newTrading(){
-    trEditingId=null;
-    ['trName','trContact','trEmail','trNat','trDob','trEmirate','trCity','trCountry','trType','trAddr','trNotes',
-     'eidNo','eidName','eidNat','eidDob','eidIssue','eidExpiry','eidOcc','eidPlace'].forEach(id=>$(id).value='');
-    $('trNumber').value=nextTRD();
-    $('trDate').value=todayISO();
-    $('trStaff').value=$('staffName').value||'';
-    $('trStatus').value='Completed';
-    trIdFront=trIdBack=trSig=null;
-    $('trIncEID').checked=false;
-    $('trFrontPrev').textContent=''; $('trBackPrev').textContent=''; $('trSigPrev').textContent='';
-    $('trDevices').innerHTML='';
-    trAddDevice();
-    buildTradingDoc();
-    saveWorkTrading();
-    showStatus('🆕 New Trading '+$('trNumber').value+' created (today\'s date)','ok');
-}
+document.addEventListener('DOMContentLoaded',()=>{$('trDevices').addEventListener('input',()=>buildTradingDoc());});
 
-function trAddDevice(d){
-    d=d||{};
-    const card=document.createElement('div');
-    card.className='tr-devcard';
-    card.innerHTML=`<div class="form-grid">
-        <div class="form-group"><label>Brand</label><input class="form-control d-brand" value="${esc(d.brand||'')}" placeholder="Apple"></div>
-        <div class="form-group"><label>Product Name</label><input class="form-control d-name" value="${esc(d.name||'')}" placeholder="iPhone 17 Pro Max"></div>
-        <div class="form-group"><label>Model</label><input class="form-control d-model" value="${esc(d.model||'')}"></div>
-        <div class="form-group"><label>Storage</label><input class="form-control d-storage" value="${esc(d.storage||'')}" placeholder="256GB"></div>
-        <div class="form-group"><label>Color</label><input class="form-control d-color" value="${esc(d.color||'')}" placeholder="Blue"></div>
-        <div class="form-group"><label>IMEI 1</label><input class="form-control d-imei1" value="${esc(d.imei1||'')}" maxlength="15"></div>
-        <div class="form-group"><label>IMEI 2</label><input class="form-control d-imei2" value="${esc(d.imei2||'')}" maxlength="15"></div>
-        <div class="form-group"><label>Serial Number</label><input class="form-control d-serial" value="${esc(d.serial||'')}"></div>
-        <div class="form-group"><label>Condition</label><select class="form-control d-cond">
-            ${['Excellent','Good','Fair','Non-working'].map(c=>`<option ${d.cond===c?'selected':''}>${c}</option>`).join('')}
-        </select></div>
-        <div class="form-group"><label>Quantity</label><input type="number" class="form-control d-qty" value="${d.qty||1}" min="1" step="1"></div>
-        <div class="form-group"><label>Trade-In Value</label><input type="number" class="form-control d-value" value="${d.value||0}" min="0" step="0.01"></div>
-        <div class="form-group"><label>Notes</label><input class="form-control d-notes" value="${esc(d.notes||'')}"></div>
-    </div>
-    <div style="margin-top:8px;display:flex;gap:8px">
-        <button class="btn btn-blue" style="padding:5px 12px" onclick="trDupDevice(this)">⧉ Duplicate</button>
-        <button class="btn btn-red" style="padding:5px 12px" onclick="trDelDevice(this)">✕ Delete</button>
-    </div>`;
-    $('trDevices').appendChild(card);
-    buildTradingDoc(); scheduleWorkSave();
-}
-function trDupDevice(btn){ const c=btn.closest('.tr-devcard'); trAddDevice(collectCard(c)); }
-function trDelDevice(btn){ if(document.querySelectorAll('.tr-devcard').length<=1){showStatus('⚠️ At least one device required','err');return;} btn.closest('.tr-devcard').remove(); buildTradingDoc(); scheduleWorkSave(); }
-function collectCard(c){ return {
-    brand:c.querySelector('.d-brand').value, name:c.querySelector('.d-name').value, model:c.querySelector('.d-model').value,
-    storage:c.querySelector('.d-storage').value, color:c.querySelector('.d-color').value,
-    imei1:c.querySelector('.d-imei1').value.trim(), imei2:c.querySelector('.d-imei2').value.trim(),
-    serial:c.querySelector('.d-serial').value.trim(), cond:c.querySelector('.d-cond').value,
-    qty:parseFloat(c.querySelector('.d-qty').value)||0, value:parseFloat(c.querySelector('.d-value').value)||0,
-    notes:c.querySelector('.d-notes').value }; }
-function collectDevices(){ return [...document.querySelectorAll('.tr-devcard')].map(collectCard); }
-function devDesc(d){ return [d.brand,d.name,d.model,d.storage,d.color].filter(Boolean).join(' ').toUpperCase(); }
-function devId(d){ return d.imei1||d.serial||d.imei2||''; }
-function trTotal(){ return collectDevices().reduce((s,d)=>s+(d.qty*d.value),0); }
-
-function trIdImg(e,side){
-    const f=e.target.files[0]; if(!f)return;
-    const r=new FileReader();
-    r.onload=ev=>{ if(side==='front'){trIdFront=ev.target.result;$('trFrontPrev').textContent='✅ Front uploaded';} else {trIdBack=ev.target.result;$('trBackPrev').textContent='✅ Back uploaded';} buildTradingDoc(); scheduleWorkSave(); };
-    r.readAsDataURL(f);
-}
-function trIdRemove(side){ if(side==='front'){trIdFront=null;$('trFrontPrev').textContent='';} else {trIdBack=null;$('trBackPrev').textContent='';} buildTradingDoc(); scheduleWorkSave(); }
-function trSigImg(e){ const f=e.target.files[0]; if(!f)return; const r=new FileReader(); r.onload=ev=>{trSig=ev.target.result;$('trSigPrev').textContent='✅ Signature uploaded';buildTradingDoc();scheduleWorkSave();}; r.readAsDataURL(f); }
-function trSigRemove(){ trSig=null; $('trSigPrev').textContent=''; buildTradingDoc(); scheduleWorkSave(); }
-
-function loadLastCustomer(){
-    try{
-        const s=localStorage.getItem('invApp_v15')||localStorage.getItem('invApp_v14');
-        if(!s){showStatus('⚠️ No saved invoice customer found','err');return;}
-        const d=JSON.parse(s);
-        $('trName').value=d.cust?.name||''; $('trContact').value=d.cust?.phone||''; $('trAddr').value=d.cust?.address||'';
-        buildTradingDoc(); showStatus('♻️ Last invoice customer loaded (original record untouched)','ok');
-    }catch(e){ showStatus('⚠️ Could not load customer','err'); }
-}
-
-function validateTrading(){
-    const errs=[];
-    if(!$('trName').value.trim())errs.push('Customer Name is required');
-    if(!$('trContact').value.trim())errs.push('Contact Number is required');
-    if(!$('trDate').value)errs.push('Date is required');
-    if(!$('trNumber').value.trim())errs.push('Trading Number is required');
-    const eid=$('eidNo').value.trim();
-    if(eid && !/^\d{3}-?\d{4}-?\d{7}-?\d$/.test(eid))errs.push('Emirates ID format must be 784-YYYY-NNNNNNN-C');
-    collectDevices().forEach((d,i)=>{
-        if(!devDesc(d))errs.push(`Device ${i+1}: description required (brand/product)`);
-        if(!(d.qty>0))errs.push(`Device ${i+1}: quantity must be at least 1`);
-        if(d.value<0)errs.push(`Device ${i+1}: value cannot be negative`);
-        [d.imei1,d.imei2].forEach((im,k)=>{ if(im && !/^\d{15}$/.test(im))errs.push(`Device ${i+1}: IMEI${k+1} must be exactly 15 digits`); });
-    });
-    return errs;
-}
-
-function buildTradingDoc(){
-    const m=trLang();
-    const en=m!=='ar', ar=m!=='en';
-    const devs=collectDevices();
-    const total=trTotal();
-    const cur=trCur();
-    const biH=(e,a)=> en&&ar?`${e} / ${a}`:(en?e:a);
-    let custLines='';
-    const addLine=(l,v)=>{ if(v)custLines+=`<div><span class="lbl">${l}:</span> ${esc(v)}</div>`; };
-    addLine(biH('Name','الاسم'), $('trName').value);
-    addLine(biH('Contact No','رقم الاتصال'), $('trContact').value);
-    addLine(biH('Email','البريد الإلكتروني'), $('trEmail').value);
-    addLine(biH('Emirates ID','الهوية الإماراتية'), $('eidNo').value);
-    addLine(biH('Nationality','الجنسية'), $('trNat').value||$('eidNat').value);
-    addLine(biH('Date of Birth','تاريخ الميلاد'), $('trDob').value?fmtDate($('trDob').value):$('eidDob').value);
-    addLine(biH('Address','العنوان'), [$('trAddr').value,$('trCity').value,$('trEmirate').value,$('trCountry').value].filter(Boolean).join(', '));
-    addLine(biH('Customer Type','نوع العميل'), $('trType').value);
-    addLine(biH('Staff','الموظف'), $('trStaff').value);
-    addLine(biH('Notes','ملاحظات'), $('trNotes').value);
-    let devRows='';
-    devs.forEach((d,i)=>{
-        devRows+=`<tr><td class="cen">${i+1}</td><td>${esc(devDesc(d))}${d.notes?`<br><span style="font-size:11px;color:#444">${esc(d.notes)} (${esc(d.cond)})</span>`:''}</td>
-        <td>${esc(devId(d))}</td><td class="cen">${d.qty}</td><td class="num">${cur} ${fmt(d.value)}</td><td class="num tot">${cur} ${fmt(d.qty*d.value)}</td></tr>`;
-    });
-    for(let i=0;i<2;i++)devRows+='<tr><td>&nbsp;</td><td></td><td></td><td></td><td></td><td></td></tr>';
-    let sigBlock=`<div class="tr-sig">
-        <div class="cell">${trSig?`<div class="sigimg"><img src="${trSig}"></div>`:''}<div class="line">${biH('Customer Signature','توقيع العميل')}</div></div>
-        <div class="cell"><div class="line">${biH('Date','التاريخ')}</div></div>
-        <div class="cell"><div style="margin-bottom:6px"><b>${biH('Staff Name','اسم الموظف')}:</b> ${esc($('trStaff').value)||'________________'}</div><div class="line">${biH('Staff Signature','توقيع الموظف')}</div></div>
-    </div>`;
-    let idBlock='';
-    if($('trIncEID').checked && (trIdFront||trIdBack)){
-        idBlock=`<div class="tr-h">${biH('Emirates ID Copy','صورة الهوية الإماراتية')}</div><div class="tr-idimgs">
-            ${trIdFront?`<div class="card"><img src="${trIdFront}"><div class="cap">${biH('Front','أمامي')}</div></div>`:''}
-            ${trIdBack?`<div class="card"><img src="${trIdBack}"><div class="cap">${biH('Back','خلفي')}</div></div>`:''}
-        </div>`;
-    }
-    const doc=$('tradingDoc');
-    doc.dir=(m==='ar')?'rtl':'ltr';
-    doc.innerHTML=`
-    <div class="tr-head">
-        <div class="tr-logo">${logoActive()?`<img src="${logoDataUrl}">`:`<div class="noname">${esc($('compName').value||'')}</div>`}</div>
-        <div class="tr-refs">
-            <div class="r"><b>${biH('Trading No.','رقم المستند')}:</b><span>${esc($('trNumber').value)}</span></div>
-            <div class="r"><b>${biH('Date','التاريخ')}:</b><span>${trLongDate($('trDate').value)}</span></div>
-        </div>
-    </div>
-    <div class="tr-h">${biH('Customer Information','معلومات العميل')}</div>
-    <div class="tr-cust">${custLines||'—'}</div>
-    <div class="tr-h">${biH('Traded Device(s) Details','تفاصيل الأجهزة المستبدلة')}</div>
-    <table class="tr-table">
-        <thead><tr>
-            <th class="cen" style="width:44px">${biH('Item','م')}</th>
-            <th>${biH('Product / Device Description','وصف المنتج / الجهاز')}</th>
-            <th style="width:150px">${biH('IMEI / Serial No.','الرقم التسلسلي / IMEI')}</th>
-            <th class="cen" style="width:48px">${biH('Qty','الكمية')}</th>
-            <th class="num" style="width:100px">${biH('Price','السعر')}</th>
-            <th class="num" style="width:110px">${biH('Total Price','السعر الإجمالي')}</th>
-        </tr></thead>
-        <tbody>${devRows}
-        <tr><td colspan="3" style="font-weight:800">${biH('Total','الإجمالي')}</td><td class="cen">${devs.reduce((s,d)=>s+d.qty,0)}</td><td></td><td class="num tot">${cur} ${fmt(total)}</td></tr>
-        </tbody>
-    </table>
-    ${en?`<div class="tr-h">Declaration & Undertaking</div><div class="tr-decl">${$('trDeclEn').value.split('\n').filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('')}</div>`:''}
-    ${ar?`<div class="tr-h" style="direction:rtl;text-align:right">إقرار وتعهد</div><div class="tr-decl-ar">${$('trDeclAr').value.split('\n').filter(Boolean).map(p=>`<p>${esc(p)}</p>`).join('')}</div>`:''}
-    ${sigBlock}
-    ${idBlock}
-    <div class="tr-foot">${esc($('compName').value||'')} — ${esc($('compAddress').value||'')}<br>${esc($('compWeb').value||'')} | ${esc($('compEmail').value||'')} | Tel: ${esc($('compPhone').value||'')}</div>`;
-    $('trTotalPrev').textContent=cur+' '+fmt(total);
-}
-
-function printTrading(){
-    buildTradingDoc();
-    document.body.classList.add('print-trading');
-    const oldTitle=document.title; document.title=' ';
-    setTimeout(()=>{ window.print(); document.title=oldTitle; },60);
-}
-
-function gatherTrading(){
-    return { number:$('trNumber').value, date:$('trDate').value, status:$('trStatus').value, lang:$('trLang').value,
-        cust:{name:$('trName').value,contact:$('trContact').value,email:$('trEmail').value,nat:$('trNat').value,dob:$('trDob').value,emirate:$('trEmirate').value,city:$('trCity').value,country:$('trCountry').value,type:$('trType').value,addr:$('trAddr').value,notes:$('trNotes').value},
-        eid:{no:$('eidNo').value,name:$('eidName').value,nat:$('eidNat').value,dob:$('eidDob').value,issue:$('eidIssue').value,expiry:$('eidExpiry').value,occ:$('eidOcc').value,place:$('eidPlace').value,front:trIdFront,back:trIdBack,include:$('trIncEID').checked},
-        devices:collectDevices(), declEn:$('trDeclEn').value, declAr:$('trDeclAr').value, staff:$('trStaff').value, sig:trSig,
-        total:trTotal(), currency:trCur() };
-}
-
-function saveTrading(){
-    if(!appUnlocked)return;
-    const errs=validateTrading();
-    if(errs.length){showStatus('⚠️ '+errs[0],'err');return;}
-    const rec=gatherTrading();
-    rec.id=trEditingId||('t'+Date.now());
-    const list=trList();
-    const dup=list.find(x=>x.number===rec.number && x.id!==rec.id);
-    if(dup){ showStatus('⚠️ Duplicate Trading number '+rec.number+' — change it','err'); return; }
-    const ix=list.findIndex(x=>x.id===rec.id);
-    if(ix>=0)list[ix]=rec; else list.unshift(rec);
-    trSaveList(list);
-    trEditingId=rec.id;
-    const num=parseInt(String(rec.number).replace(/\D/g,''),10)||0;
-    const seq=parseInt(localStorage.getItem('invApp_trd_seq')||'0',10);
-    if(num>seq)localStorage.setItem('invApp_trd_seq',String(num));
-    renderHistory();
-    saveWorkTrading();
-    updateAutoBackup();
-    showStatus('✅ Trading '+rec.number+' saved (date kept: '+fmtDate(rec.date)+')','ok');
-}
-
-function toggleHistory(){ const w=$('trHistoryWrap'); w.style.display=w.style.display==='none'?'':'none'; renderHistory(); }
-
-function renderHistory(){
-    const q=($('trSearch').value||'').toLowerCase();
-    const list=trList().filter(r=>!q|| (r.number||'').toLowerCase().includes(q)||(r.cust?.name||'').toLowerCase().includes(q)||(r.devices||[]).some(d=>(d.imei1||'').includes(q)||(d.serial||'').toLowerCase().includes(q)));
-    $('trHistoryBody').innerHTML=list.length?`<table><thead><tr><th>Number</th><th>Date</th><th>Customer</th><th>Device(s)</th><th>Total</th><th>Status</th><th>Actions</th></tr></thead><tbody>`+
-        list.map(r=>`<tr><td><b>${esc(r.number)}</b></td><td>${fmtDate(r.date)}</td><td>${esc(r.cust?.name||'')}</td><td>${(r.devices||[]).map(d=>esc(devDesc(d))).join('<br>')}</td><td>${esc(r.currency||'AED')} ${fmt(r.total||0)}</td><td>${esc(r.status||'')}</td>
-        <td style="white-space:nowrap">
-            <button class="btn btn-blue" onclick="trView('${r.id}')">View</button>
-            <button class="btn btn-green" onclick="trDup('${r.id}')">Dup</button>
-            <button class="btn btn-red" onclick="trDel('${r.id}')">Del</button>
-        </td></tr>`).join('')+`</tbody></table>`:'<div style="color:#778;font-size:13px">No trading documents saved yet.</div>';
-}
-
-function trLoadRec(r){
-    trEditingId=r.id;
-    $('trNumber').value=r.number; $('trDate').value=r.date; $('trStatus').value=r.status||'Completed'; $('trLang').value=r.lang||'both';
-    $('trStaff').value=r.staff||''; $('trCurrency').value=r.currency||'AED';
-    const c=r.cust||{};
-    $('trName').value=c.name||''; $('trContact').value=c.contact||''; $('trEmail').value=c.email||''; $('trNat').value=c.nat||''; $('trDob').value=c.dob||'';
-    $('trEmirate').value=c.emirate||''; $('trCity').value=c.city||''; $('trCountry').value=c.country||''; $('trType').value=c.type||''; $('trAddr').value=c.addr||''; $('trNotes').value=c.notes||'';
-    const e=r.eid||{};
-    $('eidNo').value=e.no||''; $('eidName').value=e.name||''; $('eidNat').value=e.nat||''; $('eidDob').value=e.dob||''; $('eidIssue').value=e.issue||''; $('eidExpiry').value=e.expiry||''; $('eidOcc').value=e.occ||''; $('eidPlace').value=e.place||'';
-    trIdFront=e.front||null; trIdBack=e.back||null; trSig=r.sig||null;
-    $('trIncEID').checked=!!e.include;
-    $('trFrontPrev').textContent=trIdFront?'✅ Front uploaded':''; $('trBackPrev').textContent=trIdBack?'✅ Back uploaded':''; $('trSigPrev').textContent=trSig?'✅ Signature uploaded':'';
-    $('trDeclEn').value=r.declEn||''; $('trDeclAr').value=r.declAr||'';
-    $('trDevices').innerHTML='';
-    (r.devices&&r.devices.length?r.devices:[{}]).forEach(d=>trAddDevice(d));
-    buildTradingDoc();
-    saveWorkTrading();
-}
-function trView(id){ const r=trList().find(x=>x.id===id); if(r){trLoadRec(r); showStatus('👁️ Loaded '+r.number+' (original date & number kept)','ok');} }
-function trDup(id){ const r=trList().find(x=>x.id===id); if(r){ const c=JSON.parse(JSON.stringify(r)); c.id=null; trEditingId=null; c.number=nextTRD(); c.date=todayISO(); trLoadRec(c); trEditingId=null; saveWorkTrading(); showStatus('⧉ Duplicated as '+c.number+' (today\'s date)','ok'); } }
-function trDel(id){ if(!confirm('Delete this trading document?'))return; trSaveList(trList().filter(x=>x.id!==id)); renderHistory(); showStatus('🗑️ Deleted','ok'); }
-
-function shareTrading(){
-    buildTradingDoc();
-    const txt=`${$('trNumber').value} — ${$('trName').value} — ${trCur()} ${fmt(trTotal())}`;
-    if(navigator.share){ navigator.share({title:'Trading Document',text:txt}).catch(()=>{}); }
-    else {
-        const html=`<!DOCTYPE html><html><head><meta charset="UTF-8"><title>${$('trNumber').value}</title><style>${$('mainStyle').textContent}\n#tradingDoc{display:block !important;}</style></head><body>${$('tradingDoc').outerHTML}</body></html>`;
-        const blob=new Blob([html],{type:'text/html'});
-        saveBlob(blob,($('trNumber').value||'TRD')+'.html');
-        showStatus('📤 Trading document exported','ok');
-    }
-}
-
-document.addEventListener('DOMContentLoaded',()=>{
-    $('trDevices').addEventListener('input',()=>buildTradingDoc());
-});
-
-/* ================= BOOT ================= */
 window.addEventListener('DOMContentLoaded',()=>{
-    let bootMode='invoice';
-    try{
-        const s=localStorage.getItem('invApp_v15')||localStorage.getItem('invApp_v14')||localStorage.getItem('invApp_v13');
-        if(s){
-            const d=JSON.parse(s);
-            if(d.company){$('compName').value=d.company.name||'';$('compTRN').value=d.company.trn||'';$('compAddress').value=d.company.address||'';$('compEmail').value=d.company.email||'';$('compPhone').value=d.company.phone||'';$('compMobile').value=d.company.mobile||'';$('compWeb').value=d.company.web||'';$('compPOBox').value=d.company.po||'';}
-            if(d.doc){$('docNumber').value=d.doc.number||'';$('docDate').value=d.doc.date||'';$('staffName').value=d.doc.staff||'';$('poRef').value=d.doc.poRef||'';}
-            if(d.cust){$('custName').value=d.cust.name||'';$('custTRN').value=d.cust.trn||'';$('custPhone').value=d.cust.phone||'';$('custAddress').value=d.cust.address||'';}
-            if(d.terms)$('termsText').value=d.terms;
-            if(d.bank){$('bankName').value=d.bank.name||'';$('bankAccName').value=d.bank.accName||'';$('bankAccNo').value=d.bank.accNo||'';$('bankIBAN').value=d.bank.iban||'';$('bankSwift').value=d.bank.swift||'';$('bankBranch').value=d.bank.branch||'';}
-            if(d.discount)$('discount').value=d.discount;
-            if(d.logo){ logoDataUrl=d.logo; $('logoPreview').innerHTML=`<img src="${logoDataUrl}">`; }
-            if(d.invType)setInvType(d.invType);
-            if(d.mode)bootMode=d.mode;
-            if(d.items&&d.items.length)d.items.forEach(it=>addRow(it.code,it.desc,it.qty,it.price));
-        }
-    }catch(e){console.log('load error',e);}
-    if(!logoDataUrl){ try{ const lg=localStorage.getItem('invApp_logo'); if(lg){ logoDataUrl=lg; $('logoPreview').innerHTML=`<img src="${logoDataUrl}">`; } }catch(e){} }
-    try{
-        const st=JSON.parse(localStorage.getItem('invApp_stamp')||'null');
-        if(st){ stampDataUrl=st.img; $('stampOn').checked=!!st.on; if(st.img)$('stampPreview').innerHTML=`<img src="${st.img}">`; }
-    }catch(e){}
-    try{ $('logoOn').checked = localStorage.getItem('invApp_logoOn')!=='0'; }catch(e){}
-    WORK.invoice = storedWork('invoice');
-    if(!WORK.invoice){
-        WORK.invoice = captureInvQuot();
-        if(!$('docDate').value)$('docDate').value=todayISO();
-        WORK.invoice.date=$('docDate').value;
-        const n0=parseInt(WORK.invoice.number,10);
-        WORK.invoice.issued=isNaN(n0)?nextNum('invoice'):n0;
-        if(isNaN(n0))$('docNumber').value=String(WORK.invoice.issued);
-        issueNum('invoice',WORK.invoice.issued);
-        persistWork('invoice');
-    }
-    WORK.quotation = storedWork('quotation') || freshWork('quotation');
-    persistWork('quotation');
-    if($('itemsBody').rows.length===0)addRow();
-    calcTotals();
-    updateHeaderFooterState();
-    updateStamp();
-    const wt=storedWork('trading');
-    if(wt){ loadTradingWork(wt); }
-    else {
-        $('trNumber').value=nextTRD();
-        $('trDate').value=todayISO();
-        $('trStaff').value=$('staffName').value||'';
-        trAddDevice();
-        saveWorkTrading();
-    }
-    try{ const ab=JSON.parse(localStorage.getItem('invApp_autobackup')||'null'); if(ab&&ab.generatedAt)$('backupInfo').textContent='Last auto-snapshot: '+new Date(ab.generatedAt).toLocaleString(); }catch(e){}
-    if(bootMode!=='invoice')setMode(bootMode); else { buildDocument(); }
+ let bootMode='invoice';
+ try{const s=localStorage.getItem('invApp_v15')||localStorage.getItem('invApp_v14')||localStorage.getItem('invApp_v13');
+  if(s){const d=JSON.parse(s);
+   if(d.company){$('compName').value=d.company.name||'';$('compTRN').value=d.company.trn||'';$('compAddress').value=d.company.address||'';$('compEmail').value=d.company.email||'';$('compPhone').value=d.company.phone||'';$('compMobile').value=d.company.mobile||'';$('compWeb').value=d.company.web||'';$('compPOBox').value=d.company.po||'';}
+   if(d.doc){$('docNumber').value=d.doc.number||'';$('docDate').value=d.doc.date||'';$('staffName').value=d.doc.staff||'';$('poRef').value=d.doc.poRef||'';}
+   if(d.cust){$('custName').value=d.cust.name||'';$('custTRN').value=d.cust.trn||'';$('custPhone').value=d.cust.phone||'';$('custAddress').value=d.cust.address||'';}
+   if(d.terms)$('termsText').value=d.terms;
+   if(d.bank){$('bankName').value=d.bank.name||'';$('bankAccName').value=d.bank.accName||'';$('bankAccNo').value=d.bank.accNo||'';$('bankIBAN').value=d.bank.iban||'';$('bankSwift').value=d.bank.swift||'';$('bankBranch').value=d.bank.branch||'';}
+   if(d.discount)$('discount').value=d.discount;
+   if(d.logo){logoDataUrl=d.logo;$('logoPreview').innerHTML=`<img src="${logoDataUrl}">`;}
+   if(d.invType)setInvType(d.invType);
+   if(d.mode)bootMode=d.mode;
+   if(d.items&&d.items.length)d.items.forEach(it=>addRow(it.code,it.desc,it.qty,it.price));}}catch(e){}
+ if(!logoDataUrl){try{const lg=localStorage.getItem('invApp_logo');if(lg){logoDataUrl=lg;$('logoPreview').innerHTML=`<img src="${logoDataUrl}">`;}}catch(e){}}
+ try{const st=JSON.parse(localStorage.getItem('invApp_stamp')||'null');if(st){stampDataUrl=st.img;$('stampOn').checked=!!st.on;if(st.img)$('stampPreview').innerHTML=`<img src="${st.img}">`;}}catch(e){}
+ try{$('logoOn').checked=localStorage.getItem('invApp_logoOn')!=='0';}catch(e){}
+ WORK.invoice=storedWork('invoice');
+ if(!WORK.invoice){WORK.invoice=captureInvQuot();if(!$('docDate').value)$('docDate').value=todayISO();WORK.invoice.date=$('docDate').value;
+  const n0=parseInt(WORK.invoice.number,10);WORK.invoice.issued=isNaN(n0)?nextNum('invoice'):n0;if(isNaN(n0))$('docNumber').value=String(WORK.invoice.issued);issueNum('invoice',WORK.invoice.issued);persistWork('invoice');}
+ WORK.quotation=storedWork('quotation')||freshWork('quotation');persistWork('quotation');
+ WORK.trading=storedWork('trading');
+ WORK.do=storedWork('do');
+ if($('itemsBody').rows.length===0)addRow();
+ calcTotals();updateHeaderFooterState();updateStamp();
+ if(!WORK.trading){$('trNumber').value=nextTRD();$('trDate').value=todayISO();$('trStaff').value=$('staffName').value||'';trAddDevice();saveWorkTrading();}
+ if(!WORK.do){const n=nextNum('do');issueNum('do',n);WORK.do={number:'DO-'+n,date:todayISO(),invNo:'',lpo:'',cust:'',recv:'',mobile:'',terms:$('doTerms').value,items:[]};persistWork('do');}
+ try{const ab=JSON.parse(localStorage.getItem('invApp_autobackup')||'null');if(ab&&ab.generatedAt)$('backupInfo').textContent='Last auto-snapshot: '+new Date(ab.generatedAt).toLocaleString();}catch(e){}
+ if(bootMode!=='invoice')setMode(bootMode);else{buildDocument();buildDoDoc();}
 });
 </script>
 </body>
