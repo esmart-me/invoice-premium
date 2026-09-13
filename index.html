@@ -104,6 +104,27 @@ table.inv-table { width:100%; border-collapse:collapse; font-size:13px; }
 .inv-foot .name { font-weight:800; font-size:14px; margin-bottom:3px; }
 .inv-foot.no-logo { margin-bottom:37px; }
 
+/* ===== QUOTATION-ONLY VERTICAL SPACING OPTIMIZATION (one A4 page for 5 products) ===== */
+#invoiceDoc.quot .invoice-top-bar { margin-bottom:14px; }
+#invoiceDoc.quot .invoice-title-section { margin:16px 0 12px 0; }
+#invoiceDoc.quot .invoice-title-section h1 { margin:0 0 6px 0; }
+#invoiceDoc.quot .invoice-title-section h2 { margin:0 0 8px 0; }
+#invoiceDoc.quot .inv-meta { padding:0 26px 8px; }
+#invoiceDoc.quot .inv-refs .r { padding:1px 0; }
+#invoiceDoc.quot .inv-table th { padding:3px 6px; }
+#invoiceDoc.quot .inv-table td { padding:5px 7px; }
+#invoiceDoc.quot .inv-space { min-height:60px; }
+#invoiceDoc.quot .inv-words { padding:9px 14px; }
+#invoiceDoc.quot .inv-words .w-val { margin-top:6px; }
+#invoiceDoc.quot .inv-sum { padding:8px 12px; }
+#invoiceDoc.quot .inv-sum .r { padding:3px 0; }
+#invoiceDoc.quot .inv-extras { padding:8px 26px 2px; }
+#invoiceDoc.quot .inv-tc { margin-bottom:8px; font-size:11.5px; line-height:1.45; }
+#invoiceDoc.quot .inv-tc .line { padding:0.5px 0; }
+#invoiceDoc.quot .bank-table td { padding:3px 9px; }
+#invoiceDoc.quot .inv-foot { padding:6px 26px 8px; }
+#invoiceDoc.quot .invoice-footer-black-bar { margin-top:12px; padding:7px 0; }
+
 #tradingDoc { display:none; width:794px; min-height:1122px; margin:0 auto; background:#fff; color:#111; padding:42px 48px; }
 #tradingDoc[dir=rtl] { text-align:right; }
 .tr-head { display:flex; justify-content:space-between; align-items:flex-start; border-bottom:2px solid #111; padding-bottom:14px; margin-bottom:20px; }
@@ -173,6 +194,10 @@ table.do-table { width:100%; border-collapse:collapse; font-size:13px; border:1p
     .invoice-top-bar.no-logo { background:transparent !important; }
     .invoice-title-section { margin:35px 0 25px 0 !important; page-break-inside:avoid; }
     .inv-foot.no-logo { margin-bottom:37px !important; }
+    /* quotation spacing overrides must win over the !important rules above */
+    #invoiceDoc.quot .invoice-top-bar { margin-bottom:14px !important; }
+    #invoiceDoc.quot .invoice-title-section { margin:16px 0 12px 0 !important; }
+    #invoiceDoc.quot .inv-foot.no-logo { margin-bottom:20px !important; }
     #tradingDoc { display:none !important; }
     body.print-trading #tradingDoc { display:block !important; width:100% !important; min-height:1122px; }
     #doDoc { display:none !important; }
@@ -665,6 +690,8 @@ function bankRows(){return [['Bank Name',$('bankName').value],['Account Name',$(
 function termsLines(){return $('termsText').value.split('\n').map(s=>s.trim()).filter(Boolean);}
 
 function buildDocument(){calcTotals();const t=getTotals(),T=getTitles();
+ /* QUOTATION-ONLY spacing class (the single layout change) */
+ $('invoiceDoc').classList.toggle('quot', currentMode==='quotation');
  if(logoActive()){$('docLogo').src=logoDataUrl;$('docLogo').style.display='block';}else $('docLogo').style.display='none';
  updateHeaderFooterState();
  $('docTitleAr').textContent=T.ar;$('docTitleEn').textContent=T.en;
@@ -897,12 +924,7 @@ function printDoc(){if(!appUnlocked)return;
 window.addEventListener('beforeprint',()=>{window._st=document.title;document.title=' ';});
 window.addEventListener('afterprint',()=>{if(window._st!==undefined)document.title=window._st;document.body.classList.remove('print-trading');document.body.classList.remove('print-do');});
 
-/* =====================================================================
-   SINGLE SOURCE-OF-TRUTH PDF EXPORT
-   The PDF is rendered FROM THE SAME PRINT-MASTER DOM + STYLESHEET that
-   the browser Print uses (#invoiceDoc / #tradingDoc / #doDoc), so
-   Print = Save-as-PDF = Download = WhatsApp = Email, pixel-identical.
-   ===================================================================== */
+/* ===== SINGLE SOURCE-OF-TRUTH PDF EXPORT (unchanged) ===== */
 function b64ToBytes(b){const bin=atob(b);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
 function strBytes(s){const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i)&0xff;return u;}
 function saveBlob(b,f){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
@@ -910,7 +932,6 @@ function professionalName(){if(currentTab==='do')return 'DeliveryNote-'+($('doNu
  if(currentTab==='trading')return 'Trading-'+($('trNumber').value||'TRD')+'.pdf';
  return (currentMode==='quotation'?'Quotation':'Invoice')+'-'+($('docNumber').value||'doc')+'.pdf';}
 
-/* Rasterize the live print-master node exactly as the browser lays it out */
 async function renderNodeToPdfPages(node){
   const W=794;
   const H=Math.max(node.scrollHeight,1122);
@@ -935,7 +956,6 @@ async function renderNodeToPdfPages(node){
   const cx=cv.getContext('2d');
   cx.fillStyle='#ffffff';cx.fillRect(0,0,cv.width,cv.height);
   cx.drawImage(im,0,0,cv.width,cv.height);
-  /* region-based ink check (no false positives on white space) */
   const tc=document.createElement('canvas');tc.width=120;tc.height=160;
   const tx=tc.getContext('2d');tx.drawImage(cv,0,0,120,160);
   const d=tx.getImageData(0,0,120,160).data;let ink=0;
@@ -953,7 +973,6 @@ async function renderNodeToPdfPages(node){
   return pages;
 }
 
-/* Assemble true-A4 PDF from rendered pages */
 function assembleImagePDF(pages){
   const objs=[];const add=o=>{objs.push(o);return objs.length;};
   const imgNums=pages.map(()=>add(null));
