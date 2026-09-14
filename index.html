@@ -91,7 +91,8 @@ table.inv-table { width:100%; border-collapse:collapse; font-size:13px; }
 .inv-sum .en { font-weight:700; width:44%; }
 .inv-sum .ar { flex:1; text-align:right; font-weight:700; }
 .inv-sum .v { width:95px; text-align:right; font-weight:800; font-size:14px; }
-.inv-extras { padding:12px 26px 4px; }
+.inv-sum .r.q .en { width:auto; flex:1; text-align:center; }
+.inv-extras { padding:12px 26px 2px; }
 .inv-extras .blk-title { font-weight:800; font-size:13px; border-bottom:1.5px solid #111; display:inline-block; padding-bottom:2px; margin-bottom:6px; }
 .inv-tc { margin-bottom:12px; font-size:12px; }
 .inv-tc .line { padding:1.5px 0; }
@@ -104,7 +105,6 @@ table.inv-table { width:100%; border-collapse:collapse; font-size:13px; }
 .inv-foot .name { font-weight:800; font-size:14px; margin-bottom:3px; }
 .inv-foot.no-logo { margin-bottom:37px; }
 
-/* ===== QUOTATION-ONLY VERTICAL SPACING OPTIMIZATION (one A4 page for 5 products) ===== */
 #invoiceDoc.quot .invoice-top-bar { margin-bottom:14px; }
 #invoiceDoc.quot .invoice-title-section { margin:16px 0 12px 0; }
 #invoiceDoc.quot .invoice-title-section h1 { margin:0 0 6px 0; }
@@ -194,7 +194,6 @@ table.do-table { width:100%; border-collapse:collapse; font-size:13px; border:1p
     .invoice-top-bar.no-logo { background:transparent !important; }
     .invoice-title-section { margin:35px 0 25px 0 !important; page-break-inside:avoid; }
     .inv-foot.no-logo { margin-bottom:37px !important; }
-    /* quotation spacing overrides must win over the !important rules above */
     #invoiceDoc.quot .invoice-top-bar { margin-bottom:14px !important; }
     #invoiceDoc.quot .invoice-title-section { margin:16px 0 12px 0 !important; }
     #invoiceDoc.quot .inv-foot.no-logo { margin-bottom:20px !important; }
@@ -323,7 +322,7 @@ table.do-table { width:100%; border-collapse:collapse; font-size:13px; border:1p
                 <div class="t-line"><span>Gross Before VAT 5%:</span><strong id="grossAmt">0.00 AED</strong></div>
                 <div class="t-line"><span>Discount:</span><strong><input type="number" id="discount" value="0" min="0" step="0.01" style="width:110px;padding:5px;border:1px solid #cfd6dd;border-radius:4px;text-align:right" oninput="calcTotals()"> AED</strong></div>
                 <div class="t-line"><span>Total VAT 5%:</span><strong id="vatAmt">0.00 AED</strong></div>
-                <div class="t-line grand"><span>Net With 5% VAT:</span><strong id="netAmt">0.00 AED</strong></div>
+                <div class="t-line grand"><span>Net / Total Including VAT:</span><strong id="netAmt">0.00 AED</strong></div>
                 <div class="words-box"><strong>Amount in Words:</strong> <span id="amtWords">ZERO DIRHAMS ONLY</span></div>
             </div>
         </div>
@@ -523,12 +522,7 @@ I understand that traded device(s) cannot be returned after completion of the tr
         <div class="inv-space"><img id="docStamp" class="inv-stamp" src="" alt="" style="display:none"></div>
         <div class="inv-totals">
             <div class="inv-words"><div class="w-lbl">Amount in Words :</div><div class="w-val" id="docWords">—</div></div>
-            <div class="inv-sum">
-                <div class="r"><span class="en">Gross Before VAT 5%</span><span class="ar">: المبلغ الإجمالي قبل الضريبة</span><span class="v" id="docGross">0.00</span></div>
-                <div class="r"><span class="en">Discount</span><span class="ar">: خصم</span><span class="v" id="docDisc">0.00</span></div>
-                <div class="r"><span class="en">Total VAT 5%</span><span class="ar">: إجمالي الضريبة ٥٪</span><span class="v" id="docVAT">0.00</span></div>
-                <div class="r"><span class="en">Net With 5%</span><span class="ar">: الصافي مع الضريبة ٥٪</span><span class="v" id="docNet">0.00</span></div>
-            </div>
+            <div class="inv-sum" id="docSum"></div>
         </div>
     </div>
     <div class="inv-extras" id="docQuoteExtras" style="display:none">
@@ -681,16 +675,52 @@ function addRow(code='',desc='',qty='',price=''){const tr=document.createElement
 function delRow(b){if($('itemsBody').rows.length<=1){showStatus('⚠️ At least one row','err');return;}b.closest('tr').remove();renumber();calcTotals();scheduleWorkSave();}
 function renumber(){[...$('itemsBody').rows].forEach((r,i)=>r.querySelector('.row-num').textContent=i+1);}
 function calcRow(inp){const r=inp.closest('tr');const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p,v=g*0.05;r.querySelector('.vat-cell').textContent=fmt(v);r.querySelector('.total-cell').textContent=fmt(g+v);calcTotals();}
-function getTotals(){let gross=0,vat=0;[...$('itemsBody').rows].forEach(r=>{const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p;gross+=g;vat+=g*0.05;});const d=parseFloat($('discount').value)||0;return{gross,vat,disc:d,net:gross+vat-d};}
-function calcTotals(){const t=getTotals();$('grossAmt').textContent=fmt(t.gross)+' AED';$('vatAmt').textContent=fmt(t.vat)+' AED';$('netAmt').textContent=fmt(t.net)+' AED';$('amtWords').textContent=numberToWords(Math.round(t.net))+' DIRHAMS ONLY';}
-function numberToWords(num){if(num===0)return'ZERO';const o=['','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE'],t=['TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN','FIFTEEN','SIXTEEN','SEVENTEEN','EIGHTEEN','NINETEEN'],x=['','','TWENTY','THIRTY','FORTY','FIFTY','SIXTY','SEVENTY','EIGHTY','NINETY'];
- const g=n=>n<10?o[n]:n<20?t[n-10]:n<100?x[n/10|0]+(n%10?' '+o[n%10]:''):o[n/100|0]+' HUNDRED'+(n%100?' '+g(n%100):'');
- let r='';const b=num/1e9|0,m=(num%1e9)/1e6|0,th=(num%1e6)/1e3|0,rem=num%1e3;if(b)r+=g(b)+' BILLION ';if(m)r+=g(m)+' MILLION ';if(th)r+=g(th)+' THOUSAND ';if(rem)r+=g(rem);return r.trim();}
+
+function getTotals(){
+ let gross=0,vatRows=0;
+ [...$('itemsBody').rows].forEach(r=>{const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p;gross+=g;vatRows+=g*0.05;});
+ const d=parseFloat($('discount').value)||0;
+ if(currentMode==='quotation'){
+   const after=Math.max(0,gross-d);
+   const vat=after*0.05;
+   return {gross,vat,disc:d,after,net:after+vat};
+ }
+ return {gross,vat:vatRows,disc:d,after:gross-d,net:gross+vatRows-d};
+}
+/* Reads the FINAL TOTAL value exactly as displayed in the last totals row */
+function displayedFinalTotal(){
+ const el=$('netAmt');
+ const txt=(el?el.textContent:'0').replace(/[^0-9.]/g,'');
+ return Math.round(parseFloat(txt)||0);
+}
+function calcTotals(){
+ const t=getTotals();
+ $('grossAmt').textContent=fmt(t.gross)+' AED';
+ $('vatAmt').textContent=fmt(t.vat)+' AED';
+ $('netAmt').textContent=fmt(t.net)+' AED';
+ /* Amount in Words = the displayed FINAL TOTAL INCLUDING VAT (same value, no separate calc) */
+ $('amtWords').textContent=numberToWords(displayedFinalTotal())+' DIRHAMS ONLY';
+}
+/* ===== FIXED number-to-words: FULL amount (billions/millions/thousands via modulo, NOT division) ===== */
+function numberToWords(num){
+ num=Math.round(Number(num)||0);
+ if(num===0)return'ZERO';
+ const o=['','ONE','TWO','THREE','FOUR','FIVE','SIX','SEVEN','EIGHT','NINE'],
+       t=['TEN','ELEVEN','TWELVE','THIRTEEN','FOURTEEN','FIFTEEN','SIXTEEN','SEVENTEEN','EIGHTEEN','NINETEEN'],
+       x=['','','TWENTY','THIRTY','FORTY','FIFTY','SIXTY','SEVENTY','EIGHTY','NINETY'];
+ const g=n=>n<10?o[n]:n<20?t[n-10]:n<100?x[Math.floor(n/10)]+(n%10?' '+o[n%10]:''):o[Math.floor(n/100)]+' HUNDRED'+(n%100?' '+g(n%100):'');
+ let r='';
+ const b=Math.floor(num/1e9), m=Math.floor((num%1e9)/1e6), th=Math.floor((num%1e6)/1e3), rem=num%1e3;
+ if(b)r+=g(b)+' BILLION ';
+ if(m)r+=g(m)+' MILLION ';
+ if(th)r+=g(th)+' THOUSAND ';
+ if(rem)r+=g(rem);
+ return r.trim();
+}
 function bankRows(){return [['Bank Name',$('bankName').value],['Account Name',$('bankAccName').value],['Account Number',$('bankAccNo').value],['IBAN',$('bankIBAN').value],['SWIFT / BIC',$('bankSwift').value],['Branch',$('bankBranch').value]].filter(r=>r[1]&&r[1].trim());}
 function termsLines(){return $('termsText').value.split('\n').map(s=>s.trim()).filter(Boolean);}
 
 function buildDocument(){calcTotals();const t=getTotals(),T=getTitles();
- /* QUOTATION-ONLY spacing class (the single layout change) */
  $('invoiceDoc').classList.toggle('quot', currentMode==='quotation');
  if(logoActive()){$('docLogo').src=logoDataUrl;$('docLogo').style.display='block';}else $('docLogo').style.display='none';
  updateHeaderFooterState();
@@ -707,8 +737,29 @@ function buildDocument(){calcTotals();const t=getTotals(),T=getTitles();
  let rows='';[...$('itemsBody').rows].forEach((r,i)=>{const q=parseFloat(r.querySelector('.qty').value)||0,p=parseFloat(r.querySelector('.price').value)||0;const g=q*p,v=g*0.05;
   rows+=`<tr><td>${i+1}</td><td>${esc(r.querySelector('.code').value)||''}</td><td>${esc(r.querySelector('.desc').value)||''}</td><td class="num">${q}</td><td class="num">${fmt(p)}</td><td class="num">${fmt(g)}</td><td class="num">${fmt(v)}</td><td class="num">${fmt(g+v)}</td></tr>`;});
  $('docItemsBody').innerHTML=rows;
- $('docWords').textContent='AED: '+$('amtWords').textContent;
- $('docGross').textContent=fmt(t.gross);$('docDisc').textContent=fmt(t.disc);$('docVAT').textContent=fmt(t.vat);$('docNet').textContent=fmt(t.net);
+ if(currentMode==='quotation'){
+   $('docSum').innerHTML=
+     '<div class="r q"><span class="en">Total Price without Vat</span><span class="v">'+fmt(t.gross)+'</span></div>'+
+     '<div class="r q"><span class="en">Discount</span><span class="v">'+fmt(t.disc)+'</span></div>'+
+     '<div class="r q"><span class="en">Total Price after discount</span><span class="v">'+fmt(t.after)+'</span></div>'+
+     '<div class="r q"><span class="en">5% VAT</span><span class="v">'+fmt(t.vat)+'</span></div>'+
+     '<div class="r q"><span class="en">Total Price Including VAT</span><span class="v">'+fmt(t.net)+'</span></div>';
+ } else {
+   $('docSum').innerHTML=
+     '<div class="r"><span class="en">Gross Before VAT 5%</span><span class="ar">: المبلغ الإجمالي قبل الضريبة</span><span class="v">'+fmt(t.gross)+'</span></div>'+
+     '<div class="r"><span class="en">Discount</span><span class="ar">: خصم</span><span class="v">'+fmt(t.disc)+'</span></div>'+
+     '<div class="r"><span class="en">Total VAT 5%</span><span class="ar">: إجمالي الضريبة ٥٪</span><span class="v">'+fmt(t.vat)+'</span></div>'+
+     '<div class="r"><span class="en">Net With 5%</span><span class="ar">: الصافي مع الضريبة ٥٪</span><span class="v">'+fmt(t.net)+'</span></div>';
+ }
+ /* Amount in Words reads back the LAST (final) row value actually rendered in docSum.
+    Same displayed number => same words. Commas stripped, COMPLETE number converted. */
+ (function(){
+   const rowsEl=$('docSum').querySelectorAll('.r');
+   const lastV=rowsEl.length?rowsEl[rowsEl.length-1].querySelector('.v'):null;
+   const finalShown=Math.round(parseFloat((lastV?lastV.textContent:'0').replace(/[^0-9.]/g,''))||0);
+   $('docWords').textContent='AED: '+numberToWords(finalShown)+' DIRHAMS ONLY';
+   $('amtWords').textContent=numberToWords(finalShown)+' DIRHAMS ONLY';
+ })();
  if(currentMode==='quotation'){$('docQuoteExtras').style.display='block';$('docTermsList').innerHTML=termsLines().map(l=>`<div class="line">${esc(l)}</div>`).join('');
   const br=bankRows();$('docBankBody').innerHTML=br.length?br.map(r=>`<tr><td>${esc(r[0])}</td><td>${esc(r[1])}</td></tr>`).join(''):'<tr><td colspan="2">—</td></tr>';
  } else $('docQuoteExtras').style.display='none';
@@ -717,7 +768,7 @@ function buildDocument(){calcTotals();const t=getTotals(),T=getTitles();
  $('docFootContact').textContent=`Web: ${$('compWeb').value} , E Mail: ${$('compEmail').value}   Tel: ${$('compPhone').value} , Mob: ${$('compMobile').value}`;
  updateStamp();}
 
-/* ===== DELIVERY NOTE editor/build ===== */
+/* ===== DELIVERY NOTE ===== */
 function addDoRow(desc='',qty=''){const tr=document.createElement('tr');
  tr.innerHTML=`<td class="row-num"></td><td><textarea class="d-desc" rows="2" style="width:100%;padding:6px;border:1px solid #cfd6dd;border-radius:4px;font-size:13px" oninput="buildDoDoc();scheduleWorkSave()">${esc(desc)}</textarea></td><td><input type="number" class="d-qty" value="${qty}" min="0" step="1" style="width:100%;padding:6px;border:1px solid #cfd6dd;border-radius:4px" oninput="buildDoDoc();scheduleWorkSave()"></td><td><button class="btn btn-red" style="padding:4px 10px" onclick="delDoRow(this)">✕</button></td>`;
  $('doItems').appendChild(tr);renumberDo();buildDoDoc();}
@@ -924,7 +975,7 @@ function printDoc(){if(!appUnlocked)return;
 window.addEventListener('beforeprint',()=>{window._st=document.title;document.title=' ';});
 window.addEventListener('afterprint',()=>{if(window._st!==undefined)document.title=window._st;document.body.classList.remove('print-trading');document.body.classList.remove('print-do');});
 
-/* ===== SINGLE SOURCE-OF-TRUTH PDF EXPORT (unchanged) ===== */
+/* ===== PDF EXPORT (unchanged engine) ===== */
 function b64ToBytes(b){const bin=atob(b);const u=new Uint8Array(bin.length);for(let i=0;i<bin.length;i++)u[i]=bin.charCodeAt(i);return u;}
 function strBytes(s){const u=new Uint8Array(s.length);for(let i=0;i<s.length;i++)u[i]=s.charCodeAt(i)&0xff;return u;}
 function saveBlob(b,f){const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=f;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),2000);}
